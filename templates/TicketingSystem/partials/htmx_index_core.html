@@ -1,0 +1,52 @@
+<div id="form_and_table">
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="card w-100">
+            <div class="card-header">
+                <h5>Agregar una nueva solicitud</h5>
+            </div>
+            <div class="card-body">
+
+                <form
+                    hx-post="{% url 'TicketingSystem:index' %}"
+                    hx-target="#form_and_table"
+                    class="was-validated">
+
+        <div id="CategoryList">
+            <div class="col-sm-8">
+                <label for="formGroupInput" class="form-label">Seleccione una categoría</label>
+                <select     hx-get="{% url 'TicketingSystem:index_htmx' %}"
+                            hx-trigger="change"
+                            hx-target="#SubCategories"
+                            hx-swap="outerHTML"
+                            name="selected_category"
+                            class="form-select"
+                            aria-label="select example"
+                            id="CategorySelection" required>
+                    <option value="">Elegir...</option>
+                    {% for category in categories %}
+                    <option value="{{category.0}}"> {{category.1}} </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <br>
+                {# This returns subcategory partial #}
+                {% include 'TicketingSystem/partials/htmx_subcategory.html' %}
+            <br>
+        </div> {# CategoryList closes here #}
+
+            <input type="hidden" id="custId" name="show_form" value=True>
+            <div class="col-sm-8">
+                <button type="submit" id="btn_submit" class="btn btn-success btn-sm btn-lb-primary">Enviar</button>
+            </div>
+        </form>
+
+            </div>
+        </div>
+    </div>
+    <!-- end request assistance -->
+
+    {# This returns user ticket history update partial #}
+    <div id="ticket_list_holder">
+    {% include 'TicketingSystem/partials/htmx_ticket_lst.html' %}
+    </div>
+</div>

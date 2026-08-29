@@ -1,0 +1,211 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block title %}
+
+{% endblock %}
+{% block containerHead %}
+<div class="flex-wrap d-flex justify-content-between align-items-center">
+    <div>
+        <h1>Sistema de Tickets</h1>
+    </div>
+    <div>
+        <!--  <a href="/investigacion/nueva" class="btn btn-success">Nueva</a> -->
+    </div>
+</div>
+{% endblock %}
+{% block subContainerHead %}
+{% endblock %}
+{% block contenido %}
+
+<div class='card'>
+    <div class='card-header'>
+        <div class="card-header d-flex justify-content-between">
+            <div class="header-title">
+                <h4 class="card-title">Administración de tickets</h4>
+            </div>
+        </div>
+        <div class='card-body'>
+            <!-- Insert content below -->
+            <div class="card w-100">
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="table-responsive">
+                        <table class="table" id="tick_table">
+                            <thead>
+                                <tr>
+                                    {% for name in table_categories %}
+                                    <th scope="col">{{ name }}</th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                <tr>
+
+                                    <td>{{ticket.creator}}</td>
+                                    <td>
+                                        <select hx-get="{% url 'TicketingSystem:ticket_admin_edit' %}"
+                                                hx-target='#assignee{{ticket.id}}'
+                                                hx-swap="outerHTML"
+                                                hx-trigger="change"
+                                                hx-vals='{"_ticket_id": "{{ticket.id}}"}'
+                                                name="selected_staff"
+                                                class="form-select"
+                                                aria-label="select"
+                                                id="assignee{{ticket.id}}">
+                                            <option value="">Por asignar ...</option>
+                                            {% for staff in all_staff %}
+                                            {% if staff.id != ticket.assignee.id %}
+                                            <option value="{{staff.id}}"> {{staff.username}} </option>
+                                            {% else %}
+                                            <option value="{{staff.id}}" selected>{{staff.username}}</option>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select hx-get="{% url 'TicketingSystem:ticket_admin_edit' %}"
+                                                hx-target='#CategorySelection{{ticket.id}}'
+                                                hx-swap="outerHTML"
+                                                hx-trigger="change"
+                                                hx-vals='{"_ticket_id": "{{ticket.id}}"}'
+                                                name="selected_category"
+                                                class="form-select"
+                                                aria-label="select"
+                                                id="CategorySelection{{ticket.id}}">
+                                            {% for category in all_categories %}
+                                            {% if category.0 != ticket.category.id %}
+                                            <option value="{{category.0}}"> {{category.1}} </option>
+                                            {% else %}
+                                            <option value="{{category.0}}" selected>{{category.1}}</option>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select hx-get="{% url 'TicketingSystem:ticket_admin_edit' %}"
+                                                hx-target='#StatusSelection{{ticket.id}}'
+                                                hx-swap="outerHTML"
+                                                hx-trigger="change"
+                                                hx-vals='{"_ticket_id": "{{ticket.id}}"}'
+                                                name="selected_status"
+                                                class="form-select"
+                                                aria-label="select"
+                                                id="StatusSelection{{ticket.id}}">
+                                            {% for status in all_status %}
+                                            {% if status.0 != ticket.status.id %}
+                                            <option value="{{status.0}}"> {{status.1}} </option>
+                                            {% else %}
+                                            <option value="{{status.0}}" selected>{{status.1}}</option>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select hx-get="{% url 'TicketingSystem:ticket_admin_edit' %}"
+                                                hx-target='#PrioritySelection{{ticket.id}}'
+                                                hx-swap="outerHTML"
+                                                hx-trigger="change"
+                                                hx-vals='{"_ticket_id": "{{ticket.id}}"}'
+                                                name="selected_priority"
+                                                class="form-select"
+                                                aria-label="select"
+                                                id="PrioritySelection{{ticket.id}}">
+                                            {% for priority in all_priorities %}
+                                            {% if priority.0 != ticket.priority %}
+                                            <option value="{{priority.0}}"> {{priority.1}} </option>
+                                            {% else %}
+                                            <option value="{{priority.0}}" selected>{{priority.1}}</option>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+                                    <td>{{ticket.created_at|date:'D d M Y'}}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <br>
+
+                    <!-- <figure class="text-end"> -->
+                    <div class="card">
+                        <div class="card-body">
+                            <br>
+                            <figure class="text-end">
+                                <figcaption class="blockquote-footer">
+                                    <cite title="Source Title">{{ticket.created_at}}</cite>
+                                </figcaption>
+                                <blockquote class="blockquote">
+                                    <p>{{ticket.description| safe | linebreaks}}</p>
+                                </blockquote>
+                            </figure>
+                        </div>
+                    </div>
+
+                    <!-- ticket_comments -->
+                    {# This returns user ticket comments update partial #}
+                    {% include 'TicketingSystem/partials/htmx_tae_comments.html' %}
+                    <!-- end ticket_comments -->
+
+                </div>
+            </div>
+
+            <!-- request assistance -->
+            <div id="StatusSelection{{ticket.id}}">
+            {% if ticket.status.id != 4 %}
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="card w-100">
+                    <div class="card-header">
+                        <h5>Agregar tu respuestes</h5>
+                    </div>
+                    <div class="card-body">
+
+                        <form   hx-get="{% url 'TicketingSystem:ticket_admin_edit' ticket_id %}"
+                                hx-vals='{"_ticket_id": "{{ticket.id}}"}'
+                                hx-target="#comments_lst"
+                                hx-on::after-request="this.reset()"
+                                class="was-validated">
+
+                            <div class="col-sm-8">
+                                <label for="formGroupInput2" class="form-label">Dé una breve descripción del problema.</label>
+                                <textarea name="comment" type="text" class="form-control" id="description" rows="3"
+                                    required></textarea>
+                            </div>
+                            <br>
+                            <div class="col-sm-8">
+                                <div class="d-grid gap-2 d-md-flex">
+                                    <a role="button" href="/tickets/ticket_admin/"
+                                        class="btn btn-success btn-sm btn-lb-primary">Regresar</a>
+                                    <button type="submit" class="btn btn-success btn-sm btn-lb-primary">Enviar</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="card">
+                <div class="card-body">
+                    <h5>Este ticket fue cerrado.</h5>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+            <!-- end request assistance -->
+        </div>
+
+        <!-- End Insert content -->
+    </div>
+</div>
+</div>
+
+{% endblock %}
+
+{% block customJS %}
+
+{% endblock %}

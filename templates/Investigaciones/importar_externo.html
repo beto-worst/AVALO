@@ -1,0 +1,72 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block title %}Importar Externo{% endblock %}
+
+{% block containerHead %}
+<div class="d-flex justify-content-between align-items-center flex-wrap">
+    <h1>Importar Investigación Externa</h1>
+</div>
+{% endblock %}
+
+{% block subContainerHead %}{% endblock %}
+
+{% block contenido %}
+<div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+
+        {% if success %}
+        <div class="card border-success mb-4">
+            <div class="card-header bg-success text-white">
+                <strong>Importación exitosa</strong>
+            </div>
+            <div class="card-body">
+                <p class="mb-1"><strong>RFC:</strong> {{ persona.rfc }}</p>
+                <p class="mb-1"><strong>Persona:</strong> {{ persona.apellido1 }} {{ persona.apellido2 }} {{ persona.nombre }}</p>
+                <p class="mb-1"><strong>Persona ID:</strong> {{ persona.id }}</p>
+                <p class="mb-1"><strong>Folio:</strong> {{ investigacion.folio }}</p>
+                <p class="mb-3"><strong>Investigación ID:</strong> {{ investigacion.id }}</p>
+                <a href="/Investigaciones/verPDF7/{{ investigacion.id }}" class="btn btn-primary">
+                    Ver Reporte
+                </a>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="card border-danger mb-4">
+            <div class="card-header bg-danger text-white">
+                <strong>Error al procesar el archivo</strong>
+            </div>
+            <div class="card-body">
+                <pre style="white-space: pre-wrap; font-size: 0.82rem; margin: 0;">{{ error }}</pre>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="card">
+            <div class="card-body p-4">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">
+                            Archivo de investigación (.json)
+                        </label>
+                        <input type="file" name="json_file" accept=".json"
+                               class="form-control" required>
+                        <div class="form-text text-muted">
+                             Selecciona el archivo JSON generado desde una fuente, externa a ávalo, que contenga los datos de la investigación a importar.
+                             <br>
+                             <strong>Nota:</strong> Debido a su origen el reporte puede presentar inconsistencias que no afectarán la integridad de la investigación pero si en su presentación. 
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">
+                        Importar
+                    </button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

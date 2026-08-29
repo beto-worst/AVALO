@@ -1,0 +1,704 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block title %}
+
+{% endblock %}
+
+{% block containerHead %}
+  <div class="flex-wrap d-flex justify-content-between align-items-center">
+    <div>
+        <h1>Nueva Investigación</h1>
+    </div>
+    <div>
+      <!--  <a href="/investigacion/nueva" class="btn btn-success">Nueva</a> -->
+    </div>
+</div>
+{% endblock %}
+{% block subContainerHead %}
+{% endblock %}
+{% block contenido %}
+
+      <div class="card">
+
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Escaneo de INE</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    {{ curp }}
+                    {{ clave_elector }}
+                    {{ hubo_error }}
+                    <p>Por favor suba los siguientes documentos:</p>
+                  
+                    
+                    <form method="post" action="" id='frmSCAN' enctype="multipart/form-data" >
+                      {% csrf_token %}
+                        <label for='file1'>Parte frontal de la INE:</label>
+                        <input type='file' id='file1' name='file1' class='form-control'>
+                        <label for='file2'>Parte trasera de la INE:</label>
+                        <input type='file' id='file2' name='file2' class='form-control'>
+                        <div class='col-12 mt-2'>
+                          <h6>2 - Selecciona el tipo de INE</h6>
+                        </div>
+                        <div class='col-12 mt-4'>
+                          <div class="row">
+                            <div class="col-md-6">
+                                <div class="image-group">
+                                    <h5  class='mb-2'>Tipo D</h5>
+                                    <img src="{% static "f2.jpeg" %}" alt="" class="img-thumbnail" id="imagen-preview" width="300" height="150">
+                                    <img src="{% static "b2.jpeg" %}" alt="" class="img-thumbnail" id="imagen-preview2" width="300" height="150">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="image-group">
+                                    <h5  class='mb-2'>Tipo E, F, G, H</h5>
+                                    <img src="{% static "f1.jpeg" %}" alt="" class="img-thumbnail" id="imagen-preview2" width="300" height="150">
+                                    <img src="{% static "b1.jpeg" %}" alt="" class="img-thumbnail" id="imagen-preview" width="300" height="150">
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <label for'selTipoINE'>Tipo de INE</label>
+                        <select id='selINE' name='selINE' class='form-select'>
+                          <option>--SELECCIONA UN TIPO DE INE--</option>
+                          
+                          <option value='D'>D</option>
+                          <option value='E'>E</option>
+                          <option value='F'>F</option>
+                          <option value='G'>G</option>
+                          <option value='H'>H</option>
+                        </select>
+                        <br>
+                        <br>
+                        <input type='submit' value='Escanear' class='btn btn-success'>  
+                    </form>
+                    
+                   
+                           
+
+                </div>
+            </div>
+            <!-- MODAL  -->
+            <div class="modal" tabindex="-1" id='modalError'>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Ocurrio un error al procesar los datos</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="modal-body">
+                           ocurrio un error, intente escanear de nuevo.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                            
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+            <!-- modal ayuda ine 2-->
+                   <!-- MODAL  -->
+            <div class="modal modal-xl" tabindex="-1" id='modalDatosINE'>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Datos a capturar.</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="modal-body">
+                          <center>
+                            <img id='imgDatosINE' >
+                            </center>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                            
+                        </div>
+                    </div>
+                </div>
+                </div>
+            <!-- modal ayuda ine 2-->
+
+                  <!-- MODAL  -->
+            <div class="modal" tabindex="-1" id='modalConsejos'>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Recomendaciones para un escaneo correcto de la INE</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="modal-body">
+                            <ol>
+                            <li>Tomar la foto con poca distancia y que no sea solo los bordes de la credencial. </li>
+                            <li>Evitar luz sobre los hologramas ya que hace que brillen y afectan el procesamiento de la imagen.</li>
+                            <li> Una resolución entre 800px y 2000px sería lo ideal para no forzar tanto el procesamiento de la imagen.</li>
+                            <li> Evitar que el color del fondo sea similar al de la credencial.</li>
+                            <li> Evitar sombras al momento de tomar la fotografía.</li>
+                            <li>La orientación se recomienda que estén en posición normal de frente en horizontal.</li>
+                            <li> Evitar sostener la imagen con los dedos, se puede reposar sobre la palma de la mano.</li>
+                            <li>Se recomienda que no se cubra nada en la credencial.</li>
+                            <li>No es recomendable hacerlo con imágenes escaneadas, pero en caso de hacerlo que sean legibles y de preferencia a color.</li>
+                            </ol>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger"  onclick='btnCerrar' id='btnCerrarMy'>Cerrar</button>
+                            
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <dialog id="DialogoNotificacion" style='background-color:#2F7BEE; color:#ffffff; border-radius: 5px;margin-top=10%'>
+                    <h3 style='color:#ffffff'>Por favor espere.</h3>
+                    <p>Se estan obteniendo los datos del investigado a través de su C.U.R.P</p>
+                </dialog>
+
+
+                <dialog id="errorTIPO"  style='background-color:#ff0000; color:#ffffff; border-radius: 25px;margin-top=10%'>
+                    <p><b>Esta Identifiación Ya no es válida.</b></p>
+                    <button id="btnOK" class='btn btn-primary btn-sm'>OK</button>
+                  </dialog>
+
+                  <dialog id="dConsulaINE"  style='background-color:#2F7BEE; color:#ffffff; border-radius: 25px;margin-top=10%'>
+                    <h3 style='color:#ffffff'>Por favor espere.</h3>
+                    <p>Validando información de la INE/IFE</p>
+                  </dialog>
+
+                  <dialog id="confirmDialog">
+                    <p>¿Estás seguro de continuar con dar de alta al investigado?</p>
+                    <button id="confirmYes">Sí</button>
+                    <button id="confirmNo">No</button>
+                  </dialog>
+                  
+
+                  <div class="modal" tabindex="-1" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Identifica el tipo de INE/IFE a capturar</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval="30000" >
+                                <div class="carousel-inner" id="carouselTipoINE">
+
+                                  <div class="carousel-item" id="A">
+                                    <img src="{% static 'img/INE_A.jpg' %}" class="d-block w-100" alt="Imagen 1">
+                                  </div>
+                                  <div class="carousel-item" id="B">
+                                    <img src="{% static 'img/INE_B.jpg' %}" class="d-block w-100" alt="Imagen 1">
+                                  </div>
+                                  <div class="carousel-item" id="C">
+                                    <img src="{% static 'img/INE_C.jpg' %}" class="d-block w-100" alt="Imagen 1">
+                                  </div>
+                                  <div class="carousel-item" id="D">
+                                    <img src="{% static 'img/INE_D.jpg' %}" class="d-block w-100" alt="Imagen 1">
+                                  </div>
+                                  <div class="carousel-item" id="EF">
+                                    <img src="{% static 'img/INE_EF.jpg' %}" class="d-block w-100" alt="Imagen 1">
+                                
+                                  </div>
+                                  <div class="carousel-item" id="GH">
+                                    <img src="{% static 'img/INE_GH.jpg' %}" class="d-block w-100" alt="Imagen 1">
+                                    
+
+                                  </div>
+                  
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only"></span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only"></span>
+                                </a>
+        
+        
+                                </div>
+        
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        
+                            </div>
+                        </div>
+                </div>
+                  
+              
+{% endblock %}
+{% block customJS %}
+<script>
+
+var carousel = document.getElementById('carouselExampleControls');
+
+carousel.pause = true;
+carousel.interval = false;
+
+
+
+
+function displayAyuda(){
+  var imgModal = document.getElementById('imgDatosINE')
+  var mySelect = document.getElementById('selTipoINE');
+  var selectedOption = mySelect.selectedOptions[0];
+  var selectedText = selectedOption.textContent.trim();
+  var srcAyuda = ''
+  imgModal.src=srcAyuda;
+  
+  if (mySelect.selectedIndex > 0) {
+    if (selectedText == 'E' || selectedText == 'F' || selectedText == 'G' || selectedText == 'H'){
+      srcAyuda ='{% static '/img/AYUDA1.png' %} '
+      imgModal.src=srcAyuda;
+    }
+    if (selectedText == 'D' ){
+      srcAyuda ='{% static '/img/AYUDA2.png' %} '
+      imgModal.src=srcAyuda;
+    }
+     if (selectedText == 'C' ){
+      srcAyuda ='{% static '/img/AYUDA3.png' %} '
+      imgModal.src=srcAyuda;
+    }
+     if (selectedText == 'A' ){
+      srcAyuda ='{% static '/img/AYUDASIN.png' %} '
+      imgModal.src=srcAyuda;
+    }
+     if (selectedText == 'B' ){
+      srcAyuda ='{% static '/img/AYUDASIN.png' %} '
+      imgModal.src=srcAyuda;
+    }
+
+
+     var modal = new bootstrap.Modal(document.getElementById('modalDatosINE'));
+   // Abre el modal
+   modal.show();
+  }
+ 
+
+}
+
+function displayTipoINE() {
+  var identificador = document.getElementById('txtIdentificador');
+  var mySelect = document.getElementById('selTipoINE');
+  var selectedOption = mySelect.selectedOptions[0];
+  var selectedText = selectedOption.textContent.trim();
+  var divName = selectedText;
+
+  if (divName == 'D') {
+    identificador.maxLength = 13;
+  } else {
+    identificador.maxLength = 9;
+  
+  if (divName == 'E' || divName == 'F') {
+    divName = 'EF';
+  }
+  if (divName == 'G' || divName == 'H') {
+    divName = 'GH';
+  }
+  }
+  // Retirar elementos activos
+      // Obtén el elemento padre
+    var padre = document.getElementById("carouselTipoINE");
+
+    // Obtén todos los elementos con la clase "active" dentro del padre
+    var elementosActivos = padre.getElementsByClassName("active");
+
+    // Recorre los elementos activos
+    for (var i = 0; i < elementosActivos.length; i++) {
+      // Elimina la clase "active"
+      elementosActivos[i].classList.remove("active");
+    }
+
+  //
+  var divImg = document.getElementById(CSS.escape(divName));
+  divImg.classList.add('active');
+
+  var modal = new bootstrap.Modal(document.getElementById('myModal'));
+  // Abre el modal
+  modal.show();
+
+  // Agrega un controlador de eventos al evento "hidden.bs.modal" para activar la interacción con la página nuevamente
+  modal._element.addEventListener('hidden.bs.modal', function () {
+    activarInteraccionPagina();
+  });
+}
+
+// Función para activar la interacción con la página
+function activarInteraccionPagina() {
+  document.body.style.pointerEvents = 'auto';
+}
+
+
+
+
+
+
+    function generarCURP(){
+        alert('hola')
+    }
+    function limpiarFormulario() {
+        var form = document.getElementById('upload-form');
+        var foto1 = document.getElementById('imagen-preview')
+        var foto2 = document.getElementById('imagen-preview2')
+        foto1.src="{% static "img/inefrente.jpg" %}"
+        foto2.src="{% static "img/inetrasera.png" %}"
+        var formElements = form.elements;
+      
+        for (var i = 0; i < formElements.length; i++) {
+          var element = formElements[i];
+      
+          if (element.tagName === 'INPUT' && element.classList.contains('is-valid') || element.tagName === 'SELECT' && element.classList.contains('is-valid')) {
+            element.classList.remove('is-valid');
+          }
+        }
+      }
+    function convertToUppercase(input) {
+        input.value = input.value.toUpperCase();
+      }
+
+      function obtenerCURPPorDatos()
+      {
+        var nombre = document.getElementById('txtNombre');
+        var apellido1 = document.getElementById('txtApellido1');
+        var apellido2 = document.getElementById('txtApellido2');
+        var selLugarNac = document.getElementById('selLugarNacimiento');
+        var fNac =  document.getElementById('txtFNac')
+        var txtRFC = document.getElementById('txtRFC')
+        var fechaParts = fNac.value.split('-');
+        var dia = fechaParts[2];
+        var mes = fechaParts[1];
+        var anio = fechaParts[0];
+        var selectSexo = document.getElementById('selSEXO');
+        // Mostrar animación de carga
+        console.log('/Investigaciones/GenerarCURP/'+selLugarNac.value +"/"+dia+"/"+mes+"/"+nombre.value+"/"+apellido1.value+"/"+apellido2.value+"/"+anio + '/'+selectSexo.value)
+        var dialogo = document.getElementById('DialogoNotificacion');
+        dialogo.showModal();
+
+        fetch('/Investigaciones/GenerarCURP/'+selLugarNac.value +"/"+dia+"/"+mes+"/"+nombre.value+"/"+apellido1.value+"/"+apellido2.value+"/"+anio + '/'+selectSexo.value)
+          .then(function(response) {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error('Error al obtener los datos del JSON');
+            }
+          })
+          .then(function(data) {
+            console.log(data);
+            txtNombre.value = data.data.curpdata[0].nombres;
+            txtApellido1.value = data.data.curpdata[0].primerApellido;
+            txtApellido2.value = data.data.curpdata[0].segundoApellido;
+            var partesFecha = data.data.curpdata[0].fechaNacimiento.split('/');
+            var fechaFormateada = partesFecha[2] + '-' + partesFecha[1] + '-' + partesFecha[0];
+            txtFNac.value = fechaFormateada;
+            txtFNac.classList.add('is-valid')
+            txtNombre.classList.add('is-valid')
+            txtApellido1.classList.add('is-valid')
+            txtApellido2.classList.add('is-valid')
+            txtCURP.classList.add('is-valid')
+            txtCURP.value = data.data.curpdata[0].curp;
+            //
+           
+
+            // Extraer el sexo de la CURP
+            var sexo = data.data.curpdata[0].curp.charAt(10);
+            // Obtener la referencia al elemento <select>
+                var selectSexo = document.getElementById('selSEXO');
+                
+                // Asignar el valor al elemento <select>
+                selectSexo.value = sexo;
+                selectSexo.classList.add('is-valid')
+                console.log(sexo)
+                //console.log(curp)
+
+                claveEntidad = data.data.curpdata[0].claveEntidad;
+                console.log(claveEntidad)
+                var selLugarNac = document.getElementById('selLugarNacimiento');
+                selLugarNac.value = claveEntidad
+                selLugarNac.classList.add('is-valid')
+                
+           
+            // Ocultar animación de carga
+            dialogo.close();
+            getCalcularRFC();
+          })
+          .catch(function(error) {
+            console.error(error);
+            // Ocultar animación de carga en caso de error
+            dialogo.close();
+          });
+      }
+
+      function getCalcularRFC(){
+        var nombre = document.getElementById('txtNombre');
+        var apellido1 = document.getElementById('txtApellido1');
+        var apellido2 = document.getElementById('txtApellido2');
+        var fNac =  document.getElementById('txtFNac')
+        var txtRFC = document.getElementById('txtRFC')
+       
+        var fechaParts = fNac.value.split('-');
+        var dia = fechaParts[2];
+        var mes = fechaParts[1];
+        var anio = fechaParts[0];
+
+        var fechaFormateada = dia + '/' + mes + '/' + anio;
+        
+
+          // Mostrar animación de carga
+          var dialogo = document.getElementById('DialogoNotificacion');
+          dialogo.showModal();
+          fetch('/Investigaciones/CalculadoraRFC/'+ nombre.value +'/'+apellido1.value+'/'+apellido2.value+'/'+dia+'/'+mes+'/'+anio)
+          .then(function(response) {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error('Error al obtener los datos del JSON');
+            }
+          })
+          .then(function(data) {
+            console.log(data);
+            txtRFC.value = data.data.rfc;
+            txtRFC.classList.add('is-valid')
+            //txtNombre.value = data.data.curpdata[0].nombres;
+            dialogo.close();
+          })
+          .catch(function(error) {
+            console.error(error);
+            // Ocultar animación de carga en caso de error
+            dialogo.close();
+          });
+      }
+
+      function getDataFromCURP(valor) {
+        if(!valor == ""){
+            var txtCURP = document.getElementById('txtCURP');
+            var txtNombre = document.getElementById('txtNombre');
+            var txtApellido1 = document.getElementById('txtApellido1');
+            var txtApellido2 = document.getElementById('txtApellido2');
+            var loading = document.getElementById('cargando');
+            var fNac =  document.getElementById('txtFNac')
+            
+            // Mostrar animación de carga
+            var dialogo = document.getElementById('DialogoNotificacion');
+            dialogo.showModal();
+            
+        
+            fetch('/Investigaciones/ObtenerDatosxCURP/' + valor)
+            .then(function(response) {
+                if (response.ok) {
+                return response.json();
+                } else {
+                throw new Error('Error al obtener los datos del JSON');
+                }
+            })
+            .then(function(data) {
+                console.log(data);
+                txtNombre.value = data.data.curpdata[0].nombres;
+                txtApellido1.value = data.data.curpdata[0].primerApellido;
+                txtApellido2.value = data.data.curpdata[0].segundoApellido;
+                var partesFecha = data.data.curpdata[0].fechaNacimiento.split('/');
+                var fechaFormateada = partesFecha[2] + '-' + partesFecha[1] + '-' + partesFecha[0];
+                txtFNac.value = fechaFormateada;
+                txtFNac.classList.add('is-valid')
+                txtNombre.classList.add('is-valid')
+                txtApellido1.classList.add('is-valid')
+                txtApellido2.classList.add('is-valid')
+                txtCURP.classList.add('is-valid')
+                //
+            
+
+                // Extraer el sexo de la CURP
+                var sexo = valor.charAt(10);
+                // Obtener la referencia al elemento <select>
+                    var selectSexo = document.getElementById('selSEXO');
+                    
+                    // Asignar el valor al elemento <select>
+                    selectSexo.value = sexo;
+                    selectSexo.classList.add('is-valid')
+                    console.log(sexo)
+                    //console.log(curp)
+
+                    claveEntidad = data.data.curpdata[0].claveEntidad;
+                    console.log(claveEntidad)
+                    var selLugarNac = document.getElementById('selLugarNacimiento');
+                    selLugarNac.value = claveEntidad
+                    selLugarNac.classList.add('is-valid')
+
+                // Ocultar animación de carga
+                dialogo.close();
+                getCalcularRFC();
+            })
+            .catch(function(error) {
+                console.error(error);
+                // Ocultar animación de carga en caso de error
+                dialogo.close();
+            });
+        }
+             
+      }
+
+    
+      function populateLugarNacimiento() {
+        var select = document.getElementById('selLugarNacimiento');
+      
+        fetch('/Generales/apiLugarNacimiento')
+          .then(function(response) {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error('Error al obtener los datos del JSON');
+            }
+          })
+          .then(function(data) {
+            console.log(data)
+            for (var i = 0; i < data.length; i++) {
+              var option = document.createElement('option');
+              option.value = data[i].clave;
+              option.textContent = data[i].lugar;  // Corrección aquí
+              select.appendChild(option);
+            }
+          })
+          .catch(function(error) {
+            console.error(error);
+          });
+      }
+
+      populateLugarNacimiento();
+    function populateTipoINE() {
+        var select = document.getElementById('selTipoINE');
+      
+        fetch('/Generales/apiTipoINE')
+          .then(function(response) {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error('Error al obtener los datos del JSON');
+            }
+          })
+          .then(function(data) {
+            console.log(data)
+            for (var i = 0; i < data.length; i++) {
+              var option = document.createElement('option');
+              option.value = data[i].pk;
+              option.textContent = data[i].tipo;  // Corrección aquí
+              select.appendChild(option);
+            }
+          })
+          .catch(function(error) {
+            console.error(error);
+          });
+      }
+      
+
+    populateTipoINE();
+
+    
+
+ function displayRecomendacion(){
+       // Obtén una referencia al elemento del modal
+var modal = new bootstrap.Modal(document.getElementById('modalConsejos'));
+// Abre el modal
+modal.show();
+}
+
+      {% if correcto == 1 %}
+      displayRecomendacion();
+      {% endif %}
+function extractFechaNacimiento(curpValue) {
+    var year = curpValue.substring(4, 6);
+    var month = curpValue.substring(6, 8);
+    var day = curpValue.substring(8, 10);
+  
+    // Verificar si el año pertenece a 1900 o 2000
+    if (year >= 0 && year <= 99) {
+      year = (year >= 0 && year <= 21) ? '20' + year : '19' + year;
+    }
+  
+    var fechaNacimiento = year + '-' + month + '-' + day;
+    document.getElementById('txtFNac').value = fechaNacimiento;
+  }
+  
+
+  function previewImagen(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const imagenPreview = document.getElementById('imagen-preview');
+                const imagenPreview2 = document.getElementById('imagen-preview2');
+                if (event.target.id === 'userfile') {
+                    imagenPreview.src = reader.result;
+                } else if (event.target.id === 'userfile2') {
+                    imagenPreview2.src = reader.result;
+                }
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+        function previewImagen2(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const imagenPreview = document.getElementById('imagen-preview');
+                const imagenPreview2 = document.getElementById('imagen-preview2');
+                if (event.target.id === 'userfile') {
+                    imagenPreview.src = reader.result;
+                } else if (event.target.id === 'userfile2') {
+                    imagenPreview2.src = reader.result;
+                }
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    
+        function validarINE(){
+            var d = document.getElementById('selTipoINE');
+            var valINE = document.getElementById('valINE')
+            var dialog = document.getElementById('errorTIPO');
+            var btnOK = document.getElementById('btnOK');
+            var cic = document.getElementById('txtCIC');
+            var identificador = document.getElementById('txtIdentificador');
+            var selectedOption = d.options[d.selectedIndex];
+            var texto = selectedOption.text;
+            var date = new Date();
+            var year = date.getFullYear();
+            if (texto == 'A' || texto == 'B'){
+               
+               dialog.showModal();
+            }else{
+                if(year > 2024 && texto == 'C'){
+                    dialog.showModal();
+                }else{
+                    getlistaNominal(texto, cic.value , identificador.value);
+                }
+            }
+            
+
+            btnOK.addEventListener('click', function() {
+                dialog.close();
+              });
+        }
+
+        function getlistaNominal(tipo, cic, identificador){
+            console.log('/Investigaciones/ValidaINEListaNominal/'+ tipo + '/' + cic + '/' +identificador )
+            var dialogo = document.getElementById('dConsulaINE');
+            var inehidden = document.getElementById('valINE');
+            dialogo.showModal();
+            fetch('/Investigaciones/ValidaINEListaNominal/'+ tipo + '/' + cic + '/' +identificador )
+            .then(function(response) {
+              if (response.ok) {
+                return response.json();
+              } else {
+                dialogo.close();
+                throw new Error('Error al obtener los datos del JSON');
+               
+              }
+            })
+            .then(function(data) {
+              console.log(data)
+              inehidden.value = JSON.stringify(data)
+              dialogo.close();
+ 
+            })
+            .catch(function(error) {
+              console.error(error);
+            });
+        }
+</script>
+{% endblock %}

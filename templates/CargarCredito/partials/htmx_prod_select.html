@@ -1,0 +1,60 @@
+<form class="was-validated"
+        action="{% url 'CargarCredito:index' %}"
+        method="POST"
+        id="payment-form">
+        {% csrf_token %}
+
+    <div id="card-element">
+        <!-- Elements will create input elements here -->
+    </div>
+
+    <div id="card-errors" role="alert">
+        <!-- We'll put the error messages in this element -->
+    </div>
+    <br>
+    <div class="row g-3">
+    <div class="col-md-9">
+        <label for="formFile" class="form-label">Productos disponibles</label>
+        <div id="price_update">
+
+        <div id="product_update">
+        <select name="price_id"
+                hx-get="{% url 'CargarCredito:product_select' %}"
+                hx-target="#qt_update"
+                id="product"
+                class="form-select"
+                aria-label="Default select example" required>
+
+            {% for product in product_list %}
+            {% if product.id == selected_product %}
+            <option value="{{ product.id }}" selected>{{ product.name }}: MX${{ product.price }}</option>
+            {% else %}
+            <option value="{{ product.id }}">{{ product.name }}: MX${{ product.price }}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+        </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <label for="formFile" class="form-label">Cantidad</label>
+        <div id="qt_update">
+        <input name="quantity"
+                hx-get="{% url 'CargarCredito:product_select' %}"
+                hx-trigger="input changed delay:500ms"
+                hx-target="#product_update"
+               type="text"
+               class="form-control"
+               placeholder=""
+               value=""
+               aria-label="Last name" required>
+        </div>
+    </div>
+    </div>
+    <br>
+    <div class="col-auto">
+        <button type="submit" id="checkout-button"
+            class="btn btn-success btn-sm btn-lb-primary">Comprar</button>
+    </div>
+</form>

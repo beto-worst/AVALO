@@ -1,0 +1,128 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block title %}
+    
+{% endblock %}
+{% block containerHead %}
+  <div class="flex-wrap d-flex justify-content-between align-items-center">
+    <div>
+        <h1>Genera tu garantía jurídica</h1>
+    </div>
+    <div>
+      <!--  <a href="/investigacion/nueva" class="btn btn-success">Nueva</a> -->
+    </div>
+</div>
+{% endblock %}
+{% block subContainerHead %}
+{% endblock %}
+{% block contenido %}
+<div class='card'>
+    <div class='card-header'>
+        <div class="card-header d-flex justify-content-between">
+            <div class="header-title">
+                <h4 class="card-title">Genera tu garantía jurídica</h4>    
+            </div>
+
+        </div>
+    </div>
+    <div class='card-body'>
+        <div class="d-flex flex-column align-items-center justify-content-center">
+            <!-- Contenido a centrar -->
+            <h5 class='mt-2'>Planes 2024</h5>
+            <h3 class='mt-2'>Cotiza tu plan</h3>
+        </div>
+        
+        <div class='form-group text-center mt-2'>
+            <div class='col-md-3 mx-auto'>
+                <input type='text' class='form-control' placeholder='Ingresa importe de renta'>
+            </div>
+        </div>
+        
+        <div class='form-group text-center mt-2'>
+            <div class='col-md-3 mx-auto'>
+              <select name="" id="" class="form-select">
+                <option value="">-Seleciona un plan-</option>
+                <option value="">Básica</option>
+                <option value="">Premium</option>
+              </select>
+            </div>
+        </div>
+        
+        <div class='form-group text-center mt-2'>
+            <div class='col-md-3 mx-auto'>
+                <a href="/Documentos/NuevoPrestacionServicios" class="btn btn-success btn-sm btn-lb-primary">Aceptar</a>
+            </div>
+        </div>
+</div>
+</div>
+<div class='card'>
+    <div class='card-header'>
+        <div class="card-header d-flex justify-content-between">
+            <div class="header-title">
+                <h4 class="card-title">Coberturas jurídicas</h4>    
+            </div>
+
+        </div>
+
+    </div>
+    <div class='card-body'>
+        <div class='row'>
+            <div class='col-md-6'>
+                <div class='card  bg-primary text-white' >
+                    <div class='card-header  bg-primary text-white'>
+                        <div class="header-title text-white">
+                            <h4 class="card-title text-white">Básica</h4>    
+                        </div>
+                    </div>
+                    <div class='card-body'>
+                        <hr>
+                        <ul>
+                            <li>Cobertura por 13 meses.</li>
+                            <li>Asesoría legal durante el arrendamiento</li>
+                            <li>Investigación del arrendamiento.</li>
+                            <li>Elaboración del contrato.</li>
+                            <li>Cobranza extrajudicial.</li>
+                            <li>Recuperación del inmueble extrajudicial.</li>
+                            <li>Honorario de abogados.</li>
+                            <li>Ratificación ante el notario.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class='col-md-6'>
+                <div class='card  bg-primary text-white' >
+                    <div class='card-header  bg-primary text-white'>
+                        <div class="header-title text-white">
+                            <h4 class="card-title text-white">Premium</h4>    
+                        </div>
+                    </div>
+                    <div class='card-body'>
+                        <hr>
+                        <ul>
+                            <li>Cobertura por 13 meses.</li>
+                            <li>Asesoría legal y fiscal durante el arrendamiento</li>
+                            <li>Investigación del arrendamiento.</li>
+                            <li>Elaboración del contrato.</li>
+                            <li>Cobranza extrajudicial.</li>
+                            <li>Recuperación del inmueble extrajudicial.</li>
+                            <li>Honorario de abogados.</li>
+                            <li>Ratificación ante el notario.</li>
+                            <li>Cobranza judicial de rentas no pagadas.</li>
+                            <li>Juicio oral civil mediante lanzamiento judicial.</li>
+                            <li>Protección contra la ley de extinción de dominio.</li>
+                            <li>Recordatorio mensual de pago al arrendador.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+           
+            
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block customJS %}
+   
+
+{% endblock %}

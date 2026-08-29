@@ -1,0 +1,23 @@
+<div id="comments_lst">
+    {% if ticket_comments %}
+        {% for comment in ticket_comments %}
+            <div class="card">
+                <div class="card-body">
+                    <br>
+                    {% if comment.creator_comment == user %}
+                        <figure>
+                        {% else %}
+                        <figure class="text-end">
+                            {% endif %}
+                            <figcaption class="blockquote-footer">
+                                <cite title="Source Title">{{comment.created_at}}</cite>
+                            </figcaption>
+                            <blockquote class="blockquote">
+                                <p>{{comment.comment|safe|linebreaks}}</p>
+                            </blockquote>
+                        </figure>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>

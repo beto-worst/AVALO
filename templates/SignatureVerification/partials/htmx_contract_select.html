@@ -1,0 +1,7 @@
+{% for contract in contract_lst %}
+    {%if contract != 'x' %}
+        <option value="{{contract.id}}">ref: {{contract.uuid_archivo}}</option>
+    {%else%}
+        <option selected>Seleccionar...</option>
+    {%endif%}
+{% endfor %}

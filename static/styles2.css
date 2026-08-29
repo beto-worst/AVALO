@@ -1,0 +1,264 @@
+:root {
+  --main-color: #002958;
+  ; /*COLOR DE ENCABEZADOS*/
+  --hr-divisor-color: #2C74B3;
+  --hr-main-color: #205295;
+  --top-color: #2C74B3;
+  --text-color:--text-color: rgb(41, 39, 39); /* COLOR DE TEXTO NUEVO*/
+  --border-footer-color: rgba(93, 92, 92, 0.223);
+}
+body {
+  font-family: "Source Sans Pro", sans-serif;
+}
+hr {
+  margin: 2rem 0;
+}
+/* SE AJUSTARON LOS TAMAÑOS DE LAS FUENTES DE ESTAS CLASES*/
+.p-head {
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  color: #144272;
+  width: 100%;
+  white-space: nowrap;
+}
+.p-title {
+  font-size: 2.3rem;
+  font-weight: 400;
+  color: var(--text-color);
+}
+.p-content {
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--text-color);
+  line-height: 20px;
+}
+.p-entidad {
+  font-size: 2.1rem;
+  font-weight: 400;
+  padding-left: 20px;
+  color: var(--text-color);
+}
+.p-acuerdos {
+  font-size: 2rem;
+  font-weight: 400;
+  color: var(--text-color);
+}
+/* HASTA P-ACUERDOS*/
+
+.main-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  padding-top: 10px;
+}
+.wrap-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-right: 1px solid rgba(20, 66, 114, 0.5);
+  padding: 1rem;
+}
+.wrap-container:last-child {
+  border: none;
+}
+.hr-main {
+  border: 2px solid var(--hr-main-color);
+  margin-left: 20px;
+  width: 100%;
+}
+.hr-divisor {
+  border: 1px solid var(--hr-divisor-color);
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.header {
+  padding: 40px 20px 20px 20px;
+  /* background: linear-gradient(to right, var(--top-color) 30%, var(--bottom-color)); */
+  /* color: white; */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.header h1 {
+  font-size: 3rem;
+  color: var(--top-color);
+}
+.header h1 span {
+  font-size: 3rem;
+  color: var(--bottom-color);
+}
+.header p {
+  /* width: 80%; */
+  line-height: 20px;
+}
+
+.block-standard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+}
+.acuerdos {
+  padding: 0 20px 10px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.img-small {
+  width: 80px;
+  height: 80px;
+}
+.img-medium {
+  height: 90px;
+}
+.footer-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+  /* color: var(--text-color); */
+  margin-top: 20px;
+  color: white;
+  background-color: var(--top-color);
+}
+a {
+  text-decoration: none;
+  color: var(--text-color);
+}
+a:visited {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.portada-wrapper{
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.portada-wrapper, .contraportada {
+  background: linear-gradient(to top left, #2c74b3, #001630);
+}
+.portada-left{
+  display: flex;
+  align-items: top;
+}
+.legalbit-logo {
+  aspect-ratio: 1080/270;
+  width: min(30vh, 30vw);
+  height: auto;
+  margin-top: 4rem;
+  margin-left: 4rem;
+  background-image: url('./resources/legalbit-logo-white.png');
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.portada-right{
+  display: flex;
+  justify-content: end;
+  align-items:end;
+  margin-bottom: 20px;
+  /* color: white; */
+}
+.portada-right p{
+  max-width: 200px;
+  margin-right: 10px;
+  border-left: 4px solid white;
+  padding-left: 20px;
+  color: white;
+  /* SE AGREGA AUMENTO DE FUENTE PARA EL NOMBRE DE LA PORTADA*/
+  font-size: 1.7rem;
+}
+
+.header-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  gap: 20px;
+  height: 1100px;
+}
+.header-left-column {
+  background: linear-gradient(var(--bottom-color), var(--top-color));
+  width: 100%;
+  height: 100%;
+}
+.header-right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (max-width: 450px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+  }
+  .portada-wrapper{
+    gap: 20px;
+  }
+
+}
+
+.table-row3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+  gap: 2vw;
+}
+.table-cell3 {
+  border-right: 1px solid rgba(20, 66, 114, 0.5);
+  padding: 0.5rem;
+}
+.table-cell3:last-child {
+  border: none;
+}
+td.p-content {
+  padding: 2rem;
+}
+.p-title {
+  margin-bottom: 1rem;
+}
+
+.head-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.head-wrapper h2 {
+  position: absolute;
+  height: 7rem;
+  width: 7rem;
+  font-size: 2.2rem;
+  background-color: #144272;
+  color: white;
+  border: 10px solid white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.head-wrapper .p-head {
+  margin-left: 6rem;
+  padding-left: 2rem;
+  margin-bottom: 0;
+}
+
+
+@media print {
+  hr {
+    margin: 1.5rem 0;
+  }
+  /* SE AJUSTARON LOS TAMAÑOS DE LAS FUENTES DE ESTAS CLASES*/
+  .p-head {
+    margin-bottom: 2rem;
+  }
+  .main-container {
+    grid-template-columns: 1fr 1fr;
+  }
+  .wrap-container:nth-child(2) {
+    border-right: none;
+  }
+}

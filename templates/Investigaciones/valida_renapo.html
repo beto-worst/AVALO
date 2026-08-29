@@ -1,0 +1,128 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block title %}
+    Investigaciones
+{% endblock %}
+
+{% block containerHead %}
+  <div class="flex-wrap d-flex justify-content-between align-items-center">
+    <div>
+        <h1>Investigaciones</h1>
+    </div>
+    <div>
+      <!--  <a href="/investigacion/nueva" class="btn btn-success">Nueva</a> -->
+    </div>
+</div>
+{% endblock %}
+{% block subContainerHead %}
+{% endblock %}
+{% block contenido %}
+      <div class="card" style="height: 60%; overflow-y: auto;">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Datos escaneados del documento de identidad</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p>datos obtenidos de la INE</p>
+                    <form method="post" action="{% url 'Investigaciones:InvAddPersona' %}"enctype="multipart/form-data" id="upload-form">
+                    {% csrf_token %}
+
+                        <div class="form-group">
+                            <label class="form-label" for="curp">CURP</label>
+                            <input id="curp" name="curp" value="{{ curp }}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="apellido1">Primer Apellido</label>
+                            <input id="apellido1"  name="apellido1" value="{{ apellido1 }}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="apellido2">Segundo Apellido:</label>
+                            <input id="apellido2" name="apellido2" value="{{ apellido2 }}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="nombres">Nombres:</label>
+                            <input id="nombres" name="nombres" value="{{ nombres }}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="direccion">Direción:</label>
+                            <input id="direccion" name="direccion" value="{{ direccion }}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="selSexosexo">Sexo:</label>
+                            <select name="selSexo" id="selSexo" class="form-control">
+                                <option value="">--Seleccionar--</option>
+                                <option value="H" {% if sexo == 'H' %} selected{% endif  %}>HOMBRE</option>
+                                <option value="M" {% if sexo == 'M' %} selected{% endif  %}>MUJER</option>
+                            </select>
+                        </div>
+                        <hr>
+                    <h3>Datos obtenidos en RENAPO a partir de la CURP</h3>
+                    <div class="form-group mt-3">
+                            <label class="form-label" for="fechaRENAPO">CURP RENAPO:</label>
+                            <input id="curpRENAPO" name="curpRENAPO" value="{{ curpRENAPO }}" class="form-control">
+                        </div>
+                     <div class="form-group">
+                            <label class="form-label" for="direccion">Nombre RENAPO:</label>
+                            <input id="nombreRENAPO" name="nombreRENAPO" value="{{ nombreRENAPO }}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="direccion">Primer Apellido RENAPO:</label>
+                            <input id="apellido1RENAPO" name="apellido1RENAPO" value="{{ apellido1RENAPO }}" class="form-control">
+                        </div>
+                     <div class="form-group">
+                            <label class="form-label" for="direccion">Segundo Apellido RENAPO:</label>
+                            <input id="apellido2RENAPO" name="apellido2RENAPO" value="{{ apellido2RENAPO }}" class="form-control">
+                        </div>
+                     <div class="form-group">
+                            <label class="form-label" for="fechaRENAPO">Fecha Nacimiento RENAPO</label>
+                            <input id="fechaNacRENAPO" name="fechaNacRENAPO" value="{{ fechaNacRENAPO }}" class="form-control">
+                        </div>
+                    <div class="form-group">
+                            <label class="form-label" for="fechaRENAPO">Sexo RENAPO</label>
+                            <input id="sexoRENAPO" name="sexoRENAPO" value="{{ sexoRENAPO }}" class="form-control">
+                        </div>
+                     <div class="form-group">
+                            <label class="form-label" for="fechaRENAPO">Pais Nacimiento RENAPO:</label>
+                            <input id="paisRENAPO" name="paisRENAPO" value="{{ paisRENAPO }}" class="form-control">
+                        </div>
+                    <div class="form-group">
+                            <label class="form-label" for="fechaRENAPO">Estado Nacimiento RENAPO:</label>
+                            <input id="entidadRENAPO" name="entidadRENAPO" value="{{ entidadRENAPO }}" class="form-control">
+                        </div>
+                    <div class="form-group">
+                            <label class="form-label" for="fechaRENAPO">Municipio Nacimiento RENAPO:</label>
+                            <input id="municipioRENAPO" name="municipioRENAPO" value="{{ municipioRENAPO }}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="rfc">RFC:</label>
+                            <input id="rfc" name="rfc" value="{{ rfc }}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="Estado Civil">Estado Civil:</label>
+                            <select name="estadoCivil" class="form-select">
+                                <option value="">--Selecciona un estado Civil--</option>
+                                {% for e in estadosciviles %}
+                                    <option value="{{ e.id }}">{{ e.estado }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    <div class="form-group">
+                            <label class="form-label" for="correo">Correo Electronico</label>
+                            <input id="correo" name="correo" value="" class="form-control" type="email">
+                        </div>
+
+                        <button type="submit" name="addInvPersona" value="one" class="btn btn-success">Guardar Persona</button>
+                    </form>
+                    <pre></pre>
+                    <pre></pre>
+                    <pre></pre>
+                    <pre></pre>
+                    <pre></pre>
+
+                </div>
+            </div>
+{% endblock %}
+{% block customJS %}
+
+{% endblock %}

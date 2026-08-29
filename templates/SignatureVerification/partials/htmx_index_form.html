@@ -1,0 +1,53 @@
+<form class="row g-3 was-validated" hx-post="{%  url 'SignatureVerification:index' %}" hx-target="#index_reload" hx-indicator=".htmx-indicator" hx-disabled-elt="#submit_button">
+    <div class="col-md-6">
+        <label for="" class="form-label">Seleccione una persona (Arrendatario)</label>
+        <select hx-post="{% url 'SignatureVerification:index_htmx_form' %}" hx-target="#contract_select" id="client_select" name="client_select" class="form-select" required>
+            <option value="" selected>Seleccionar...</option>
+            {% for client in clients %}
+            <option value="{{client.persona}}">{{client.persona__nombre}} {{client.persona__apellido1}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-6">
+        <label for="" class="form-label">Seleccione una contrato</label>
+        <select id="contract_select" name="contract_select" class="form-select" required>
+            <option value selected>Seleccionar...</option>
+        </select>
+    </div>
+    <div class="col-md-6">
+        <label for="" class="form-label">Email del arrendador</label>
+        <input type="email" name="arrendador_email" class="form-control" id="arrendador_email" required>
+    </div>
+    <div class="col-md-6">
+        <label for="" class="form-label">Nombre del arrendador</label>
+        <input type="text" name="arrendador_name" class="form-control" id="arrendador_name" required>
+    </div>
+    <div class="col-md-6">
+        <label for="" class="form-label">Email de Observador (Opcional)</label>
+        <input type="email" name="observer_email" class="form-control" id="observer_email">
+    </div>
+    <div class="col-md-6">
+        <label for="" class="form-label">Nombre de Observador (Opcional)</label> 
+        <input type="text" name="observer_name" class="form-control" id="observer_name">
+    </div>
+    <br>
+    <div class="border-top my-3"></div>
+    <p class="fs-5">Correo electrónico a los firmantes</p>
+
+    <div class="col-md-4">
+        <label for="" class="form-label">Titulo del correo</label>
+        <input type="text" name="email_title" class="form-control" id="email_title" required>
+    </div>
+    <div class="col-md-8">
+        <label for="" class="form-label">Mensaje</label>
+        <input type="text" name="email_message" class="form-control" id="email_message" required>
+    </div>
+    <div class="col-md-12">
+        <button type="submit" id="submit_button" class="btn btn-success btn-sm btn-lb-primary">Configurar</button>
+    </div>
+</form>
+<span class="htmx-indicator">
+    <div class="spinner-border spinner-border-sm" role="status">
+        <span class="visually-hidden">Procesando ...</span>
+    </div> Procesando, esperar ...
+</span>

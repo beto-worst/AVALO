@@ -1,0 +1,89 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block title %}
+    Perfil de usuario
+{% endblock %}
+{% block containerHead %}
+  <div class="flex-wrap d-flex justify-content-between align-items-center">
+    <div>
+        <h1>Mis datos</h1>
+    </div>
+    <div>
+      <!--  <a href="/investigacion/nueva" class="btn btn-success">Nueva</a> -->
+    </div>
+</div>
+{% endblock %}
+{% block subContainerHead %}
+{% endblock %}
+{% block contenido %}
+      <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Datos registrados</h4>
+                        <a href="/resetpsw" class="btn btn-warning btn-sm">Actualizar constraseña</a>
+                    </div>
+
+                </div>
+                <div class="card-body">
+
+                        <div class="form-group">
+                            <div class="col-auto">
+                                <span>
+                                    Nombre de usuario en sistema:
+                                    <input type="text" class="form-control form-control-sm" name="txtSearch" id="txtSearch" placeholder="" value="{{ user.email }}" readonly/>
+                                </span>
+                            </div>
+                        </div>
+                     <div class="form-group">
+                            <div class="col-auto">
+                                <span>
+                                    Nombre(s):
+                                    <input type="text" class="form-control form-control-sm" name="txtSearch" id="txtSearch" placeholder="" value="{{ user.username }}" readonly/>
+                                </span>
+                            </div>
+                          <div class="col-auto">
+                                <span>
+                                    Apellidos:
+                                    <input type="text" class="form-control form-control-sm" name="txtSearch" id="txtSearch" placeholder="" value="{{ user.last_name }}" readonly/>
+                                </span>
+                            </div>
+                         
+                        </div>
+
+
+                </div>
+            </div>
+
+
+
+
+<div class="modal" tabindex="-1">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p>Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+    </div>
+</div>
+</div>
+
+
+{% endblock %}
+{% block customJS %}
+    <script>
+    function btnReset(){
+
+          const searchInput = document.querySelector('input[name="txtSearch"]');
+            searchInput.value = '';
+    }
+    </script>
+
+{% endblock %}

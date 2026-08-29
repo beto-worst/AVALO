@@ -1,0 +1,6 @@
+<input type="text"
+name="quantity"
+hx-get="{% url 'CargarCredito:product_select' %}"
+hx-trigger="input changed delay:500ms"
+hx-target="#product_update"
+class="form-control" placeholder="" value="{{selected_qt}}" aria-label="Last name" required>

@@ -1,0 +1,94 @@
+<div id="ticket_list">
+    <div class="card w-100">
+        <div class="card-header">
+            <h5>Lista de tickets</h5>
+        </div>
+        <div class="card-body">
+            <p>En esta sección puede ver todos los tickets creados por los usuarios y cambiar algunos de los parámetros.</p>
+            <div class="table-responsive">
+                <table class="table" id="tick_table">
+                    <thead>
+                        <tr>
+                            {% for name in table_categories %}
+                            <th scope="col">{{ name }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        {% for ticket in tickets %}
+                        <tr>
+                            <td><a href="/tickets/ticket_admin_edit/{{ticket.id}}">{{ticket.title}}</a></td>
+                            <td>{{ticket.creator}}</td>
+
+                            <td>
+                                <select hx-get="{% url 'TicketingSystem:ticket_admin' %}"
+                                    hx-target='#assignee{{ticket.id}}'
+                                    hx-swap="outerHTML"
+                                    hx-trigger="change"
+                                    hx-vals='{"_ticket_id": "{{ticket.id}}"}'
+                                    name="selected_staff"
+                                    class="form-select"
+                                    aria-label="select"
+                                    id="assignee{{ticket.id}}">
+                                    <option value="">Por asignar ...</option>
+                                    {% for staff in all_staff %}
+                                    {% if staff.id != ticket.assignee.id %}
+                                    <option value="{{staff.id}}"> {{staff.username}} </option>
+                                    {% else %}
+                                    <option value="{{staff.id}}" selected>{{staff.username}}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            <td>
+                                <select hx-get="{% url 'TicketingSystem:ticket_admin' %}"
+                                    hx-target='#CategorySelection{{ticket.id}}' hx-swap="outerHTML" hx-trigger="change"
+                                    hx-vals='{"_ticket_id": "{{ticket.id}}"}' name="selected_category"
+                                    class="form-select" aria-label="select" id="CategorySelection{{ticket.id}}">
+                                    {% for category in all_categories %}
+                                    {% if category.0 != ticket.category.id %}
+                                    <option value="{{category.0}}"> {{category.1}} </option>
+                                    {% else %}
+                                    <option value="{{category.0}}" selected>{{category.1}}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            <td>
+                                <select hx-get="{% url 'TicketingSystem:ticket_admin' %}"
+                                    hx-target='#StatusSelection{{ticket.id}}' hx-swap="outerHTML" hx-trigger="change"
+                                    hx-vals='{"_ticket_id": "{{ticket.id}}"}' name="selected_status" class="form-select"
+                                    aria-label="select" id="StatusSelection{{ticket.id}}">
+                                    {% for status in all_status %}
+                                    {% if status.0 != ticket.status.id %}
+                                    <option value="{{status.0}}"> {{status.1}} </option>
+                                    {% else %}
+                                    <option value="{{status.0}}" selected>{{status.1}}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            <td>
+                                <select hx-get="{% url 'TicketingSystem:ticket_admin' %}"
+                                    hx-target='#PrioritySelection{{ticket.id}}' hx-swap="outerHTML" hx-trigger="change"
+                                    hx-vals='{"_ticket_id": "{{ticket.id}}"}' name="selected_priority"
+                                    class="form-select" aria-label="select" id="PrioritySelection{{ticket.id}}">
+                                    {% for priority in all_priorities %}
+                                    {% if priority.0 != ticket.priority %}
+                                    <option value="{{priority.0}}"> {{priority.1}} </option>
+                                    {% else %}
+                                    <option value="{{priority.0}}" selected>{{priority.1}}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            <td>{{ticket.created_at|date:'D d M Y'}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,473 @@
+/* ávalo Brand Guidelines - LegalBit */
+
+/* ─── Google Fonts ─────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+/* ─── CSS Variables ─────────────────────────────────────────── */
+:root {
+  --avalo-light:  #dcf0f1;
+  --avalo-mid:    #7bc0db;
+  --avalo-blue:   #488fc3;
+  --avalo-navy:   #192635;
+
+  --color-light-blue: #dcf0f1;
+  --color-mid-blue:   #7bc0db;
+  --color-blue:       #488fc3;
+  --color-navy:       #192635;
+
+  --font-body:    'Montserrat', sans-serif;
+  --font-heading: 'Montserrat', sans-serif;
+
+  --bs-primary:        #488fc3;
+  --bs-primary-rgb:    72, 143, 195;
+  --bs-success:        #488fc3;
+  --bs-success-rgb:    72, 143, 195;
+  --bs-info:           #7bc0db;
+  --bs-info-rgb:       123, 192, 219;
+  --bs-heading-color:  #192635;
+  --bs-body-color:     #192635;
+  --bs-body-bg:        #f4f6f9;
+}
+
+/* ─── Global Typography ─────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif !important;
+  color: var(--avalo-navy);
+  background-color: #f4f6f9;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 700 !important;
+  color: var(--avalo-navy) !important;
+}
+
+p, span, label, input, select, textarea, button, a, li, td, th {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+/* ─── Sidebar mini logo ─────────────────────────────────────── */
+.logo-mini-icon {
+  display: none;
+  filter: brightness(0) invert(1);
+  flex-shrink: 0;
+}
+
+.sidebar.sidebar-mini .logo-mini-icon {
+  display: block !important;
+  width: 30px !important;
+  height: 30px !important;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+.sidebar.sidebar-mini .navbar-brand {
+  width: 100% !important;
+  overflow: hidden !important;
+  justify-content: center !important;
+  display: flex !important;
+}
+
+/* Ocultar completamente el logo principal en mini para evitar sangrado */
+.sidebar.sidebar-mini .logo-title {
+  display: none !important;
+}
+
+/* ─── Sidebar ───────────────────────────────────────────────── */
+.sidebar,
+.sidebar-default,
+aside.sidebar {
+  background: linear-gradient(180deg, #192635 0%, #1e3a52 50%, #488fc3 100%) !important;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.sidebar-header {
+  background-color: #192635 !important;
+  border-bottom: 1px solid rgba(123, 192, 219, 0.25) !important;
+}
+
+.sidebar .item-name,
+.sidebar .navbar-nav .nav-link,
+.sidebar .nav-link {
+  color: #dcf0f1 !important;
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 500 !important;
+}
+
+.sidebar .navbar-nav .nav-link:hover,
+.sidebar .nav-link:hover {
+  background-color: rgba(123, 192, 219, 0.15) !important;
+  color: #ffffff !important;
+}
+
+.sidebar .navbar-nav .nav-link.active,
+.sidebar .nav-link.active {
+  background-color: #488fc3 !important;
+  border-left: 3px solid #7bc0db !important;
+  color: #ffffff !important;
+}
+
+.sidebar .static-item .nav-link,
+.sidebar .static-item .nav-link.disabled {
+  color: rgba(123, 192, 219, 0.7) !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+}
+
+.sidebar .icon img,
+.sidebar .icon svg {
+  filter: brightness(0) invert(1) !important;
+  opacity: 0.85;
+}
+
+.sidebar-toggle svg,
+.sidebar-toggle path {
+  color: #dcf0f1 !important;
+  stroke: #dcf0f1 !important;
+}
+
+/* ─── Navbar ────────────────────────────────────────────────── */
+.iq-navbar,
+nav.iq-navbar,
+.navbar {
+  background: #192635 !important;
+  border-bottom: 1px solid rgba(123, 192, 219, 0.2) !important;
+}
+
+.iq-navbar .nav-link,
+.iq-navbar a,
+.navbar .nav-link,
+.navbar a {
+  color: #dcf0f1 !important;
+}
+
+.iq-navbar .nav-link:hover,
+.navbar .nav-link:hover {
+  color: #7bc0db !important;
+}
+
+.navbar-brand .logo-title img {
+  filter: brightness(0) invert(1);
+}
+
+/* Navbar caption (username / group) */
+.iq-navbar .caption .caption-title,
+.iq-navbar .caption-title,
+.iq-navbar .caption h6,
+.iq-navbar .caption small {
+  color: #dcf0f1 !important;
+}
+
+.iq-navbar .caption .caption-sub-title,
+.iq-navbar .caption p {
+  color: rgba(123, 192, 219, 0.85) !important;
+  font-size: 0.75rem !important;
+}
+
+/* Navbar icons */
+.iq-navbar .iq-icon-box,
+.iq-navbar .nav-item .nav-link i,
+.iq-navbar .nav-item .nav-link svg,
+.iq-navbar .iq-notification,
+.iq-navbar .iq-mail {
+  color: #7bc0db !important;
+  stroke: #7bc0db !important;
+}
+
+/* User avatar ring */
+.iq-navbar .avatar,
+.iq-navbar .user-img,
+.iq-navbar img.avatar,
+.iq-navbar .iq-profile-avatar {
+  border: 2px solid #7bc0db !important;
+}
+
+/* ─── Page Title ────────────────────────────────────────────── */
+.iq-navbar-header h1,
+.iq-navbar-header h2,
+.iq-navbar-header .page-title,
+.iq-page-header h1,
+.iq-page-header h2,
+.iq-page-header .page-title,
+.content-inner .page-title,
+.content-inner > .container-fluid > .row > * h1,
+.content-inner > .container-fluid > .row > * h2,
+main h1.page-title,
+main h2.page-title,
+.breadcrumb-title h1,
+.breadcrumb-title h2 {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+.breadcrumb-item,
+.breadcrumb-item a,
+.breadcrumb-item + .breadcrumb-item::before {
+  color: rgba(220, 240, 241, 0.8) !important;
+}
+
+/* ─── Buttons ───────────────────────────────────────────────── */
+.btn-primary,
+.btn-success,
+.btn-lb-primary {
+  background-color: #488fc3 !important;
+  border-color: #488fc3 !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  border-radius: 6px !important;
+}
+
+.btn-primary:hover,
+.btn-success:hover,
+.btn-lb-primary:hover {
+  background-color: #7bc0db !important;
+  border-color: #7bc0db !important;
+  color: #ffffff !important;
+}
+
+.btn-outline-primary {
+  border-color: #488fc3 !important;
+  color: #488fc3 !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+}
+
+.btn-outline-primary:hover {
+  background-color: #488fc3 !important;
+  color: #ffffff !important;
+}
+
+/* Remove all greens → replace with avalo-mid */
+.btn-success,
+.bg-success,
+.badge-success,
+.text-bg-success {
+  background-color: #7bc0db !important;
+  border-color: #7bc0db !important;
+  color: #192635 !important;
+}
+
+.text-success {
+  color: #7bc0db !important;
+}
+
+/* ─── Cards ─────────────────────────────────────────────────── */
+.card {
+  border: 1px solid #dcf0f1 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(25, 38, 53, 0.08) !important;
+}
+
+.card-header {
+  background-color: #192635 !important;
+  color: #dcf0f1 !important;
+  font-weight: 700 !important;
+  border-bottom: 2px solid #488fc3 !important;
+  border-radius: 12px 12px 0 0 !important;
+}
+
+.card-header .card-title,
+.card-header h4,
+.card-header h5 {
+  color: #dcf0f1 !important;
+  font-weight: 700 !important;
+}
+
+.card-title {
+  color: #192635 !important;
+  font-weight: 700 !important;
+}
+
+/* Stat cards */
+.card.stat-card,
+.iq-card.stat-card,
+.card.bg-primary,
+.card.bg-info {
+  background: linear-gradient(135deg, #488fc3, #7bc0db) !important;
+  border: none !important;
+  color: #ffffff !important;
+}
+
+.card.bg-primary *,
+.card.bg-info * {
+  color: #ffffff !important;
+}
+
+/* ─── Tables ────────────────────────────────────────────────── */
+.table {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.table thead tr,
+.table thead th {
+  background-color: #192635 !important;
+  color: #dcf0f1 !important;
+  font-weight: 600 !important;
+  border-color: rgba(123, 192, 219, 0.3) !important;
+}
+
+.table tbody tr:hover {
+  background-color: #dcf0f1 !important;
+}
+
+.table td,
+.table th {
+  border-color: rgba(123, 192, 219, 0.3) !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  background-color: rgba(220, 240, 241, 0.4) !important;
+}
+
+/* ─── Forms ─────────────────────────────────────────────────── */
+.form-control,
+.form-select {
+  border: 1.5px solid #7bc0db !important;
+  border-radius: 6px !important;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #488fc3 !important;
+  box-shadow: 0 0 0 3px rgba(72, 143, 195, 0.15) !important;
+}
+
+.form-label {
+  font-weight: 600 !important;
+  color: #192635 !important;
+}
+
+/* ─── Links ─────────────────────────────────────────────────── */
+a {
+  color: #488fc3;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #7bc0db;
+}
+
+/* ─── Dropdowns ─────────────────────────────────────────────── */
+.dropdown-menu {
+  border: 1px solid #dcf0f1 !important;
+  box-shadow: 0 4px 16px rgba(25, 38, 53, 0.12) !important;
+  border-radius: 8px !important;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: #dcf0f1 !important;
+  color: #192635 !important;
+}
+
+/* ─── User profile dropdown (navbar) ────────────────────────── */
+.iq-navbar .nav-item.dropdown .dropdown-menu {
+  background-color: #192635 !important;
+  border: 1px solid rgba(123, 192, 219, 0.25) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(25, 38, 53, 0.35) !important;
+  min-width: 200px !important;
+  padding: 8px 0 !important;
+  margin-top: 8px !important;
+}
+
+/* Header con nombre/grupo dentro del dropdown */
+.iq-navbar .nav-item.dropdown .dropdown-menu::before {
+  content: '';
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, #7bc0db, #488fc3);
+  border-radius: 12px 12px 0 0;
+  margin: -8px 0 8px 0;
+}
+
+.iq-navbar .nav-item.dropdown .dropdown-menu .dropdown-item {
+  color: #dcf0f1 !important;
+  font-weight: 500 !important;
+  font-size: 0.88rem !important;
+  padding: 10px 20px !important;
+  border-radius: 0 !important;
+  transition: background-color 0.15s, padding-left 0.15s;
+}
+
+.iq-navbar .nav-item.dropdown .dropdown-menu .dropdown-item:hover,
+.iq-navbar .nav-item.dropdown .dropdown-menu .dropdown-item:focus {
+  background-color: rgba(123, 192, 219, 0.15) !important;
+  color: #ffffff !important;
+  padding-left: 26px !important;
+}
+
+/* Cerrar Sesión en rojo suave */
+.iq-navbar .nav-item.dropdown .dropdown-menu .dropdown-item[href="/logout"] {
+  color: #f87171 !important;
+}
+
+.iq-navbar .nav-item.dropdown .dropdown-menu .dropdown-item[href="/logout"]:hover {
+  background-color: rgba(248, 113, 113, 0.15) !important;
+  color: #fca5a5 !important;
+}
+
+.iq-navbar .nav-item.dropdown .dropdown-menu .dropdown-divider {
+  border-color: rgba(123, 192, 219, 0.2) !important;
+  margin: 4px 16px !important;
+}
+
+/* ─── Alerts ────────────────────────────────────────────────── */
+.alert-success {
+  background-color: var(--avalo-light) !important;
+  border-color: var(--avalo-mid) !important;
+  color: var(--avalo-navy) !important;
+}
+
+/* ─── Progress bars ─────────────────────────────────────────── */
+.bg-primary,
+.progress-bar.bg-primary,
+.progress-bar.bg-success {
+  background-color: #488fc3 !important;
+}
+
+.bg-info {
+  background-color: #7bc0db !important;
+}
+
+/* ─── Override all remaining greens ─────────────────────────── */
+[style*="color: rgb(32, 201, 151)"],
+[style*="color:#20c997"],
+[style*="color: #20c997"],
+[style*="color: #28a745"],
+[style*="color:#28a745"] {
+  color: #7bc0db !important;
+}
+
+[style*="background-color: rgb(32, 201, 151)"],
+[style*="background-color:#20c997"],
+[style*="background-color: #20c997"],
+[style*="background-color: #28a745"],
+[style*="background-color:#28a745"] {
+  background-color: #7bc0db !important;
+}
+
+/* ─── Utility ───────────────────────────────────────────────── */
+.text-primary  { color: #488fc3 !important; }
+.text-info     { color: #7bc0db !important; }
+.bg-soft-primary { background-color: rgba(72, 143, 195, 0.1) !important; }
+
+.iq-navbar-header {
+  background: linear-gradient(135deg, #192635 0%, #488fc3 100%) !important;
+}
+
+/* ─── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .btn-primary, .btn-success {
+    font-size: 0.85rem !important;
+  }
+}

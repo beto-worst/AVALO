@@ -1,0 +1,161 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Lista de contratos</h5>
+        <br>
+        <p class="fst-italic"> Some detailed information here if needed.</p>
+        {% if rv_message %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ rv_message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+        <br>
+        <div class="table-responsive">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Firmantes</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Opciones</th>
+                        <th scope="col">Borrar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contract in contracts %}
+                    <tr>
+                        <th scope="row">{{contract.client.apellido1}}-{{contract.contract_id.uuid_archivo|slice:'-8:'}}</th>
+                        <td>
+                            {% for sign in signature_info %}
+                                {% if sign.wt_contract == contract.wt_contract_id %}
+                                    {{ sign.arrendador_email}}<br>{{ sign.arrendatario_email}}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {%if contract.wt_status == 'DRAFT'%}
+                            Borrador
+                            {%elif contract.wt_status == 'PENDING'%}
+                            Pendiente
+                            {%elif contract.wt_status == 'COMPLETED'%}
+                            Completado
+                            {%else%}
+                            Desconocido
+                            {%endif%}
+                        </td>
+                        <td>{{contract.date_created|date:"d/m/Y H:i"}}</td>
+                        <td>
+                            {%if contract.wt_status == 'DRAFT'%}
+                            <button type="submit"
+                                    id="btn_submit"
+                                    class="btn btn-success btn-sm btn-lb-primary"
+                                    hx-post="{% url 'SignatureVerification:verify' %}"
+                                    hx-vars="{'wtc_id': '{{contract.id}}', 'wt_contract_id': '{{ contract.wt_contract_id }}'}"
+                                    hx-target="#reload_contract_lst"
+                                    hx-disabled-elt="this">
+                                    Enviar
+                            </button>
+
+                            {%elif contract.wt_status == 'PENDING'%}
+
+                            <!-- modal button -->
+                            <button type="button" class="btn btn-success btn-sm btn-lb-primary" data-bs-toggle="modal" data-bs-target="#PENDING_Modal">
+                                Mostrar opciones
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="PENDING_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Opciones para: {{contract.client.apellido1}}-{{contract.contract_id.uuid_archivo|slice:'-8:'}}</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                            <!-- menu -->
+                                            <div class="list-group">
+                                                <a href=""
+                                                hx-post="{% url 'SignatureVerification:resend_verification' %}"
+                                                hx-vars="{'wtc_id': '{{contract.id}}', 'wt_contract_id': '{{ contract.wt_contract_id }}'}"
+                                                hx-target="#reload_contract_lst"
+                                                data-bs-dismiss="modal"
+                                                class="list-group-item list-group-item-action">Reenviar contrato a firmar</a>
+                                            </div>
+                                            <!-- end of menu -->
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-success btn-sm btn-lb-primary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <!-- modal end -->
+
+                            {%elif contract.wt_status == 'COMPLETED'%}
+
+                            <!-- modal button -->
+                            <button type="button" class="btn btn-success btn-sm btn-lb-primary" data-bs-toggle="modal" data-bs-target="#COMPLETED_Modal_{{contract.wt_contract_id}}">
+                                Mostrar opciones
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="COMPLETED_Modal_{{contract.wt_contract_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Opciones para: {{contract.client.apellido1}}-{{contract.contract_id.uuid_archivo|slice:'-8:'}}</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <!-- menu -->
+                                        <div class="list-group">
+                                            {%for links in compleated_urls%}
+                                                {% if links.wt_contract__wt_contract_id == contract.wt_contract_id %}
+                                                    <a href={{links.documentURL|safe}} target="_blank" class="list-group-item list-group-item-action">Descargar</a>
+                                                    <a href={{links.pscCertificateURL|safe}} target="_blank" class="list-group-item list-group-item-action">Constancia PSC (asn)</a>
+                                                    <a href={{links.certificateURL|safe}} target="_blank" class="list-group-item list-group-item-action">Certificado Blockchain</a>
+                                                {% else %}
+
+                                                {% endif %}
+                                            {%endfor%}
+                                        </div>
+                                        <!-- end of menu -->
+
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-success btn-sm btn-lb-primary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <!-- modal end -->
+
+                            {%else%}
+                            <!-- leave blank -->
+                            {%endif%}
+
+                        </td>
+                        <td>
+                            {% if contract.wt_status == 'DRAFT' %}
+                            <button type="button" class="btn btn-outline-light"
+                            hx-post="{% url 'SignatureVerification:delete_contract' %}"
+                            hx-confirm="¿¿Estás segura de que quieres eliminar el contrato {{contract.client.apellido1}}-{{contract.contract_id.uuid_archivo|slice:'-8:'}}?"
+                            hx-vars='{"wtc_id": "{{contract.id}}", "wt_contract_id": "{{ contract.wt_contract_id }}"}'
+                            hx-target="#reload_contract_lst"
+                            hx-disabled-elt="this">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="20" width="14"
+                                    viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                    <path fill="#8ea7d5"
+                                        d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z" />
+                                </svg>
+                            </button>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

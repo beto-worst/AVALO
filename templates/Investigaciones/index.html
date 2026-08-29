@@ -1,0 +1,209 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block title %}
+    Investigaciones
+{% endblock %}
+
+{% block containerHead %}
+  <div class="flex-wrap d-flex justify-content-between align-items-center">
+    <div>
+        <h1>Investigaciones</h1>
+    </div>
+    <div>
+      <!--  <a href="/investigacion/nueva" class="btn btn-success">Nueva</a> -->
+    </div>
+</div>
+{% endblock %}
+{% block subContainerHead %}
+{% endblock %}
+{% block contenido %}
+      <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Registro de documentos</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p>Adjunte la INE del solicitante para comenzar</p>
+                    <form method="post" action="{% url 'Investigaciones:index' %}"enctype="multipart/form-data" id="upload-form">
+                    {% csrf_token %}
+                        <div class="form-group">
+                            <label class="form-label" for="email">Imagen frontal de la INE</label>
+                             <input type="file" name="userfile" id="userfile" onchange="previewImagen(event)" />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="email">Imagen trasera de la INE</label>
+                             <input type="file" name="userfile2" id="userfile2" onchange="previewImagen2(event)" />
+                        </div>
+                        <div class="form-group">
+                            <img src="{% static "img/ineejemplo.jpg" %}" alt="" class="img-thumbnail" id="imagen-preview" width="300" height="150" src="{{ foto }}">
+                            <img src="{% static "img/inetrasera.png" %}" alt="" class="img-thumbnail" id="imagen-preview2" width="300" height="150" src="{{ foto2 }}">
+
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="curp">CURP</label>
+                            <input id="curp" name="curp" value="{{ curp }}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="apellido1">Primer Apellido</label>
+                            <input id="apellido1"  name="apellido1" value="{{ apellido1 }}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="apellido2">Segundo Apellido:</label>
+                            <input id="apellido2" name="apellido2" value="{{ apellido2 }}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="nombres">Nombres:</label>
+                            <input id="nombres" name="nombres" value="{{ nombres }}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="direccion">Direción:</label>
+                            <input id="direccion" name="direccion" value="{{ direccion }}" class="form-control">
+                        </div>
+                        <div class='form-group' id='divOCR'>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="selSexosexo">Sexo:</label>
+                            <select name="selSexo" id="selSexo" class="form-control">
+                                <option value="">--Seleccionar--</option>
+                                <option value="H" {% if sexo == 'H' %} selected{% endif  %}>HOMBRE</option>
+                                <option value="M" {% if sexo == 'M' %} selected{% endif  %}>MUJER</option>
+                            </select>
+                        </div>
+                        <button type="submit" name="submitBtn" value="one" class="btn btn-success" >Escanear Documento</button>
+                        <br>
+                            <button type="submit" value="frmValidarRENAPO" name="validaRENAPO" id="validaRENAPO" class="btn btn-success mt-3">
+                            Validar CURP ante RENAPO
+                            </button>
+                    </form>
+                    <pre></pre>
+                    <pre></pre>
+                    <pre></pre>
+                    <pre></pre>
+                    <pre></pre>
+
+                </div>
+            </div>
+            <!-- MODAL  -->
+            <div class="modal" tabindex="-1" id='modalError'>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Ocurrio un error al procesar los datos</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="modal-body">
+                           
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                            
+                        </div>
+                    </div>
+                </div>
+                </div>
+                  <!-- MODAL  -->
+            <div class="modal" tabindex="-1" id='modalConsejos'>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Recomendaciones para un escaneo correcto de la INE</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="modal-body">
+                            <ol>
+                            <li>Tomar la foto con poca distancia y que no sea solo los bordes de la credencial. </li>
+                            <li>Evitar luz sobre los hologramas ya que hace que brillen y afectan el procesamiento de la imagen.</li>
+                            <li> Una resolución entre 800px y 2000px sería lo ideal para no forzar tanto el procesamiento de la imagen.</li>
+                            <li> Evitar que el color del fondo sea similar al de la credencial.</li>
+                            <li> Evitar sombras al momento de tomar la fotografía.</li>
+                            <li>La orientación se recomienda que estén en posición normal de frente en horizontal.</li>
+                            <li> Evitar sostener la imagen con los dedos, se puede reposar sobre la palma de la mano.</li>
+                            <li>Se recomienda que no se cubra nada en la credencial.</li>
+                            <li>No es recomendable hacerlo con imágenes escaneadas, pero en caso de hacerlo que sean legibles y de preferencia a color.</li>
+                            </ol>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                            
+                        </div>
+                    </div>
+                </div>
+                </div>
+{% endblock %}
+{% block customJS %}
+<script>
+ function displayRecomendacion(){
+       // Obtén una referencia al elemento del modal
+var modal = new bootstrap.Modal(document.getElementById('modalConsejos'));
+// Abre el modal
+modal.show();
+}
+ window.addEventListener('load', displayRecomendacion);
+</script>
+{% if error is not defined or error|length == 0 %}
+<script>
+document.removeEventListener('DOMContentLoaded', displayRecomendacion);
+var modalBody = document.getElementById('modal-body');
+var nuevoElemento = document.createElement('p');
+nuevoElemento.textContent = '{{ error }}';
+modalBody.appendChild(nuevoElemento);
+
+   // Obtén una referencia al elemento del modal
+var modal = new bootstrap.Modal(document.getElementById('modalError'));
+
+// Abre el modal
+modal.show();
+// Espera a que el modal se haya cerrado completamente
+// Obtén una referencia al formulario por su ID
+var divOCR = document.getElementById('divOCR');
+
+// Crea el elemento <label> y establece su atributo "for" al ID del campo de entrada
+var label = document.createElement('label');
+label.setAttribute('for', 'txtOCR');
+label.textContent = 'OCR INE (Reverso INE parte inferior, la cadena completa similar a : IDMEX9999999<<9999999999999MEX<00<<12232<1 APELLIDO<APELLIDO2<<NOMBRE<NOMBRE<'):';
+
+// Crea el elemento <input> de tipo texto
+var input = document.createElement('input');
+input.type = 'text';
+input.required = true;
+input.name = 'txtOCR';
+input.classList.add('form-control')
+
+// Agrega el elemento <input> al formulario
+divOCR.appendChild(label);
+divOCR.appendChild(input);
+
+</script>
+{% endif %}
+
+    <script>
+   
+  function previewImagen(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const imagenPreview = document.getElementById('imagen-preview');
+                const imagenPreview2 = document.getElementById('imagen-preview2');
+                if (event.target.id === 'userfile') {
+                    imagenPreview.src = reader.result;
+                } else if (event.target.id === 'userfile2') {
+                    imagenPreview2.src = reader.result;
+                }
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+        function previewImagen2(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const imagenPreview = document.getElementById('imagen-preview');
+                const imagenPreview2 = document.getElementById('imagen-preview2');
+                if (event.target.id === 'userfile') {
+                    imagenPreview.src = reader.result;
+                } else if (event.target.id === 'userfile2') {
+                    imagenPreview2.src = reader.result;
+                }
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+</script>
+{% endblock %}

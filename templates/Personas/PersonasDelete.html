@@ -1,0 +1,48 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block title %}
+    Personas físicas
+{% endblock %}
+{% block containerHead %}
+  <div class="flex-wrap d-flex justify-content-between align-items-center">
+    <div>
+        <h1>Personas Físicas</h1>
+    </div>
+    <div>
+      <!--  <a href="/investigacion/nueva" class="btn btn-success">Nueva</a> -->
+    </div>
+</div>
+{% endblock %}
+{% block subContainerHead %}
+{% endblock %}
+{% block contenido %}
+      <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Eliminar Persona: {{ personas }} </h4>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <form method="post" >
+                    {% csrf_token %}
+                        <h3>Estas seguro ?</h3>
+                            <p>Esta acción no se puede deshacer.</p>
+                        <button type="submit" class="btn btn-danger btn-sm" name="Eliminar">Eliminar</button>
+                    </form>
+
+                  <a href="/Personas/PersonasPF" class="btn btn-success mt-5">Regresar</a>
+                </div>
+            </div>
+
+
+
+
+
+
+{% endblock %}
+{% block customJS %}
+{% endblock %}
+
+
+

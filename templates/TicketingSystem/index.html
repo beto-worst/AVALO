@@ -1,0 +1,41 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block title %}
+
+{% endblock %}
+{% block containerHead %}
+<div class="flex-wrap d-flex justify-content-between align-items-center">
+    <div>
+        <h1>Sistema de Tickets</h1>
+    </div>
+    <div>
+        <!--  <a href="/investigacion/nueva" class="btn btn-success">Nueva</a> -->
+    </div>
+</div>
+{% endblock %}
+{% block subContainerHead %}
+{% endblock %}
+{% block contenido %}
+<div class='card'>
+    <div class='card-header'>
+        <div class="card-header d-flex justify-content-between">
+            <div class="header-title">
+                <h4 class="card-title">Administración de tickets</h4>
+            </div>
+        </div>
+        <div class='card-body'>
+
+            <!-- Index core: form and table -->
+            {% include 'TicketingSystem/partials/htmx_index_core.html' %}
+            <!-- end Index core: form and table -->
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block customJS %}
+
+
+{% endblock %}

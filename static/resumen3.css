@@ -1,0 +1,463 @@
+:root {
+    --colorPrimario: #fff;
+    --colorPrimarioVariante: #f6f6f6;
+    --colorSecundario: #000;
+    --colorSecundarioVariante: #766f71;
+    --colorTerciario: #144272;
+    --colorTerciarioVariante: rgba(44, 116, 179, 0.3);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+    print-color-adjust: exact;
+}
+html {
+    font-size: 62.5%;
+}
+body {
+    width: 100%;
+}
+
+/*Estilos de main*/
+main, #portada-rpt {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+    padding: 5vh 3vw;
+}
+.information-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+    padding: 0 3vw;
+}
+
+/*Sección de descripción del reporte*/
+.report-description {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3vw;
+    padding: 0 3vw;
+}
+.report-description > div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5vh;
+}
+.report-description .right {
+    background-color: var(--colorPrimarioVariante);
+    padding: 1vh 3vw;
+    border-radius: 10px;
+}
+main h2, #portada-rpt h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: left;
+}
+.report-description h3 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--colorTerciario);
+}
+.report-data {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: left;
+}
+.report-description h5 {
+    font-size: 1.6rem;
+    color: var(--colorSecundarioVariante);
+    font-weight: 600;
+}
+.report-description span {
+    font-size: 1.6rem;
+    color: var(--colorSecundarioVariante);
+    font-weight: 400;
+}
+@media only screen and (max-width: 600px) {
+    .report-description {
+        grid-template-columns: 1fr;
+        row-gap: 3vh;
+    }
+}
+
+/*Sección de descripción de la persona*/
+.user-description {
+    width: 100%;
+    background-color: var(--colorTerciario);
+    padding: 4vh 3vw;
+    display: grid;
+    grid-template: 1fr 1fr / 1fr 1fr;
+    gap: 2.5vh 3vw;
+    border-radius: 20px;
+}
+.user-description > div {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5vh;
+}
+.user-description h4 {
+    color: var(--colorPrimario);
+    font-weight: 700;
+    font-size: 1.6rem;
+}
+.user-description span {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    font-size: 1.6rem;
+}
+@media only screen and (max-width: 400px) {
+    .user-description {
+        grid-template: auto / 1fr;
+    }
+}
+
+/*Estilos de encabezados de estas secciones*/
+.bordered-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    padding: 0 3vw;
+}
+.heading-border {
+    font-size: 2.6rem;
+    background-color: var(--colorTerciario);
+    width: 10ch;
+    height: 5px;
+}
+.bordered-heading h2 {
+    font-size: 2.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--colorSecundario);
+}
+
+/*Resumen de categorías y puntaje de la persona*/
+.trust-summary {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh;
+}
+.summary-categories {
+    width: min(700px, 100%);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: max(2vw, 1.5rem);
+}
+.category {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh;
+    padding: 2vh 1.5vw;
+    border-radius: 20px;
+}
+.category .background {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 65%;
+    z-index: 1;
+    background-color: var(--colorTerciario);
+    border-radius: 0 0 20px 20px;
+}
+.category-score {
+    aspect-ratio: 1/1;
+    height: 12rem;
+    width: auto;
+    border: 10px solid var(--colorTerciarioVariante);
+    background-color: var(--colorPrimario);
+    color: var(--colorTerciario);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    z-index: 2;
+}
+.category.correct .category-score {
+    background-image: url('./resources/palomita-check.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.category.bad .background{
+    background-color: #813326;
+}
+.category.bad .category-score {
+    color: #813326;
+    border-color: rgba(255, 87, 87, 0.2);
+}
+.category.regular .background {
+    background-color: #CBBA17 ;
+}
+.category.regular .category-score {
+    color: #CBBA17 ;
+    border-color: rgba(255, 145, 65, 0.2);
+}
+.category.good .background {
+    background-color: #488fc3;
+}
+.category.good .category-score {
+    color: #488fc3;
+    border-color: rgba(65, 160, 135, 0.3);
+}
+.category.excellent .background {
+    background-color: rgb(20, 66, 114);
+}
+.category.excellent .category-score {
+    color: rgb(20, 66, 114);
+    border-color: rgba(20, 66, 114, 0.2);
+}
+.category.none .background {
+    background-color: rgb(140, 140, 140);
+}
+.category.none .category-score {
+    color: rgb(140, 140, 140);
+    border-color: rgba(140, 140, 140, 0.5);
+}
+
+.category.tachometer .category-score {
+    background-image: url('./resources/tacometro.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    padding: 10px;
+}
+.tachometer-indicator {
+    aspect-ratio: 132/400;
+    position: absolute;
+    top: 1rem;
+    height: 4rem;
+    width: auto;
+    background-image: url('./resources/tacometro-flecha.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    transform-origin: bottom;
+    transform: rotate(-37deg);
+}
+.category h6 {
+    font-size: 2.3rem;
+    font-weight: 600;
+    color: var(--colorPrimario);
+    letter-spacing: 0.1ch;
+    text-transform: uppercase;
+    z-index: 2;
+}
+
+
+.page-header, .page-footer {
+    display: flex;
+    visibility: hidden;
+    width: 100%;
+    height: 1px;
+}
+/**Impresión*/
+
+@media print {
+    main, .information-wrapper {
+        gap: 2vh;
+    }
+    .bordered-heading {
+        margin-top: 1vh;
+        gap: 0.5vh;
+    }
+    .report-description {
+        margin-bottom: 1vh;
+    }
+    .user-description {
+        padding: 2rem 3vw;
+        gap: 1.2rem;
+        margin-bottom: 1vh;
+    }
+    .user-description > div {
+        gap: 1.2rem;
+    }
+    .summary-categories {
+        margin: 0 auto;
+        justify-content: center;
+        align-items: center;
+    }
+    .category {
+        margin: 0 auto;
+        width: 65%;
+        gap: 1rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    .category-score {
+        height: 7rem;
+    }
+    .category h6 {
+        font-size: 1.6rem;
+    }
+    .tachometer-indicator {
+        height: 2.8rem;
+        top: 0.7rem;
+    }
+    .category.tachometer {
+        width: 40%;
+        grid-column: 1 / 3;
+        justify-self: center;
+    }
+    .category.tachometer .category-score {
+        height: 10rem;
+    }
+
+    .legalbit-logo {
+        margin-top: 5rem;
+        margin-left: 4rem;
+    }
+    .bordered-heading{
+        align-items: center;
+    }
+    .p-entidad.special {
+        text-align: center;
+        font-weight: 700;
+    }
+
+    .page-header, .page-footer {
+        visibility: visible;
+        height: initial;
+    }
+    #portada-rpt, .user-data-1, .user-data-2, .user-data-3, .contraportada {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin: 0 !important;
+        padding: 0 !important;
+        gap: 0 !important;
+        height: 100vh !important;
+    }
+
+    .page-header {
+        padding: 4rem 3vw;
+        justify-content: center;
+        align-items: center;
+    }
+    .page-header .header-logo {
+        aspect-ratio: 1080/270;
+        width: 25vw;
+        height: auto;
+        background-position: top center;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+
+    
+    .page-footer {
+        margin-top: auto;
+        background-color: #144272;
+        padding: 2rem 3vw;
+        justify-content: space-between;
+    }
+    .page-footer .left {
+        display: flex;
+        align-items: center;
+    }
+    .page-footer .left span {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: white;
+    }
+    .page-footer .right {
+        display: flex;
+        align-items: center;
+        gap: 2vw;
+    }
+    .footer-social {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+    .footer-social img {
+        width: 2rem;
+        height: 2rem;
+    }
+    .footer-social span {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: white;
+    }
+}
+
+@page {
+    margin: 0 !important;
+}
+.p-entidad.special {
+    font-size: 3rem;
+}
+.antecedentes-entidad {
+    width: 100% !important;
+}
+.table-row3 .p-content {
+    font-weight: 700;
+}
+.main-container:has(.check-icon-span){
+    padding-bottom: 0;
+}
+.p-title:has(.check-icon-span) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2vw;
+    font-weight: 700;
+}
+.check-icon-span {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-image: url('./resources/palomita-check.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.contraportada {
+    height: 100vh;
+    background-color: #001630;
+}
+.contraportada .p-content {
+    word-wrap: normal;
+    word-break: normal;
+}
+.contraportada .legalbit-logo {
+    margin: 0;
+}
+.contraportada .content-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5vh;
+}
+.contraportada .text-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+.contraportada span {
+    font-size: 2rem;
+    font-weight: 500;
+    color: white;
+    max-width: 60%;
+    text-align: center;
+}

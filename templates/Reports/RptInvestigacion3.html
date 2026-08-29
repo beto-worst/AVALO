@@ -1,0 +1,959 @@
+{% load static %}
+{% load tz %}
+<!DOCTYPE html>
+<html class="fontawesome-i2svg-active fontawesome-i2svg-complete" lang="es">
+<head>
+<base href="http://sistema.legalbit.mx:8000/" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style type="text/css">:host,:root{--fa-font-solid:normal 900 1em/1 "Font Awesome 6 Solid";--fa-font-regular:normal 400 1em/1 "Font Awesome 6 Regular";--fa-font-light:normal 300 1em/1 "Font Awesome 6 Light";--fa-font-thin:normal 100 1em/1 "Font Awesome 6 Thin";--fa-font-duotone:normal 900 1em/1 "Font Awesome 6 Duotone";--fa-font-sharp-solid:normal 900 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-regular:normal 400 1em/1 "Font Awesome 6 Sharp";--fa-font-sharp-light:normal 300 1em/1 "Font Awesome 6 Sharp";--fa-font-brands:normal 400 1em/1 "Font Awesome 6 Brands"}svg:not(:host).svg-inline--fa,svg:not(:root).svg-inline--fa{overflow:visible;box-sizing:content-box}.svg-inline--fa{display:var(--fa-display,inline-block);height:1em;overflow:visible;vertical-align:-.125em}.svg-inline--fa.fa-2xs{vertical-align:.1em}.svg-inline--fa.fa-xs{vertical-align:0}.svg-inline--fa.fa-sm{vertical-align:-.0714285705em}.svg-inline--fa.fa-lg{vertical-align:-.2em}.svg-inline--fa.fa-xl{vertical-align:-.25em}.svg-inline--fa.fa-2xl{vertical-align:-.3125em}.svg-inline--fa.fa-pull-left{margin-right:var(--fa-pull-margin,.3em);width:auto}.svg-inline--fa.fa-pull-right{margin-left:var(--fa-pull-margin,.3em);width:auto}.svg-inline--fa.fa-li{width:var(--fa-li-width,2em);top:.25em}.svg-inline--fa.fa-fw{width:var(--fa-fw-width,1.25em)}.fa-layers svg.svg-inline--fa{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.fa-layers-counter,.fa-layers-text{display:inline-block;position:absolute;text-align:center}.fa-layers{display:inline-block;height:1em;position:relative;text-align:center;vertical-align:-.125em;width:1em}.fa-layers svg.svg-inline--fa{-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-text{left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter{background-color:var(--fa-counter-background-color,#ff253a);border-radius:var(--fa-counter-border-radius,1em);box-sizing:border-box;color:var(--fa-inverse,#fff);line-height:var(--fa-counter-line-height,1);max-width:var(--fa-counter-max-width,5em);min-width:var(--fa-counter-min-width,1.5em);overflow:hidden;padding:var(--fa-counter-padding,.25em .5em);right:var(--fa-right,0);text-overflow:ellipsis;top:var(--fa-top,0);-webkit-transform:scale(var(--fa-counter-scale,.25));transform:scale(var(--fa-counter-scale,.25));-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-bottom-right{bottom:var(--fa-bottom,0);right:var(--fa-right,0);top:auto;-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:bottom right;transform-origin:bottom right}.fa-layers-bottom-left{bottom:var(--fa-bottom,0);left:var(--fa-left,0);right:auto;top:auto;-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:bottom left;transform-origin:bottom left}.fa-layers-top-right{top:var(--fa-top,0);right:var(--fa-right,0);-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-top-left{left:var(--fa-left,0);right:auto;top:var(--fa-top,0);-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:top left;transform-origin:top left}.fa-1x{font-size:1em}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-6x{font-size:6em}.fa-7x{font-size:7em}.fa-8x{font-size:8em}.fa-9x{font-size:9em}.fa-10x{font-size:10em}.fa-2xs{font-size:.625em;line-height:.1em;vertical-align:.225em}.fa-xs{font-size:.75em;line-height:.0833333337em;vertical-align:.125em}.fa-sm{font-size:.875em;line-height:.0714285718em;vertical-align:.0535714295em}.fa-lg{font-size:1.25em;line-height:.05em;vertical-align:-.075em}.fa-xl{font-size:1.5em;line-height:.0416666682em;vertical-align:-.125em}.fa-2xl{font-size:2em;line-height:.03125em;vertical-align:-.1875em}.fa-fw{text-align:center;width:1.25em}.fa-ul{list-style-type:none;margin-left:var(--fa-li-margin,2.5em);padding-left:0}.fa-ul>li{position:relative}.fa-li{left:calc(var(--fa-li-width,2em) * -1);position:absolute;text-align:center;width:var(--fa-li-width,2em);line-height:inherit}.fa-border{border-color:var(--fa-border-color,#eee);border-radius:var(--fa-border-radius,.1em);border-style:var(--fa-border-style,solid);border-width:var(--fa-border-width,.08em);padding:var(--fa-border-padding,.2em .25em .15em)}.fa-pull-left{float:left;margin-right:var(--fa-pull-margin,.3em)}.fa-pull-right{float:right;margin-left:var(--fa-pull-margin,.3em)}.fa-beat{-webkit-animation-name:fa-beat;animation-name:fa-beat;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,ease-in-out);animation-timing-function:var(--fa-animation-timing,ease-in-out)}.fa-bounce{-webkit-animation-name:fa-bounce;animation-name:fa-bounce;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.28,.84,.42,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.28,.84,.42,1))}.fa-fade{-webkit-animation-name:fa-fade;animation-name:fa-fade;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1))}.fa-beat-fade{-webkit-animation-name:fa-beat-fade;animation-name:fa-beat-fade;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1))}.fa-flip{-webkit-animation-name:fa-flip;animation-name:fa-flip;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,ease-in-out);animation-timing-function:var(--fa-animation-timing,ease-in-out)}.fa-shake{-webkit-animation-name:fa-shake;animation-name:fa-shake;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,linear);animation-timing-function:var(--fa-animation-timing,linear)}.fa-spin{-webkit-animation-name:fa-spin;animation-name:fa-spin;-webkit-animation-delay:var(--fa-animation-delay,0s);animation-delay:var(--fa-animation-delay,0s);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,2s);animation-duration:var(--fa-animation-duration,2s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,linear);animation-timing-function:var(--fa-animation-timing,linear)}.fa-spin-reverse{--fa-animation-direction:reverse}.fa-pulse,.fa-spin-pulse{-webkit-animation-name:fa-spin;animation-name:fa-spin;-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,steps(8));animation-timing-function:var(--fa-animation-timing,steps(8))}@media (prefers-reduced-motion:reduce){.fa-beat,.fa-beat-fade,.fa-bounce,.fa-fade,.fa-flip,.fa-pulse,.fa-shake,.fa-spin,.fa-spin-pulse{-webkit-animation-delay:-1ms;animation-delay:-1ms;-webkit-animation-duration:1ms;animation-duration:1ms;-webkit-animation-iteration-count:1;animation-iteration-count:1;-webkit-transition-delay:0s;transition-delay:0s;-webkit-transition-duration:0s;transition-duration:0s}}@-webkit-keyframes fa-beat{0%,90%{-webkit-transform:scale(1);transform:scale(1)}45%{-webkit-transform:scale(var(--fa-beat-scale,1.25));transform:scale(var(--fa-beat-scale,1.25))}}@keyframes fa-beat{0%,90%{-webkit-transform:scale(1);transform:scale(1)}45%{-webkit-transform:scale(var(--fa-beat-scale,1.25));transform:scale(var(--fa-beat-scale,1.25))}}@-webkit-keyframes fa-bounce{0%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}10%{-webkit-transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0);transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0)}30%{-webkit-transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em));transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em))}50%{-webkit-transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0);transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0)}57%{-webkit-transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em));transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em))}64%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}100%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}}@keyframes fa-bounce{0%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}10%{-webkit-transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0);transform:scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0)}30%{-webkit-transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em));transform:scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em))}50%{-webkit-transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0);transform:scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0)}57%{-webkit-transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em));transform:scale(1,1) translateY(var(--fa-bounce-rebound,-.125em))}64%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}100%{-webkit-transform:scale(1,1) translateY(0);transform:scale(1,1) translateY(0)}}@-webkit-keyframes fa-fade{50%{opacity:var(--fa-fade-opacity,.4)}}@keyframes fa-fade{50%{opacity:var(--fa-fade-opacity,.4)}}@-webkit-keyframes fa-beat-fade{0%,100%{opacity:var(--fa-beat-fade-opacity,.4);-webkit-transform:scale(1);transform:scale(1)}50%{opacity:1;-webkit-transform:scale(var(--fa-beat-fade-scale,1.125));transform:scale(var(--fa-beat-fade-scale,1.125))}}@keyframes fa-beat-fade{0%,100%{opacity:var(--fa-beat-fade-opacity,.4);-webkit-transform:scale(1);transform:scale(1)}50%{opacity:1;-webkit-transform:scale(var(--fa-beat-fade-scale,1.125));transform:scale(var(--fa-beat-fade-scale,1.125))}}@-webkit-keyframes fa-flip{50%{-webkit-transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg));transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg))}}@keyframes fa-flip{50%{-webkit-transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg));transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg))}}@-webkit-keyframes fa-shake{0%{-webkit-transform:rotate(-15deg);transform:rotate(-15deg)}4%{-webkit-transform:rotate(15deg);transform:rotate(15deg)}24%,8%{-webkit-transform:rotate(-18deg);transform:rotate(-18deg)}12%,28%{-webkit-transform:rotate(18deg);transform:rotate(18deg)}16%{-webkit-transform:rotate(-22deg);transform:rotate(-22deg)}20%{-webkit-transform:rotate(22deg);transform:rotate(22deg)}32%{-webkit-transform:rotate(-12deg);transform:rotate(-12deg)}36%{-webkit-transform:rotate(12deg);transform:rotate(12deg)}100%,40%{-webkit-transform:rotate(0);transform:rotate(0)}}@keyframes fa-shake{0%{-webkit-transform:rotate(-15deg);transform:rotate(-15deg)}4%{-webkit-transform:rotate(15deg);transform:rotate(15deg)}24%,8%{-webkit-transform:rotate(-18deg);transform:rotate(-18deg)}12%,28%{-webkit-transform:rotate(18deg);transform:rotate(18deg)}16%{-webkit-transform:rotate(-22deg);transform:rotate(-22deg)}20%{-webkit-transform:rotate(22deg);transform:rotate(22deg)}32%{-webkit-transform:rotate(-12deg);transform:rotate(-12deg)}36%{-webkit-transform:rotate(12deg);transform:rotate(12deg)}100%,40%{-webkit-transform:rotate(0);transform:rotate(0)}}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.fa-rotate-90{-webkit-transform:rotate(90deg);transform:rotate(90deg)}.fa-rotate-180{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.fa-rotate-270{-webkit-transform:rotate(270deg);transform:rotate(270deg)}.fa-flip-horizontal{-webkit-transform:scale(-1,1);transform:scale(-1,1)}.fa-flip-vertical{-webkit-transform:scale(1,-1);transform:scale(1,-1)}.fa-flip-both,.fa-flip-horizontal.fa-flip-vertical{-webkit-transform:scale(-1,-1);transform:scale(-1,-1)}.fa-rotate-by{-webkit-transform:rotate(var(--fa-rotate-angle,none));transform:rotate(var(--fa-rotate-angle,none))}.fa-stack{display:inline-block;vertical-align:middle;height:2em;position:relative;width:2.5em}.fa-stack-1x,.fa-stack-2x{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0;z-index:var(--fa-stack-z-index,auto)}.svg-inline--fa.fa-stack-1x{height:1em;width:1.25em}.svg-inline--fa.fa-stack-2x{height:2em;width:2.5em}.fa-inverse{color:var(--fa-inverse,#fff)}.fa-sr-only,.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.fa-sr-only-focusable:not(:focus),.sr-only-focusable:not(:focus){position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.svg-inline--fa .fa-primary{fill:var(--fa-primary-color,currentColor);opacity:var(--fa-primary-opacity,1)}.svg-inline--fa .fa-secondary{fill:var(--fa-secondary-color,currentColor);opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-primary{opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-secondary{opacity:var(--fa-primary-opacity,1)}.svg-inline--fa mask .fa-primary,.svg-inline--fa mask .fa-secondary{fill:#000}.fa-duotone.fa-inverse,.fad.fa-inverse{color:var(--fa-inverse,#fff)}</style><link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/">
+  <style>
+    
+    :root {
+      --static-url: "./static/";
+    }
+    @font-face {
+      font-family: 'SansPro';
+      src: url( ./static/fonts/SourceSansPro-Regular.ttf) format('truetype');
+      font-style: normal;
+      font-weight: normal;
+    }
+    @font-face {
+      font-family: 'SansProBlack';
+      src: url( ./static/fonts/SourceSansPro-Black.ttf) format('truetype');
+      font-style: normal;
+      font-weight: normal;
+    }
+    @font-face {
+      font-family: 'Carbona';
+      src: url( ./static/fonts/carbona/Carbona-Regular.otf) format('opentype');
+      font-style: normal;
+      font-weight: normal;
+    }
+    @font-face {
+      font-family: 'CarbonaBlack';
+      src: url( ./static/fonts/carbona/Carbona-Black.otf) format('opentype');
+      font-style: normal;
+      font-weight: normal;
+    }
+    
+    .antecedentes-entidad {
+      width: 98%;
+    }
+    
+    .main-container2 {
+      gap: 20px;
+      padding: 20px;
+      padding-top: 40px;
+      display: table;
+      width: 100%;
+    }
+    .wrap-container2 {
+      display: table-cell;
+      padding: 5px;
+      vertical-align: top;
+      width: 200px;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+    
+    @media print {
+      
+      body {
+        zoom: 1;
+      }
+      
+      .page-footer{
+        position: fixed;
+        bottom: 0;
+      }
+      .main-container2 {
+        display: block;
+      }
+      
+      .wrap-container2 {
+        display: inline-block;
+        width: auto;
+      }
+      
+      .antecedentes-entidad3 {
+        width: 98%;
+      }
+      
+      .table-container3 {
+        display: table;
+        width: 100%;
+      }
+      
+      .table-row3 {
+        display: table-row;
+      }
+      
+      .table-cell3 {
+        display: table-cell;
+        padding: 5px;
+      }
+      
+      .p-title3 {
+        font-weight: bold;
+      }
+      
+      .p-content3 {
+        margin: 0;
+      }
+      
+      .main-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+    }
+    .portada, .contraportada{
+      position: relative;
+      z-index: 10000;
+    }
+    @media print {
+      @page {
+        size: letter;
+      }
+    }
+    @page {
+      margin: 0;
+      box-shadow: 0;
+    }
+    
+  </style>
+  
+  
+  <link rel="stylesheet" href="{% static "styles3.css" %}"  />
+  <link rel="stylesheet" href="{% static "reset3.css" %}"  />
+  <link rel="stylesheet" href="{% static "resumen3.css" %}"  />
+  <link rel="stylesheet" href="{% static "css3.css" %}"  />
+  <!-- One file includes all the Font Awesome Free icons and utilities -->
+  <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+  <style>
+    .portada-wrapper{
+      height: 100vh;
+    }
+  </style>
+  <title>LegalBit - Reporte</title>
+</head>
+<body>
+  <section class="portada" style="page-break-after: always">
+    <div class="portada-wrapper">
+      <div class="portada-left">
+        <div class="legalbit-logo"></div>
+      </div>
+      <div class="portada-right">
+        <p>
+          <b>{{ object.investigado.rfc }}</b>
+          {{ object.investigado.apellido1 }} {{ object.investigado.apellido2 }} {{ object.investigado.nombre }}
+        </p>
+      </div>
+    </div>
+  </section>
+  
+  <section style="page-break-after: always" id="portada-rpt">
+    <div class="page-header">
+      <div style="background-image: url({% static '/resources3/legalbit-logo-dark.png' %} );" class="header-logo"></div>
+    </div>
+    
+    <div class="information-wrapper">
+      <section class="report-description">
+        <div class="left">
+          <h2>Reporte de Investigación</h2>
+        </div>
+        <div class="right">
+          <div class="report-data">
+            <h5>Fecha de Investigación</h5>
+            <span>{{ object.creado_en }}</span>
+          </div>
+          <div class="report-data">
+            <h5>Folio </h5>
+            <span>
+              {% with object.creado_en|date:"Y" as current_year %}
+              {{ current_year|slice:"-2:" }}LB-{{ folioInv }}
+              {% endwith %}
+            </span>
+          </div>
+        </div>
+      </section>
+      
+      <section class="user-description">
+        <div class="user-data">
+          <h4>Nombre Completo</h4>
+          <span>{{ object.investigado.apellido1 }} {{ object.investigado.apellido2 }} {{ object.investigado.nombre }}</span>
+        </div>
+        <div style="padding: 0 3vw;" class="user-data">
+          <h4>Género</h4>
+          <span>{{ sexo }}</span>
+        </div>
+        <div class="user-data">
+          <h4>Fecha de Nacimiento</h4>
+          <span>{{ object.investigado.fnacimiento }}</span>
+        </div>
+        <div style="padding: 0 3vw;" class="user-data">
+          <h4>Número de Identificación</h4>
+          <span>
+            
+            {% if clave_elector %}
+            {{ clave_elector }}
+            {% endif %}
+            
+            
+          </span>
+        </div>
+      </section>
+      <section class="trust-summary">
+        <div class="bordered-heading">
+          <div class="heading-border"></div>
+          <h2>Resumen</h2>
+        </div>
+        <div class="summary-categories">
+          <div class="category correct">
+            <div class="background"></div>
+            <span class="category-score"></span>
+            <h6>Identidad</h6>
+          </div>
+          <div class="category correct">
+            <div class="background"></div>
+            <span class="category-score legal-score"></span>
+            <h6>Legal</h6>
+          </div>
+          <div class="category correct">
+            <div class="background"></div>
+            <span class="category-score international-score"></span>
+            <h6>Internacional</h6>
+          </div>
+          <div class="category none">
+            <div class="background"></div>
+            <span class="category-score academic-score">N/A</span>
+            <h6>Académico</h6>
+          </div>
+          <div class="category tachometer good">
+            <div class="background"></div>
+            <span class="category-score"><span class="score-value">{{ score }}</span> <div class="tachometer-indicator" style="transform: rotate(36deg);"></div></span>
+            <h6>Score Crediticio</h6>
+          </div>
+        </div>
+      </section>
+    </div>
+    
+    <div class="page-footer">
+      <div class="left">
+        <span>Legal Proptech S.C.</span>
+      </div>
+      <div class="right">
+        <div class="footer-social">
+          <img src='{% static "resources3/socials/facebook-icon-white.png" %}' alt="" class="footer-icon">
+          <span>legalbit.mx</span>
+        </div>
+        <div class="footer-social">
+          <img src='{% static "resources3/socials/instagram-icon-white.png" %}' alt="" class="footer-icon">
+          <span>legalbit.mx</span>
+        </div>
+        <div class="footer-social">
+          <img src='{% static "resources3/socials/mail-icon-white.png" %}' alt="" class="footer-icon">
+          <span>contacto@legalbit.mx</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="user-data-1">
+    <!-- DOCUMENTO DE IDENTIDAD-->
+    <div class="page-header">
+      <div  style="background-image: url({% static '/resources3/legalbit-logo-dark.png' %} );" class="header-logo"></div>
+    </div>
+    <!-- FIN BLOQUE -->
+    <div class="content-wrapper">
+      <!-- INICIO BLOQUE -->
+      <p class="p-head">Documento de Identidad</p>
+      
+      <!-- Entidad -->
+      <p class="p-entidad">Documento de Identidad INE</p>
+      <!-- Contenido -->
+      <div class="main-container">
+        <div class="wrap-container">
+          <p class="p-title">Nombre completo</p>
+          <p class="p-content" style="font-size: 1.8rem !important">
+            {{ object.investigado.apellido1 }} {{ object.investigado.apellido2 }} {{ object.investigado.nombre }}</p>
+          </div>
+          <div class="wrap-container">
+            
+            <p class="p-title">Clave de Elector</p>
+            <p class="p-content" style="font-size: 1.5rem !important">SNFLCL47012219M600</p>
+            
+          </div>
+          <div class="wrap-container">
+            <p class="p-title">Anverso</p>
+            
+            {% if object.investigado.inefront %}
+            <img src="{{ object.investigado.inefront.url }}" alt="Imagen INE Frontal" width="250px">
+            {% else %}
+            <img
+            class="img-medium"
+            alt="documento de identidad"
+            class="p-content"
+            src="data:image/png;base64, {{ imgElector }}"
+            />
+            {% endif %}
+            
+          </div>
+          <div class="wrap-container">
+            
+            <p class="p-title">Reverso</p>
+            {% if object.investigado.inerevers %}
+            <img src="{{ object.investigado.inerevers.url }}" alt="Imagen INE Frontal" width="250px">
+            {% else %}
+            {% endif %}
+            
+            
+          </div>
+        </div>
+        <div style="width: 100%; display: flex; justify-content: center;" class="main-container">
+          <center>
+            
+            
+            {% if object.investigado.manual%}
+            
+            <p class="p-title">{{ vencimientoINE }}</p>
+            {% endif %}
+            
+            
+            
+            
+          </center>
+        </div>
+        
+        <hr class="hr-divisor" style="margin-top:-1vh !important" >
+        <!-- FIN SAT -->
+        
+        <!-- INICIO CURP RENAPO -->
+        
+        <!-- INICIO BLOQUE -->
+        <p class="p-head" >Consulta de Clave Única de Registro de Población</p>
+        <div class="main-container3" style="margin-left:15px;">
+          <div class="table-container3" style="margin-top:-4vh !important" >
+            <div class="table-row3">
+              <div class="table-cell3">
+                <p class="p-title">Nombre consultado:</p>
+                <p class="p-content">{{ object.investigado.apellido1 }} {{ object.investigado.apellido2 }} {{ object.investigado.nombre }}</p>
+              </div>
+              <div class="table-cell3">
+                <p class="p-title">C.U.R.P:</p>
+                <p style="word-wrap: break-word;
+                word-break: break-all;" class="p-content">
+                {{ object.investigado.curp }}</p>
+              </div>
+              <div class="table-cell3">
+                <p class="p-title">Fecha de Nacimiento:</p>
+                <p class="p-content">{{ object.investigado.fnacimiento }}</p>
+              </div>
+              <div class="table-cell3">
+                <p class="p-title">Lugar de Nacimiento:</p>
+                <p class="p-content">{{ object.investigado.lugarNacimiento }}</p>
+              </div>
+              <div class="table-cell3">
+                <p class="p-title">Sexo:</p>
+                <p class="p-content">{{ sexo }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </section>
+      
+      <div class="page-footer" style="margin-top:-5.75vh !important" >
+        <div class="left">
+          <span>Legal Proptech S.C.</span>
+        </div>
+        <div class="right">
+          <div class="footer-social">
+            <img src='{% static "resources3/socials/facebook-icon-white.png" %}' alt="" class="footer-icon">
+            <span>legalbit.mx</span>
+          </div>
+          <div class="footer-social">
+            <img src='{% static "resources3/socials/instagram-icon-white.png" %}' alt="" class="footer-icon">
+            <span>legalbit.mx</span>
+          </div>
+          <div class="footer-social">
+            <img src='{% static "resources3/socials/mail-icon-white.png" %}' alt="" class="footer-icon">
+            <span>contacto@legalbit.mx</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- SAT CEDULAS BURO -->
+    <section class="antecedentes-entidad user-data-2" style="page-break-after: always !important;">
+      <div class="page-header">
+        <div  style="background-image: url({% static '/resources3/legalbit-logo-dark.png' %} );" class="header-logo"></div>
+      </div>
+      
+      <div class="content-wrapper">
+        
+        <!-- INICIO BLOQUE -->
+        <p class="p-head">Situación ante el SAT</p>
+        
+        <!-- Entidad -->
+        <p class="p-entidad">RFC consultado</p>
+        <!-- Contenido -->
+        <div class="main-container" style="grid-template-columns: 1fr 3fr;">
+          <div class="wrap-container">
+            <p class="p-title">RFC</p>
+            <p style="font-weight: 700; word-wrap: break-word;
+            word-break: break-all;" class="p-content">{{ object.investigado.rfc }}</p>
+          </div>
+          <div class="wrap-container">
+            <p class="p-title">Resultado:</p>
+            <p class="p-content">
+              Con el criterio de búsqueda del RFC: {{ object.investigado.rfc }} proporcionado
+              {% if situacionSAT %}
+              si
+              {% else %}
+              no
+              {% endif %}
+              se encontraron coincidencias en los listados de contribuyentes con
+              operaciones presuntamente inexistentes.
+            </p>
+          </div>
+        </div>
+        
+        
+        <hr class="hr-divisor">
+        
+        <section style='{% if num_cedulas > 0 %}  page-break-after:always !important;{% endif%}'>
+        <!-- INICIO BLOQUE -->
+        <p class="p-head">Profesiones encontradas SEP</p>
+        
+        <!-- Entidad -->
+        {% if num_cedulas > 0 %}
+        {% for r in resultado_cedulas %}
+          {% if forloop.first %}
+          <div class="main-container">
+            <div class="wrap-container">
+              <p class="p-title">Nombre</p>
+              <p class="p-content">{{ r.nombre }}</p>
+            </div>
+            <div class="wrap-container">
+              <p class="p-title"> Cédula</p>
+              <p class="p-content"> {{ r.numCedula }} </p>
+            </div>
+            <div class="wrap-container">
+              <p class="p-title">Profesión</p>
+              <p class="p-content">{{ r.profesion }}</p>
+            </div>
+          </div>
+          {% endif %}
+        {% endfor %}
+        
+        {% else %}
+        <p class="p-entidad">No se encontraron registros.</p>
+        {% endif %}
+        </section>
+        
+        <!-- BURO -->
+        {% if num_cedulas == 1 %}
+
+        <section style='{% if num_cedulas == 1%} margin-top:-35%;padding-bottom:5vh !important; {% endif %}'>
+          <p class="p-head">Score en Buró de Crédito</p>
+        <p class="p-entidad special">{{ score }}</p>
+        <p class="p-content" style="padding-left: 20px; padding-top: 10px">
+          "La puntuación mínima es de 456 puntos y la máxima de 760 puntos. A
+          menor BC Score, mayor es la probabilidad de impago del Cliente y a mayor
+          BC Score, menor es la probabilidad de incumplimiento del Cliente."
+        </p>
+        </section>
+
+        <div class="page-footer">
+          <div class="left">
+            <span>Legal Proptech S.C.</span>
+          </div>
+          <div class="right">
+            <div class="footer-social">
+              <img src='{% static "resources3/socials/facebook-icon-white.png" %}' alt="" class="footer-icon">
+              <span>legalbit.mx</span>
+            </div>
+            <div class="footer-social">
+              <img src='{% static "resources3/socials/instagram-icon-white.png" %}' alt="" class="footer-icon">
+              <span>legalbit.mx</span>
+            </div>
+            <div class="footer-social">
+              <img src='{% static "resources3/socials/mail-icon-white.png" %}' alt="" class="footer-icon">
+              <span>contacto@legalbit.mx</span>
+            </div>
+          </div>
+        </div>
+        
+
+        {% elif num_cedulas > 2 %}
+        <div class="page-header" style='page-break-before:always !important;'>
+          <div  style="background-image: url({% static '/resources3/legalbit-logo-dark.png' %} );" class="header-logo"></div>
+        </div>
+
+        {% else %}
+        <hr class="hr-divisor">
+        
+        
+        <section style='{% if num_cedulas > 2%} page-break-before:always; page-break-after: always !important {% else%} margin-top:15vh;padding-bottom:5vh !important; {% endif %}'>
+          <p class="p-head">Score en Buró de Crédito</p>
+        <p class="p-entidad special">{{ score }}</p>
+        <p class="p-content" style="padding-left: 20px; padding-top: 10px">
+          "La puntuación mínima es de 456 puntos y la máxima de 760 puntos. A
+          menor BC Score, mayor es la probabilidad de impago del Cliente y a mayor
+          BC Score, menor es la probabilidad de incumplimiento del Cliente."
+        </p>
+        </section>
+        {% endif %}
+      
+      </div>
+      
+      
+      
+      <div class="page-footer" style="margin-bottom:-0 !important;">
+        <div class="left">
+          <span>Legal Proptech S.C.</span>
+        </div>
+        <div class="right">
+          <div class="footer-social">
+            <img src='{% static "resources3/socials/facebook-icon-white.png" %}' alt="" class="footer-icon">
+            <span>legalbit.mx</span>
+          </div>
+          <div class="footer-social">
+            <img src='{% static "resources3/socials/instagram-icon-white.png" %}' alt="" class="footer-icon">
+            <span>legalbit.mx</span>
+          </div>
+          <div class="footer-social">
+            <img src='{% static "resources3/socials/mail-icon-white.png" %}' alt="" class="footer-icon">
+            <span>contacto@legalbit.mx</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- CEDULAS SAT BURO -->
+    
+    {% if num_cedulas >= 1 %}
+    <div class="page-header">
+      <div  style="background-image: url({% static '/resources3/legalbit-logo-dark.png' %} );" class="header-logo"></div>
+    </div>
+    {% endif %}
+
+    <section  style='{% if numero_antecedentes > 0  %}  padding-top:5vh !important; page-break-after: always;  {% endif %}'>
+
+      
+      <div class="content-wrapper">
+        <section class="block-standard"  style="{% if numero_antecedentes == 0 %} {% endif %} {% if num_cedulas > 2  %} margin-top: 15vh !important {% endif %}" >
+          <p class="p-head">Resultados de Antecedentes Legales (Nacional)</p>
+          <section id="consulta-antecedentes">
+            <p class="p-head">Consulta de antecedentes</p>
+            <div class="main-container">
+              <div class="wrap-container">
+                <p class="p-title">Fecha y hora</p>
+                <p class="p-content">{{ object.creado_en }}</p>
+              </div>
+              <div class="wrap-container">
+                <p class="p-title">
+                  Num. de Entidades en las que se ha encontrado antecedentes
+                </p>
+                <p style="font-weight: 700;" class="p-content">
+                  {{ numero_antecedentes  }}
+                </p>
+              </div>
+              <div class="wrap-container">
+                <p class="p-title">Criterio de busqueda</p>
+                <p class="p-content">
+                  {{ object.investigado.apellido1 }} {{ object.investigado.apellido2 }} {{ object.investigado.nombre }}
+                </p>
+              </div>
+              
+              
+            </section>
+          </div>
+          </section>
+
+
+            {% if num_cedulas > 5 %}
+                <div class="page-header"  >
+                  <div  style="background-image: url({% static '/resources3/legalbit-logo-dark.png' %} );" class="header-logo"></div>
+                </div>
+                {% else %}
+
+              {% endif %}
+          <!-- INICIO BLOQUE -->
+
+          <!-- Entidad -->
+          
+          {% if numero_antecedentes > 0 %}
+          
+          
+          
+          {% for r in antecedentes2 %}
+          
+          {% if forloop.first %}
+
+          <section class="antecedentes-entidad" style="{% if forloop.first %} page-break-after: always !important;  {% elif forloop.counter == 2 %} page-break-before:always !important; page-break-after: always !important; {% endif %} ">
+
+              {% if  forloop.first %}
+            <div class="page-header"  style='page-break-before: always'>
+              <div  style="background-image: url({% static '/resources3/legalbit-logo-dark.png' %} );" class="header-logo"></div>
+            </div>
+            {% endif %}
+            <p class="p-entidad" >Entidad: {{  r.entidad }}</p>
+            
+            
+            <!-- Contenido -->
+            <div class="main-container2">
+              <div class="wrap-container2">
+                <p class="p-title">Fecha:</p>
+                <p class="p-content">{{ r.fecha }}</p>
+              </div>
+              <div class="wrap-container2">
+                <p class="p-title">Expediente</p>
+                <p class="p-content">{{ r.expediente }}</p>
+              </div>
+              <div class="wrap-container2">
+                <p class="p-title">Tipo</p>
+                <p class="p-content">{{ r.tipo }}</p>
+              </div>
+              <div class="wrap-container2">
+                <p class="p-title">Actor</p>
+                <p class="p-content">{{ r.actor|truncatewords:25}}</p>
+              </div>
+              <div class="wrap-container2">
+                <p class="p-title">Demandado</p>
+                <p class="p-content">{{ r.demandado|truncatewords:25 }}</p>
+              </div>
+            </div>
+            {% if forloop.first %}
+            <div class="page-footer" style="margin-top:8.3vh !important">
+              <div class="left">
+                <span>Legal Proptech S.C.</span>
+              </div>
+              <div class="right">
+                <div class="footer-social">
+                  <img src='{% static "resources3/socials/facebook-icon-white.png" %}' alt="" class="footer-icon">
+                  <span>legalbit.mx</span>
+                </div>
+                <div class="footer-social">
+                  <img src='{% static "resources3/socials/instagram-icon-white.png" %}' alt="" class="footer-icon">
+                  <span>legalbit.mx</span>
+                </div>
+                <div class="footer-social">
+                  <img src='{% static "resources3/socials/mail-icon-white.png" %}' alt="" class="footer-icon">
+                  <span>contacto@legalbit.mx</span>
+                </div>
+              </div>
+            </div>
+            {%  endif %}
+          </section>
+        </section>
+        
+        {# para el footer imprime 3 antecedentes por pagina #}
+        {% if forloop.counter|divisibleby:3 %}
+        
+        {% endif %}
+        {# end inf forloop.firs #}
+        {% endif %}
+        {# for loop first #}
+        
+        {# imprimir mas de 2  #}
+        {% if forloop.counter > 2 or forloop.counter < 4  and not forloop.first %}
+        
+        <section id='entidadesX' class="antecedentes-entidad" style=" ">
+          {% if  forloop.counter == 2 or forloop.counter|divisibleby:2  %}
+          <div class="page-header" style="{% if forloop.counter|divisibleby:2  and not forloop.counter == 2%} page-break-before:always; {% endif %}" >
+            <div  style="background-image: url({% static '/resources3/legalbit-logo-dark.png' %} );" class="header-logo"></div>
+          </div>
+          {% endif %}
+          <p class="p-entidad" >Entidad: {{  r.entidad }}</p>
+          
+          
+          <!-- Contenido -->
+          <div class="main-container2">
+            <div class="wrap-container2">
+              <p class="p-title">Fecha:</p>
+              <p class="p-content">{{ r.fecha }}</p>
+            </div>
+            <div class="wrap-container2">
+              <p class="p-title">Expediente</p>
+              <p class="p-content">{{ r.expediente }}</p>
+            </div>
+            <div class="wrap-container2">
+              <p class="p-title">Tipo</p>
+              <p class="p-content">{{ r.tipo }}</p>
+            </div>
+            <div class="wrap-container2">
+              <p class="p-title">Actor</p>
+              <p class="p-content">{{ r.actor|truncatewords:25}}</p>
+            </div>
+            <div class="wrap-container2">
+              <p class="p-title">Demandado</p>
+              <p class="p-content">{{ r.demandado|truncatewords:25}}</p>
+            </div>
+          </div>
+          
+          
+        </section>
+        
+        
+        {% endif %}
+        
+        
+        {% endfor %}
+        
+        
+        
+        {% else %}
+        <p class="p-entidad">No se encontraron antecedentes ante el poder judicial federal o poderes judiciales estatales.</p>
+        {% endif %}
+      </section>
+    </div>
+  </section>
+  
+  <!-- antecedentes internacionales -->
+  <section class="block-standard" style="{% if numero_antecedentes == 0  %} margin-top:-1vh !important;  {% endif %} ">
+    <hr class="hr-divisor">
+    <p class="p-head">Antecedentes Internacionales</p>
+    <div class="main-container" >
+      
+      {% if num_antecedentes_intl > 0 %}
+      
+      <table style="{% if numero_antecedentes == 0  %} page-break-inside: avoid; margin-top: -5vh !important; {% endif %}">
+        {% if entidadesIntl %}
+        
+        {% for d in entidadesIntl|slice:": -1" %}
+        <tr>
+          <td class="p-content">{{ d.source_full_name }} </td>
+        </tr>
+        {% endfor %}
+        
+        
+        {% else %}
+        <tr>
+          <td>Sin Información</td>
+        </tr>
+        
+        {% endif %}
+      </table>
+      
+    </div>
+    
+    
+    <div class="main-container">
+      <table style="margin-left: -3vh !important;">
+        {% if sancionesIntl %}
+        
+        <tr>
+          <td style="font-size: 2.1rem !important;">Nombre</td>
+          <td  style="font-size: 2.1rem !important;">Origen Alerta</td>
+        </tr>
+        {% with show_alert=false %}
+        {% for d in sancionesIntl %}
+        {% if d.name == object.investigado.nombreCompleto %}
+        {% if not show_alert %}
+        {% with show_alert=true %}
+        <tr>
+          <td class="p-content">{{ d.name }}</td>
+          <td class="p-content">{{ d.source.source_full_name }}</td>
+        </tr>
+        {% endwith %}
+        {% endif %}
+        {% endif %}
+        {% empty %}
+        {% with show_alert=false %}
+        {% endwith %}
+        {% endfor %}
+        {% endwith %}
+        {% if not show_alert %}
+        <tr>
+          <td colspan="2" class="p-content" style="padding-left: 2.4vh !important;">No se encontraron alertas internacionales</td>
+        </tr>
+        {% endif %}
+        
+        {% else %}
+        <tr>
+          <td class="p-head">Nombre</td>
+          <td class="p-head"> Origen Alerta</td>
+        </tr>
+        <tr>
+          <td colspan="2" class="p-content" style="padding-left: 2.4vh !important;">No se encontraron alertas internacionales</td>
+        </tr>
+        
+        {% endif %}
+      </table>
+      {% else %}
+      <p class="p-entidad" style="margin-left: -2vh !important;{% if numero_antecedentes == 0  %} margin-top: -3vh !important; {% endif %}">No sé encontró al investigado en ninguna lista negra internacional.</p>
+      {% endif %}
+      
+    </div>
+    {# imprime el footer aqui si hay 0 antecedentes nacionales #}
+    {%  if numero_antecedentes == 0  %}
+    <div class="page-footer" style="margin-top: 12.5vh ! important">
+      <div class="left">
+        <span>Legal Proptech S.C.</span>
+      </div>
+      <div class="right">
+        <div class="footer-social">
+          <img src='{% static "resources3/socials/facebook-icon-white.png" %}' alt="" class="footer-icon">
+          <span>legalbit.mx</span>
+        </div>
+        <div class="footer-social">
+          <img src='{% static "resources3/socials/instagram-icon-white.png" %}' alt="" class="footer-icon">
+          <span>legalbit.mx</span>
+        </div>
+        <div class="footer-social">
+          <img src='{% static "resources3/socials/mail-icon-white.png" %}' alt="" class="footer-icon">
+          <span>contacto@legalbit.mx</span>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </section>
+  {%  if numero_antecedentes > 2  %}
+  
+  
+  <div class="page-footer" style="margin-top:33.5vh !important">
+    <div class="left">
+      <span>Legal Proptech S.C.</span>
+    </div>
+    <div class="right">
+      <div class="footer-social">
+        <img src='{% static "resources3/socials/facebook-icon-white.png" %}' alt="" class="footer-icon">
+        <span>legalbit.mx</span>
+      </div>
+      <div class="footer-social">
+        <img src='{% static "resources3/socials/instagram-icon-white.png" %}' alt="" class="footer-icon">
+        <span>legalbit.mx</span>
+      </div>
+      <div class="footer-social">
+        <img src='{% static "resources3/socials/mail-icon-white.png" %}' alt="" class="footer-icon">
+        <span>contacto@legalbit.mx</span>
+      </div>
+    </div>
+  </div> 
+  
+  {% endif %}
+  
+  
+  <section class="contraportada" style="page-break-inside: avoid; page-break-after: always">
+    <div class="content-wrapper">
+      <div class="legalbit-logo"></div>
+      <div class="text-content">
+        <span>contacto@legalbit.mx</span>
+        <span>Blvd. Antonio L. Rodríguez 2100-Edificio B.H Piso 15, Col, Santa María, 64650 Monterrey, N.L.</span>
+        <span>www.legalbit.mx</span>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  <script src="{% static 'resumen3.js' %}"></script>
+  <script>
+    {% if sancionesIntl %}
+    {% with show_alert=false %}
+    {% for d in sancionesIntl %}
+    {% if d.name == object.investigado.nombreCompleto %}
+    {% if not show_alert %}
+    {% with show_alert=true %}
+    setInternationalScore(1)
+    {% endwith %}
+    {% endif %}
+    {% endif %}
+    {% empty %}
+    {% with show_alert=false %}
+    {% endwith %}
+    {% endfor %}
+    {% endwith %}
+    {% if not show_alert %}
+    setInternationalScore("")
+    {% endif %}
+    
+    {% else %}
+    setInternationalScore("")
+    
+    
+    {% endif %}
+    
+    
+    {% if  numero_antecedentes  == 0 %}
+    setLegalScore('')
+    {% else %}
+    setLegalScore('{{ numero_antecedentese }}')
+    {% endif %}
+    
+    {% if num_cedulas == 0 %}
+    setAcademicScore('N/A')
+    {% else %}
+    setAcademicScore({{ num_cedulas }})
+    {% endif %}
+    
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Seleccionar todos los elementos con ID que comienzan con "entidadesX"
+      var elementos = document.querySelectorAll('[id^="entidadesX"]');
+      
+      // Verificar si hay al menos dos elementos
+      if (elementos.length >= 2) {
+        // Iterar a través de los elementos en pasos de 2
+        var mtop = 25;
+        for (var i = 1; i < elementos.length; i += 2) {
+          if(i > 5  && i < 6){
+            mtop = mtop + 3;
+          }
+          
+          
+          if(i == 6){
+            mtop= 10;
+          }
+          if(i == 7){
+            mtop = mtop + 12;
+          }
+          // Crear un nuevo elemento <div>
+            var nuevoDiv = document.createElement("div");
+            nuevoDiv.className = "page-footer";
+            nuevoDiv.style.marginTop = mtop +"%";
+            
+            var contenidoDiv = `
+            <div class="left">
+              <span>Legal Proptech S.C.</span>
+            </div>
+            <div class="right">
+              <div class="footer-social">
+                <img src="{% static 'resources3/socials/facebook-icon-white.png' %}" alt="" class="footer-icon">
+                <span>legalbit.mx</span>
+              </div>
+              <div class="footer-social">
+                <img src="{% static 'resources3/socials/instagram-icon-white.png' %}" alt="" class="footer-icon">
+                <span>legalbit.mx</span>
+              </div>
+              <div class="footer-social">
+                <img src="{% static 'resources3/socials/mail-icon-white.png' %}" alt="" class="footer-icon">
+                <span>contacto@legalbit.mx</span>
+              </div>
+            </div>`;
+            
+            // nuevoDiv.innerHTML = contenidoDiv;
+            
+            
+            // // Insertar el nuevo elemento <div> en el elemento actual
+              // elementos[i].appendChild(nuevoDiv);
+              
+              
+            }
+          }
+          
+          simulateKeyPress(80, true);
+        });
+        
+        window.print();
+        
+        
+      </script>
+    </body>
+    
+    </html>

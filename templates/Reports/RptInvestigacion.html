@@ -1,0 +1,634 @@
+{% load static %}
+{% load tz %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com"  />
+     <!-- One file includes all the Font Awesome Free icons and utilities -->
+     <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;700&display=swap"
+      rel="stylesheet"
+    />
+      <style>
+
+        :root {
+            --static-url: "{% static '' %}";
+        }
+        @font-face {
+  font-family: 'SansPro';
+  src: url( {% static '/fonts/SourceSansPro-Regular.ttf' %}) format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+             @font-face {
+  font-family: 'SansProBlack';
+  src: url( {% static '/fonts/SourceSansPro-Black.ttf' %}) format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+           @font-face {
+  font-family: 'Carbona';
+  src: url( {% static '/fonts/carbona/Carbona-Regular.otf' %}) format('opentype');
+  font-style: normal;
+  font-weight: normal;
+}
+                   @font-face {
+  font-family: 'CarbonaBlack';
+  src: url( {% static '/fonts/carbona/Carbona-Black.otf' %}) format('opentype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+.antecedentes-entidad {
+  width: 98%;
+}
+
+.main-container2 {
+  gap: 20px;
+  padding: 20px;
+  padding-top: 40px;
+  display: table;
+  width: 100%;
+}
+.wrap-container2 {
+  display: table-cell;
+  padding: 5px;
+  vertical-align: top;
+  width: 200px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+  .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+        }
+
+@media print {
+
+      .main-container2 {
+        display: block;
+      }
+      .wrap-container2 {
+        display: inline-block;
+        width: auto;
+      }
+
+      .antecedentes-entidad3 {
+        width: 98%;
+      }
+      .table-container3 {
+        display: table;
+        width: 100%;
+      }
+      .table-row3 {
+        display: table-row;
+      }
+      .table-cell3 {
+        display: table-cell;
+        padding: 5px;
+      }
+      .p-title3 {
+        font-weight: bold;
+      }
+      .p-content3 {
+        margin: 0;
+      }
+
+  }
+
+
+
+    </style>
+
+     <link rel="stylesheet" href="{% static "styles2.css" %}"  />
+    <link rel="stylesheet" href="{% static "reset2.css" %}"  />
+    <link rel="stylesheet" href="{% static "resumen.css" %}"  />
+    <link rel="stylesheet" href="{% static "css2.css" %}"  />
+    <style>
+        .portada-wrapper{
+  height: 100vh;}
+    </style>
+    <title>LegalBit - Reporte</title>
+  </head>
+  <body>
+    <section class="portada" style="page-break-after: always">
+      <div class="portada-wrapper">
+        <div class="portada-left">
+          <h1 style="font-family: Carbona">legalBIT</h1>
+        </div>
+        <div class="portada-right">
+          <p>
+              <b>{{ object.investigado.rfc }}</b>
+            {{ object.investigado.apellido1 }} {{ object.investigado.apellido2 }} {{ object.investigado.nombre }}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section style="page-break-after: always" id="portada-rpt">
+      <div class="page-header">
+        <div style="background-image: url('{% static "resources/legalbit-logo-dark.png" %}');" class="header-logo"></div>
+      </div>
+      <section class="report-description">
+        <div class="left">
+            <h2>Reporte de Investigación</h2>
+        </div>
+        <div class="right">
+            <div class="report-data">
+                <h5>Fecha de Investigación</h5>
+                <span>{{ object.creado_en }}</span>
+            </div>
+            <div class="report-data">
+                <h5>Folio </h5>
+                <span>{% now "Y" as current_year %}{{ current_year|slice:"-2:" }}LB-{{ folioInv }}</span>
+            </div>
+        </div>
+    </section>
+    
+    <section class="user-description" style="margin-top:2vh !important;">
+        <div class="user-data">
+            <h4>Nombre Completo</h4>
+            <span>{{ object.investigado.apellido1 }} {{ object.investigado.apellido2 }} {{ object.investigado.nombre }}</span>
+        </div>
+        <div style="padding: 0 3vw;" class="user-data">
+            <h4>Género</h4>
+            <span>{{ sexo }}</span>
+        </div>
+        <div class="user-data">
+            <h4>Fecha de Nacimiento</h4>
+            <span>{{ object.investigado.fnacimiento }}</span>
+        </div>
+        <div style="padding: 0 3vw;" class="user-data">
+            <h4>Número de Identificación</h4>
+            <span>
+              {% if clave_elector %}
+                  {{ clave_elector }}
+              {% endif %}
+
+            </span>
+        </div>
+    </section>
+
+    <section class="trust-summary">
+        <div class="bordered-heading">
+            <div class="heading-border"></div>
+            <h2>Resumen</h2>
+        </div>
+        <div class="summary-categories">
+            <div class="category correct">
+                <div class="background"></div>
+                <span class="category-score"></span>
+                <h6>Identidad</h6>
+            </div>
+            <div class="category bad">
+                <div class="background"></div>
+                <span class="category-score legal-score">5</span>
+                <h6>Legal</h6>
+            </div>
+            <div class="category correct">
+                <div class="background"></div>
+                <span class="category-score international-score"></span>
+                <h6>Internacional</h6>
+            </div>
+            <div class="category none">
+                <div class="background"></div>
+                <span class="category-score academic-score">N/A</span>
+                <h6>Académico</h6>
+            </div>
+            <div class="category tachometer">
+                <div class="background"></div>
+                <span class="category-score"><span class="score-value">{{ score }}</span> <div class="tachometer-indicator"></div></span>
+                <h6>Score Crediticio</h6>
+            </div>
+        </div>
+    </section>
+    </section>
+  </div>
+
+     <!-- DOCUMENTO DE IDENTIDAD-->
+
+      <!-- FIN BLOQUE -->
+
+      <!-- INICIO BLOQUE -->
+      <div class="page-header">
+        <div style="background-image: url('{% static "resources/legalbit-logo-dark.png" %}');" class="header-logo"></div>
+      </div>
+      <p class="p-head">Documento de Identidad</p>
+
+      <!-- Entidad -->
+      <p class="p-entidad">Documento de Identidad INE</p>
+      <!-- Contenido -->
+      <div class="main-container" >
+        <div class="wrap-container">
+          <p class="p-title" >Nombre completo</p>
+          <p class="p-content" style="font-size: 1.8rem !important">
+          {{ object.investigado.apellido1 }} {{ object.investigado.apellido2 }} {{ object.investigado.nombre }}</p>
+        </div>
+        <div class="wrap-container">
+          {% if clave_elector %}
+        <p class="p-title">Clave de Elector</p>
+        <p class="p-content" style="font-size: 1.5rem !important" >{{ clave_elector }}</p>
+      </div>
+        <div class="wrap-container">
+          <p class="p-title">Anverso</p>
+          {% if object.investigado.inefront %}
+          <img src="{{ object.investigado.inefront.url }}" alt="Imagen INE Frontal" width="250px">
+          {% else %}
+          <img
+            class="img-medium"
+            alt="documento de identidad"
+            class="p-content"
+            src="data:image/png;base64, {{ imgElector }}"
+          />
+          {% endif %}
+        </div>
+        <div class="wrap-container" >
+          {% if object.investigado.inerevers %}
+          <p class="p-title">Reverso</p>
+          <img src="{{ object.investigado.inerevers.url }}" alt="Imagen INE Frontal" width="250px">
+          {% else %}
+         
+          <p class="p-title">Reverso</p>
+            {% if imgElector2 %}
+          <img
+            class="img-medium"
+            alt="documento de identidad"
+            class="p-content"
+            src="data:image/png;base64, {{ imgElector2 }}"
+          />
+            {% endif %}
+            
+            {% endif %}
+        </div>
+     
+            {% endif %}
+       
+        <div class="wrap-container">
+          
+          {% if object.investigado.manual%}
+          {% else %}
+          <p class="p-title" >Vencimiento</p>
+          <p class="p-content" >{{ vencimientoINE }}</p>
+          {% endif %}
+        </div>
+      </div>
+      <center></center>
+      <div class='main-container' style="margin-bottom: -4vh !important;">
+        
+          {% if object.investigado.manual%}
+          
+          <p class="p-title" style="margin-top: -5vh !important; ">{{ vencimientoINE }}</p>
+          {% endif %}
+       
+      </div>
+    </center>
+      <hr class="hr-divisor" />
+      <!-- FIN SAT -->
+  
+<!-- INICIO CURP RENAPO -->
+<section class="antecedentes-entidad3">
+  <!-- INICIO BLOQUE -->
+  <p class="p-head"> Consulta de Clave Única de Registro de Población</p>
+  <div class="main-container3" style="margin-left:15px;">
+    <div class="table-container3">
+      <div class="table-row3">
+        <div class="table-cell3">
+          <p class="p-title" >Nombre consultado:</p>
+          <p class="p-content" >{{ object.investigado.apellido1 }} {{ object.investigado.apellido2 }} {{ object.investigado.nombre }}</p>
+        </div>
+        <div class="table-cell3">
+          <p class="p-title" >C.U.R.P:</p>
+          <p class="p-content" >{{ object.investigado.curp }}</p>
+        </div>
+        <div class="table-cell3">
+          <p class="p-title" >Fecha de Nacimiento:</p>
+          <p class="p-content" >{{ object.investigado.fnacimiento }}</p>
+        </div>
+        <div class="table-cell3">
+          <p class="p-title" >Lugar de Nacimiento:</p>
+          <p class="p-content" >{{ object.investigado.lugarNacimiento }}</p>
+        </div>
+        <div class="table-cell3">
+          <p class="p-title" >Sexo:</p>
+          <p class="p-content" >{{ sexo }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+      <hr class="hr-divisor" />
+      <!-- FIN BLOQUE -->
+
+  <div style='page-break-before:always'></div>
+      <section >
+        <div class="page-header">
+        <div style="background-image: url('{% static "resources/legalbit-logo-dark.png" %}');" class="header-logo"></div>
+      </div>
+     <!-- INICIO BLOQUE -->
+      <p class="p-head">Situación ante el SAT</p>
+
+      <!-- Entidad -->
+      <p class="p-entidad">RFC consultado</p>
+      <!-- Contenido -->
+      <div class="main-container">
+        <div class="wrap-container">
+          <p class="p-title">RFC</p>
+          <p class="p-content">{{ object.investigado.rfc }}</p>
+        </div>
+        <div class="wrap-container">
+          <p class="p-title">Resultado:</p>
+          <p class="p-content">
+            Con el criterio de búsqueda del RFC: {{ object.investigado.rfc }} proporcionado
+            {% if situacionSAT %}
+            si
+            {% else %}
+              no
+            {% endif %}
+            se encontraron coincidencias en los listados de contribuyentes con
+            operaciones presuntamente inexistentes.
+          </p>
+        </div>
+      </div>
+
+
+    </section>
+   <hr class="hr-divisor" />
+    <!-- FIN SAT -->
+
+    <!-- INICIO PROFESIONES -->
+    <section class="antecedentes-entidad" >
+      <!-- INICIO BLOQUE -->
+      <p class="p-head">Profesiones encontradas SEP</p>
+
+
+      <!-- Entidad -->
+        {% if num_cedulas > 0 %}
+
+            {% for r in resultado_cedulas %}
+                 <div class="main-container">
+                <div class="wrap-container">
+                  <p class="p-title">Nombre</p>
+                  <p class="p-content">{{ r.nombre }}</p>
+                </div>
+                <div class="wrap-container">
+                  <p class="p-title"> Cédula</p>
+                  <p class="p-content"> {{ r.numCedula }} </p>
+                </div>
+                <div class="wrap-container">
+                  <p class="p-title">Profesión</p>
+                  <p class="p-content">{{ r.profesion }}</p>
+                </div>
+                 </div>
+            {% endfor %}
+
+        {% else %}
+            <p class="p-entidad">No se encontraron registros.</p>
+        {% endif %}
+<!-- BURO -->
+ <hr class="hr-main"/>
+
+    <section id="score">
+      <p class="p-head">Score en Buró de Crédito</p>
+      <p class="p-entidad">{{ score }}</p>
+      <p class="p-content" style="padding-left: 20px; padding-top: 10px">
+        "La puntuación mínima es de 456 puntos y la máxima de 760 puntos. A
+        menor BC Score, mayor es la probabilidad de impago del Cliente y a mayor
+        BC Score, menor es la probabilidad de incumplimiento del Cliente."
+      </p>
+
+
+    </section>
+
+    <!-- <div style="page-break-inside: avoid"> -->
+    <section class="block-standard">
+      <p class="p-head">
+      Resultados de Antecedentes Legales (Nacional)
+      </p>
+
+    <section id="consulta-antecedentes"  >
+      <p class="p-head">Consulta de antecedentes</p>
+      <div class="main-container">
+        <div class="wrap-container">
+          <p class="p-title">Fecha y hora</p>
+          <p class="p-content">{{ object.creado_en }}</p>
+        </div>
+        <div class="wrap-container">
+          <p class="p-title">
+            Num. de Entidades en las que se ha encontrado antecedentes
+          </p>
+          <p class="p-content">
+              {{ num_entidadesant }}
+          </p>
+        </div>
+        <div class="wrap-container">
+          <p class="p-title">Criterio de busqueda</p>
+          <p class="p-content">
+              {{ object.investigado.apellido1 }} {{ object.investigado.apellido2 }} {{ object.investigado.nombre }}
+          </p>
+        </div>
+      </div>
+   
+    <section class="antecedentes-entidad" style='page-break-inside:avoid' >
+      <!-- INICIO BLOQUE -->
+     
+      <p class="p-head">Antecedentes por Entidad</p>
+        <!-- Entidad -->
+       numero antedecentes  {{ numero_antecedentes }}
+       
+        {% if numero_antecedentes > 0 %}
+    
+              {% for r in antecedentes2 %}
+              
+                      <p class="p-entidad">Entidad: {{  r.entidad }}</p>
+                      
+
+                                  <!-- Contenido -->
+                                  <div class="main-container2">
+                                    <div class="wrap-container2">
+                                      <p class="p-title">Fecha:</p>
+                                      <p class="p-content">{{ r.fecha }}</p>
+                                    </div>
+                                    <div class="wrap-container2">
+                                      <p class="p-title">Expediente</p>
+                                      <p class="p-content">{{ r.expediente }}</p>
+                                    </div>
+                                    <div class="wrap-container2">
+                                      <p class="p-title">Tipo</p>
+                                      <p class="p-content">{{ r.tipo }}</p>
+                                    </div>
+                                    <div class="wrap-container2">
+                                      <p class="p-title">Actor</p>
+                                      <p class="p-content">{{ r.actor|truncatewords:80}}</p>
+                                    </div>
+                                    <div class="wrap-container2">
+                                      <p class="p-title">Demandado</p>
+                                      <p class="p-content">{{ r.demandado }}</p>
+                                    </div>
+                                  </div>
+                                  
+
+                                </div>
+                  {% endfor %}
+                  {% else %}
+                      <p class="p-entidad">No se encontraron antecedentes ante el poder judicial federal o poderes judiciales estatales.</p>
+                  {% endif %}
+              </section>
+            <!--  </div> -->
+           <br/>
+           <br/>
+          <!-- antecedentes internacionales -->
+          <hr class="hr-main" />
+              <section  style="page-break-inside: avoid !important;">
+              
+             
+              
+                <p class="p-head">Antecedentes Internacionales</p>
+                  <div class="main-container" >
+                  
+                  {% if num_antecedentes_intl > 0 %}
+
+                  <table style="page-break-inside: avoid; margin-top: -5vh !important;">
+                      {% if entidadesIntl %}
+
+                          {% for d in entidadesIntl|slice:": -1" %}
+                              <tr>
+                                  <td class="p-content">{{ d.source_full_name }} </td>
+                              </tr>
+                          {% endfor %}
+
+
+                          {% else %}
+                          <tr>
+                          <td>Sin Información</td>
+                          </tr>
+
+                      {% endif %}
+                      </table>
+                    
+                  </div>
+
+
+                  <div class="main-container">
+            <table style="margin-left: -3vh !important;">
+              {% if sancionesIntl %}
+              
+                  <tr>
+                      <td style="font-size: 2.1rem !important;">Nombre</td>
+                      <td  style="font-size: 2.1rem !important;">Origen Alerta</td>
+                  </tr>
+                  {% with show_alert=false %}
+                  {% for d in sancionesIntl %}
+                      {% if d.name == object.investigado.nombreCompleto %}
+                          {% if not show_alert %}
+                              {% with show_alert=true %}
+                              <tr>
+                                  <td class="p-content">{{ d.name }}</td>
+                                  <td class="p-content">{{ d.source.source_full_name }}</td>
+                              </tr>
+                              {% endwith %}
+                          {% endif %}
+                      {% endif %}
+                  {% empty %}
+                      {% with show_alert=false %}
+                      {% endwith %}
+                  {% endfor %}
+                  {% endwith %}
+                  {% if not show_alert %}
+                      <tr>
+                          <td colspan="2" class="p-content" style="padding-left: 2.4vh !important;">No se encontraron alertas internacionales</td>
+                      </tr>
+                  {% endif %}
+
+                  {% else %}
+                <tr>
+                      <td class="p-head">Nombre</td>
+                      <td class="p-head"> Origen Alerta</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" class="p-content" style="padding-left: 2.4vh !important;">No se encontraron alertas internacionales</td>
+                  </tr>
+
+              {% endif %}
+          </table>
+          {% else %}
+          <p class="p-entidad" style="margin-left: -2vh !important;margin-top: -3vh !important;">No sé encontró al investigado en ninguna lista negra internacional.</p>
+          {% endif %}
+
+        </div>
+    </section>
+    <!-- fin antecedentes internacionales -->
+
+ <section class="contraportada" style="page-break-before: always !important;page-break-after: always !important">
+      <div class="content-wrapper">
+        <div class="legalbit-logo"></div>
+        <div class="text-content">
+          <span>contacto@legalbit.mx</span>
+          <span>Blvd. Antonio L. Rodríguez 2100-Edificio B.H Piso 15, Col, Santa María, 64650 Monterrey, N.L.</span>
+          <span>www.legalbit.mx</span>
+        </div>
+        
+       
+      </div>
+    </section>
+    
+    <script src="{% static 'resumen3.js' %}"></script>
+    <script>
+          {% if sancionesIntl %}
+    
+        <tr>
+            <td>Nombre</td>
+            <td>Origen Alerta</td>
+        </tr>
+        {% with show_alert=false %}
+        {% for d in sancionesIntl %}
+            {% if d.name == object.investigado.nombreCompleto %}
+                {% if not show_alert %}
+                    {% with show_alert=true %}
+                   setInternationalScore(1)
+                    {% endwith %}
+                {% endif %}
+            {% endif %}
+        {% empty %}
+            {% with show_alert=false %}
+            {% endwith %}
+        {% endfor %}
+        {% endwith %}
+        {% if not show_alert %}
+        setInternationalScore("")
+        {% endif %}
+
+        {% else %}
+        setInternationalScore("")
+
+   
+    {% endif %}
+
+
+      {% if  num_entidadesant  == 0 %}
+       setLegalScore('')
+      {% else %}
+       setLegalScore('{{ num_entidadesant }}')
+      {% endif %}
+
+      {% if num_cedulas == 0 %}
+      setAcademicScore('N/A')
+      {% else %}
+      setAcademicScore({{ num_cedulas }})
+      {% endif %}
+      window.addEventListener("beforeprint", (event) => {
+          console.log("Before print");
+    });
+    </script>
+  </body>
+</html>

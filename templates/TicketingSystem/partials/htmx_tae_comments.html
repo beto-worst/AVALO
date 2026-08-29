@@ -1,0 +1,29 @@
+<div id="comments_lst">
+    {% if ticket_comments %}
+        {% for comment in ticket_comments %}
+            <div class="card">
+                <div class="card-body">
+                    <br>
+                    {% if comment.creator_comment == ticket.creator %}
+                        <figure class="text-end">
+                        {% else %}
+                        <figure>
+                            {% endif %}
+                            <figcaption class="blockquote-footer">
+                                <cite title="Source Title">{{comment.created_at}}</cite>
+                            </figcaption>
+                            <blockquote class="blockquote">
+                                {% if comment.creator_comment != ticket.creator %}
+                                <p><strong>{{ comment.creator_comment}}</strong></p>
+                                {% endif %}
+                                <p>{{comment.comment| safe | linebreaks}}</p>
+                            </blockquote>
+                        </figure>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+<!-- Irving, your team might want to add a rich text editor with the following library -->
+<!-- https://dev.to/ieeecsvitc/integrating-rich-text-editor-with-django-k19 -->

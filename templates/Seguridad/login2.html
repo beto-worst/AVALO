@@ -1,0 +1,190 @@
+{% load static %}
+<!doctype html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>LegalBit - Acceso al sistema</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'favicon.png' %}" />
+
+    <!-- Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Hope UI Framework -->
+    <link rel="stylesheet" href="{% static 'assets/css/core/libs.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/hope-ui.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/custom.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/dark.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/rtl.min.css' %}" />
+
+    <!-- Brand CSS -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+
+    <style>
+      *, *::before, *::after {
+        font-family: 'Montserrat', sans-serif !important;
+      }
+
+      body {
+        background-color: #f4f6f9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+
+      .login-card {
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(25, 38, 53, 0.12);
+        padding: 48px 40px;
+        width: 100%;
+        max-width: 400px;
+      }
+
+      .logo-container {
+        text-align: center;
+        margin-bottom: 32px;
+      }
+
+      .logo-container img {
+        width: 220px;
+        height: auto;
+      }
+
+      .login-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--color-navy, #192635);
+        text-align: center;
+        margin-bottom: 4px;
+      }
+
+      .login-subtitle {
+        font-size: 0.9rem;
+        font-weight: 400;
+        color: #6b7280;
+        text-align: center;
+        margin-bottom: 28px;
+      }
+
+      .form-label {
+        font-weight: 600;
+        font-size: 0.85rem;
+        color: var(--color-navy, #192635);
+        margin-bottom: 6px;
+      }
+
+      .form-control {
+        border: 1.5px solid #d1d5db;
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 0.9rem;
+        transition: border-color 0.2s;
+      }
+
+      .form-control:focus {
+        border-color: var(--color-blue, #488fc3);
+        box-shadow: 0 0 0 3px rgba(72, 143, 195, 0.15);
+        outline: none;
+      }
+
+      .btn-login {
+        background-color: var(--color-blue, #488fc3) !important;
+        border: none;
+        border-radius: 8px;
+        color: #ffffff !important;
+        font-weight: 600;
+        font-size: 0.95rem;
+        padding: 11px;
+        width: 100%;
+        transition: background-color 0.2s;
+      }
+
+      .btn-login:hover {
+        background-color: var(--color-navy, #192635) !important;
+      }
+
+      .link-registro {
+        display: block;
+        text-align: center;
+        font-size: 0.82rem;
+        color: var(--color-blue, #488fc3);
+        margin-bottom: 20px;
+      }
+
+      .link-registro:hover {
+        color: var(--color-navy, #192635);
+      }
+
+      .alert-danger {
+        border-radius: 8px;
+        font-size: 0.85rem;
+        margin-top: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- loader Start -->
+    <div id="loading">
+      <div class="loader simple-loader">
+        <div class="loader-body"></div>
+      </div>
+    </div>
+    <!-- loader END -->
+
+    <div class="login-card">
+      <div class="logo-container">
+        <img src="{% static '03_logo a-obscuro.svg' %}" alt="LegalBit">
+      </div>
+
+      <p class="login-title">Inicio de sesión</p>
+      <p class="login-subtitle">Identifícate para comenzar</p>
+
+      <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="id_username" class="form-label">Usuario</label>
+          {{ form.username }}
+        </div>
+        <div class="mb-3">
+          <label for="id_password" class="form-label">Contraseña</label>
+          {{ form.password }}
+        </div>
+
+        
+
+        <button type="submit" class="btn btn-login">Entrar</button>
+
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger">
+          <ul class="mb-0">
+            {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+      </form>
+    </div>
+
+    <!-- Scripts -->
+    <script src="{% static 'assets/js/core/libs.min.js' %}"></script>
+    <script src="{% static 'assets/js/core/external.min.js' %}"></script>
+    <script src="{% static 'assets/js/hope-ui.js' %}"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var usr = document.getElementById('id_username');
+        var psw = document.getElementById('id_password');
+        if (usr) usr.classList.add('form-control');
+        if (psw) psw.classList.add('form-control');
+      });
+    </script>
+  </body>
+</html>

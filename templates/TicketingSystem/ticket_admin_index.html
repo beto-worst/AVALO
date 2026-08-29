@@ -1,0 +1,115 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block title %}
+
+{% endblock %}
+{% block containerHead %}
+<div class="flex-wrap d-flex justify-content-between align-items-center">
+    <div>
+        <h1>Sistema de Tickets</h1>
+    </div>
+    <div>
+        <!--  <a href="/investigacion/nueva" class="btn btn-success">Nueva</a> -->
+    </div>
+</div>
+{% endblock %}
+{% block subContainerHead %}
+{% endblock %}
+{% block contenido %}
+
+<div class='card'>
+    <div class='card-header'>
+        <div class="card-header d-flex justify-content-between">
+            <div class="header-title">
+                <h4 class="card-title">Administración de tickets</h4>
+            </div>
+        </div>
+        <div class='card-body'>
+            <!-- Insert content below -->
+            <p>Para filtrar la lista de tickets a continuación, seleccione los parámetros deseados y presione el botón "Filtrar tickets".</p>
+        <form
+            hx-post="{% url 'TicketingSystem:ticket_admin' %}"
+            hx-target="#ticket_list"
+            hx-swap="outerHTML">
+            <div class="table-responsive">
+            <table class="table table-sm table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Creador</th>
+                        <th scope="col">Asignado</th>
+                        <th scope="col">categoría</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Prioridad</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>
+                            <select name="filter_creator" class="form-select" aria-label="select" id="">
+                                <option value="">Selecione ...</option>
+                                {% for ticket in tickets %}
+                                {% ifchanged %}
+                                <option value="{{ticket.creator.id}}"> {{ticket.creator}} </option>
+                                {% endifchanged %}
+                                {% endfor %}
+                            </select>
+                        </th>
+                        <td>
+                            <select name="filter_assignee" class="form-select" aria-label="select" id="">
+                                <option value="">Selecione ...</option>
+                                {% for staff in all_staff %}
+                                <option value="{{staff.id}}"> {{staff.username}} </option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td>
+                            <select name="filter_category" class="form-select" aria-label="select" id="">
+                                <option value="">Selecione ...</option>
+                                {% for category in all_categories %}
+                                <option value="{{category.0}}"> {{category.1}} </option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td>
+                            <select name="filter_status" class="form-select" aria-label="select" id="">
+                                <option value="">Selecione ...</option>
+                                {% for status in all_status %}
+                                <option value="{{status.0}}"> {{status.1}} </option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td>
+                            <select name="filter_priority" class="form-select" aria-label="select" id="">
+                                <option value="">Selecione ...</option>
+                                {% for priority in all_priorities %}
+                                <option value="{{priority.0}}"> {{priority.1}} </option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td><button type="submit" class="btn btn-success btn-sm btn-lb-primary">Filtrar tickets</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        </form>
+            {# This returns user ticket list partial for admin #}
+            {% include 'TicketingSystem/partials/htmx_tai_lst.html' %}
+
+            <!-- End Insert content -->
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block customJS %}
+<script>
+    function checkLength() {
+        var textbox = document.getElementById("description");
+        if (textbox.value.length <= 70) {
+            alert("Asegúrese de ingresar al menos 70 caracteres en la descripcion.");
+        }
+    }
+</script>
+{% endblock %}

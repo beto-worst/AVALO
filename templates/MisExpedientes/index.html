@@ -1,0 +1,431 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block title %}
+
+{% endblock %}
+{% block containerHead %}
+<div class="flex-wrap d-flex justify-content-between align-items-center">
+    <div>
+        <h1>Mis Expedientes</h1>
+    </div>
+    <div>
+        <!--  <a href="/investigacion/nueva" class="btn btn-success">Nueva</a> -->
+    </div>
+</div>
+{% endblock %}
+{% block subContainerHead %}
+{% endblock %}
+{% block contenido %}
+<div class="card">
+    <div class="card-header d-flex justify-content-between">
+        <div class="header-title">
+            <h4 class="card-title">Lista de Expedientes</h4>
+            <br><br>
+        </div>
+    </div>
+
+    <div class="container overflow-hidden ms-3">
+        <div class="row ms-0">
+            <div class="col-md-5 ps-0">
+                <h5>Clientes</h5>
+                <br>
+
+                <table class="table table-sm table-striped table-hover px-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <!-- Iterate through client object -->
+                        {% for name in page.object_list %}
+                        <!-- If the name is equal to the client id change row color -->
+                        {% if name.0 == cliente_id %}
+                        <tr class="table-primary">
+                        {% else %}
+                        <tr onclick="seleccionarFila(this)">
+                        {% endif %}
+                            <th scope="row" id="idExp">{{ name.0 }}</th>
+                            <!-- Adds parameterized link with the client id, page number and shows name all in upper case -->
+                            <td align="left" id="txtNombre"><a href='javascript:void(0)'>{{ name.1|upper }} {{ name.2|upper }}</a></td>
+                            <td align="center">
+                           <!--   <a href={% url 'MisExpedientes:index' name.0 %}?page={{ page.number }}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="1.5em"
+                                    viewBox="0 0 576 512">
+                                    <style>
+                                        svg {
+                                            fill: #b7c9e3
+                                        }
+                                    </style>
+                                    <path
+                                        d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z" />
+                                </svg>
+                                </a>  -->
+                                <a href='javascript:void(0)'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="1.5em"
+                                    viewBox="0 0 576 512">
+                                    <style>
+                                        svg {
+                                            fill: #b7c9e3
+                                        }
+                                    </style>
+                                    <path
+                                        d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z" />
+                                </svg>
+                                </a>
+                               
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <!-- pagination -->
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center pagination-sm">
+
+                        <!-- If page has a previous page, show previous button -->
+                        {% if page.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href={% url 'MisExpedientes:index'%}?page={{ page.previous_page_number }}>Anterior</a>
+                        </li>
+                        {% endif %}
+
+                        <!-- Iterate through page range -->
+                        {% for p in paginator.page_range %}
+                            <!-- if page number is equal to p, show active page, else show page number -->
+                            {% if page.number == p %}
+                                <li class="page-item active"><a class="page-link" href={% url 'MisExpedientes:index'%}?page={{p}}>{{p}}</a></li>
+                            {% else %}
+                                <li class="page-item"><a class="page-link" href={% url 'MisExpedientes:index'%}?page={{p}}>{{p}}</a></li>
+                            {% endif %}
+                        {% endfor %}
+
+                        <!-- If page has a next page, show next button -->
+                        {% if page.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href={% url 'MisExpedientes:index'%}?page={{ page.next_page_number }}>Siguiente</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                <!-- pagination -->
+
+            </div>
+            <div class=" col-md-7 px-5">
+
+                {% if error == 1 %}
+                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+                    <div class="toast-body">
+                        <p class="h6">Hubo un problema al cargar su archivo, asegúrese de:</p>
+                        <br>
+                        <ol class="list-group list-group-flush">
+                            <li class="list-group-item">El archivo tiene un tamaño máximo de 2.5 MB.</li>
+                            <li class="list-group-item">El archivo tiene uno de los siguientes formatos: 'pdf', 'doc', 'docx', 'png', 'jpg', 'jpeg', 'bmp'</li>
+                        </ol>
+                      <div class="mt-2 pt-2 border-top">
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Cerca</button>
+                      </div>
+                    </div>
+                  </div>
+                  <br><br>
+                {% elif error == 2 %}
+                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+                    <div class="toast-body">
+                        <p class="h6">Hubo un problema al intentar de borrar su archivo.</p>
+                        <br>
+                        <p><mark>Inténtelo de nuevo o comuníquese con el soporte técnico.</mark></p>
+                      <div class="mt-2 pt-2 border-top">
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Cerca</button>
+                      </div>
+                    </div>
+                  </div>
+                  <br><br>
+                {% else %}
+                {% endif %}
+                  <h5 id="lblInfo"></h5>
+                {% for name in page.object_list %}
+                    {% if name.0 == cliente_id %}
+                        <h5>Documentación de {{ name.1|upper}} {{ name.2|upper }} (Persona {%if name.3 == 'PF' %}Física{% else %} Moral{% endif %})</h5>
+                    {% endif %}
+                {% endfor %}
+                <br>
+                <div class="card text-bg-light px-3  {% if cliente_id == None %}  mt-4 {% endif %}">
+                    <div class="card-body">
+                        <div class="row row-cols-1 row-cols-md-4 g-2" id="cardExpedientes">
+
+                            <!-- If the client id is None, show toast message -->
+                            {% if cliente_id == None %}
+                            <div class="toast" role="alert" data-animation="true" data-autohide="false" aria-live="assertive" aria-atomic="true">
+                                <div class="toast-header">
+                                    <img src="" class="rounded me-2" alt="">
+                                    <strong class="me-auto">Atención por favor</strong>
+                                    <small></small>
+                                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                                <div class="toast-body">
+                                    <<< Elija un cliente de la lista de la izquierda
+                                </div>
+                            </div>
+                            {% else %}
+
+                            <!-- if client id is not None, Iterate through categories -->
+                            {% for c in lista_categorias %}
+                            <div class="col-md-4">
+                                <div class="card text-center">
+                                    <div class="card-header text-bg-primary" style='background-color:#488fc3 !important; font-size:12px!important;'><strong><small>{{c.1}}</small></strong><br><br></div>
+                                    <div class="card-body">
+                                        <form action={% url 'MisExpedientes:up_load' %} method='post' enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="usuario_id" class="form-control" placeholder="usuario" value="{{user.id}}">
+                                            <input type="hidden" name="cliente_id" class="form-control" placeholder="cliente" value="{{cliente_id}}">
+                                            <input type="hidden" name="expediente_categoria_id" class="form-control" placeholder="expediente_categoria_id" value="{{c.0}}">
+                                            <input type="hidden" name="page" value="{{ page.number }}">
+                                            <div class="mb-3">
+
+                                            <!-- if there isn't a file path in the database, show upload HTML block by checking -->
+                                            {% if c.2 == 0 %}
+                                            <!-- Hide input file -->
+                                            <div style="height:0px;overflow:hidden">
+                                                <input type="file" name="expediente_nombre" class="form-control form-control-sm " aria-label="file example" accept=".pdf, .doc, .docx, .png, .jpg, .bmp, .jpeg" id="fileInput_{{c.0}}" required>
+                                            </div>
+                                            <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Primero haga clic para elegir el archivo. Luego presione Enviar.">
+                                                <!-- Onclick function call input field, function in customJS -->
+                                                <img src="{% static 'img/file-arrow-up-solid.svg' %}" height="35em" class="card-img-top" alt="" onclick="chooseFile_{{c.0}}();">
+                                            </span>
+                                            <br><br>
+                                            <button class="btn btn-primary btn-lb-primary btn-sm"" type="submit" id="">Enviar</button>
+                                        {% else %} 
+                                        <!-- Iterate through client -->
+                                            {% for cl in cliente %}
+                                            <!-- if client category (cl.3) equal to current category (c.0) show client category in db in HTML block -->
+                                                {% if c.0 == cl.3 %}
+                                                <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Click to view the document.">
+                                                <a href="{% get_media_prefix %}{{ cl.4 }}">
+                                                    <img src="{% static 'img/' %}file_{{ cl.5 }}.svg" height="35em" class="card-img-top" alt="" onclick="chooseFile_{{c.0}}();">
+                                                </a>
+                                                </span>
+                                                <br><br>
+                                                <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="To replace docuent, first Borrar then upload new file">
+                                                    <a href={% url 'MisExpedientes:delete_document' cl.2 cl.0 page.number %} class="btn btn-info btn-sm mt-1 btn-lb-info" role="button">Borrar</a>
+                                                </span>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                    </form>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <p>
+            <br>
+
+        </p>
+    </div>
+</div>
+
+{% endblock %}
+<!-- https://fontawesome.com/icons/eye?f=classic&s=solid&sz=xl&pc=%23b7c9e3 -->
+<!-- https://fontawesome.com/icons/file-arrow-up?f=classic&s=solid&pc=%23bccce7 -->
+
+{% block customJS %}
+{% for c in lista_categorias %}
+<script>
+    function chooseFile_{{c.0}}() {
+        document.getElementById("fileInput_{{c.0}}").click();
+    }
+</script>
+
+<script>
+    window.onload = (event)=> {
+        let myAlert = document.querySelector('.toast');
+        let bsAlert = new  bootstrap.Toast(myAlert);
+        bsAlert.show();
+    }
+</script>
+<script>
+
+    //const ruta = window.location.pathname; 
+    //alert(ruta)
+    //const partesRuta = ruta.split('/');
+    //const valor = partesRuta[partesRuta.indexOf('Expedientes') + 1];
+    //alert(valor)
+
+</script>
+<script>
+
+function obtenerNombreCategoria(idCategoria) {
+  return fetch('/Expedientes/getCategoriaByID/' + idCategoria)
+    .then(function (response) {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Error al obtener los datos del JSON');
+      }
+    })
+    .then(function (data) {
+      return data.nombre; // Retorna el nombre desde aquí
+    })
+    .catch(function (error) {
+      console.error('Error:', error);
+      // Puedes manejar el error según tus necesidades
+      return null; // Otra opción podría ser devolver un valor predeterminado o lanzar el error nuevamente
+    });
+}
+
+function obtenerCategorias() {
+  return fetch('/Expedientes/getCategorias')
+    .then(function (response) {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Error al obtener los datos del JSON');
+      }
+    })
+    .then(function (data) {
+     console.log(data)
+     var cardExpedientes = document.getElementById('cardExpedientes');
+        cardExpedientes.innerHTML = "";
+        // HTML que deseas agregar
+        var nuevoContenidoHTML = '';
+        var cards = '';
+     data.forEach(function (d) {
+        console.log(d)
+        
+        cards+='<div class="col-md-4">'+
+                                '<div class="card text-center">'+
+                                '<div class="card-header text-bg-primary" style="background-color:#488fc3 !important; font-size:12px!important;"><strong><small>'+d.nombre+'</small></strong><br><br></div>'+
+                                ' <div class="card-body">'+
+                                ' <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Click to view the document.">'+
+                                ' <a href="/media/'+'">'+
+                                '<img src="/static/img/file_pdf.svg" height="35em" class="card-img-top" alt="" onclick="chooseFile_{{c.0}}();">'+
+                                "</a>"+
+                                "</span>"+
+                                "<br><br>"+
+                                '<span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="To replace docuent, first Borrar then upload new file">'+
+                                '<a href="#" class="btn btn-info btn-sm mt-1 btn-lb-info" role="button">Subir</a>'+
+                                '</span>'+   
+                                '</div>' + '</div>' + '</div>';
+        // Agregar el HTML al divs
+        cardExpedientes.innerHTML=cards;
+   
+     })
+    })
+    .catch(function (error) {
+      console.error('Error:', error);
+      // Puedes manejar el error según tus necesidades
+      return null; // Otra opción podría ser devolver un valor predeterminado o lanzar el error nuevamente
+    });
+}
+
+    function seleccionarFila(fila) {
+    // Tu lógica aquí para manejar la fila seleccionada
+   // Elimina la clase 'table-primary' de todas las filas
+   var filas = document.querySelectorAll('tr');
+    filas.forEach(function(fila) {
+      fila.classList.remove('table-primary');
+    });
+
+    // Agrega la clase 'table-primary' a la fila seleccionada
+    fila.classList.add('table-primary');
+     // Obtiene el valor del td con id='idExp' en la fila seleccionada
+     var idExpValue = fila.querySelector('#idExp').innerText;
+
+    // Tu lógica adicional aquí para manejar la fila seleccionada
+    //alert('Se seleccionó la fila con ID: ' + idExpValue);
+     // Obtener el elemento div por su ID
+     var cardExpedientes = document.getElementById('cardExpedientes');
+     cardExpedientes.innerHTML = "";
+    // HTML que deseas agregar
+    var nuevoContenidoHTML = '';
+
+    // Agregar el HTML al divs
+    cardExpedientes.innerHTML = nuevoContenidoHTML;
+
+    fetch('/Expedientes/getByID/'+ idExpValue)
+          .then(function(response) {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error('Error al obtener los datos del JSON');
+            }
+          })
+          .then(function(data) {
+            // Verificar si el array de expedientes está vacío
+            const expedientesArray = data.expedientes || [];
+            var cards = '';
+            
+            if (expedientesArray.length === 0) {
+                obtenerCategorias()
+                       console.log('vacio')
+            } else {
+            console.log('El array de expedientes no está vacío:', expedientesArray);
+             // Iterar sobre el array de expedientes
+                expedientesArray.forEach(function (expediente) {
+                    fetch('/Expedientes/getCategoriaByID/'+ expediente[3])
+                
+                    console.log('ID:', expediente[0]);
+                    console.log('Usuario ID:', expediente[1]);
+                    console.log('Cliente ID:', expediente[2]);
+                    console.log('Expediente Categoría ID:', expediente[3]);
+                    console.log('Nombre del Expediente:', expediente[4]);
+                    console.log('URL del Expediente:', expediente[5]);
+                    var nomCat;
+                    nomCat=""
+                    obtenerNombreCategoria(expediente[3])
+                    .then(function (nombreCategoria) {
+                        if (nombreCategoria !== null) {
+                        nomCat = nombreCategoria;
+                        console.log('Nombre de la categoría:', nomCat);
+                        } else {
+                        console.log('No se pudo obtener el nombre de la categoría');
+                        }
+
+                        cards+='<div class="col-md-4">'+
+                                '<div class="card text-center">'+
+                                '<div class="card-header text-bg-primary" style="background-color:#488fc3 !important; font-size:12px!important;"><strong><small>'+nomCat+'</small></strong><br><br></div>'+
+                                ' <div class="card-body">'+
+                                ' <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Click to view the document.">'+
+                                ' <a href="/media/'+expediente[4] +'">'+
+                                '<img src="/static/img/file_pdf.svg" height="35em" class="card-img-top" alt="" onclick="chooseFile_{{c.0}}();">'+
+                                "</a>"+
+                                "</span>"+
+                                "<br><br>"+
+                                '<span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="To replace docuent, first Borrar then upload new file">'+
+                                '<a href="#" class="btn btn-info btn-sm mt-1 btn-lb-info" role="button">Borrar</a>'+
+                                '</span>'+   
+                                '</div>' + '</div>' + '</div>';
+                                 
+                    cardExpedientes.innerHTML=cards;
+                    var info = document.getElementById("lblInfo");
+                    info.innerHTML=''
+
+                    });
+    
+                    console.log('---');
+                   
+                    
+                });
+            }
+          })
+  }
+
+ 
+</script>
+
+{%endfor%}
+
+{% endblock %}

@@ -1,0 +1,35 @@
+<!-- Deprecated -->
+
+<div id="category_form"  hx-swap-oob="true">
+
+    <form   hx-post="{% url 'TicketingSystem:index' %}"
+            hx-target="#ticket_list"
+            hx-swap="outerHTML"
+            class="was-validated">
+            <!-- hx-on::after-settle="this.reset()" -->
+        <div class="col-sm-8">
+            <label for="formGroupInput" class="form-label">Seleccione una categoría</label>
+            <select     hx-get="{% url 'TicketingSystem:index_htmx' %}"
+                        hx-trigger="change"
+                        hx-target="#SubCategories"
+                        hx-swap="outerHTML"
+                        name="selected_category"
+                        class="form-select"
+                        aria-label="select example"
+                        id="CategorySelection" required>
+                <option value="">Elegir...</option>
+                {% for category in categories %}
+                <option value="{{category.0}}"> {{category.1}} </option>
+                {% endfor %}
+            </select>
+        </div>
+        <br>
+            {# This returns subcategory partial #}
+            {% include 'TicketingSystem/partials/htmx_subcategory.html' %}
+        <br>
+        <div class="col-sm-8">
+            <button type="submit" id="btn_submit" class="btn btn-success btn-sm btn-lb-primary">Enviar</button>
+        </div>
+    </form>
+
+</div>

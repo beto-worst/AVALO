@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - Legalbit</title>
+    <style>
+  body {
+            background-color: #fff;
+            display: flex;
+            flex-direction: column; /* Cambia la dirección principal a columna */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column; /* Cambia la dirección principal a columna */
+            align-items: center;
+            text-align: center; /* Alinea el texto del enlace al centro */
+        }
+        img {
+            width: 680px;
+            height: 680px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="{% static 'error.gif' %}" alt="Error">
+        <a href="../Lista">Regresar</a>
+        <p>
+            {{ error }}
+        </p>
+    </div>
+</body>
+</html>

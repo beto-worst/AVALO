@@ -1,0 +1,54 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block title %}
+    Investigaciones
+{% endblock %}
+{% block containerHead %}
+  <div class="flex-wrap d-flex justify-content-between align-items-center">
+    <div>
+        <h1>Catálogos del sistema / Municipios</h1>
+    </div>
+    <div>
+      <!--  <a href="/investigacion/nueva" class="btn btn-success">Nueva</a> -->
+    </div>
+</div>
+{% endblock %}
+{% block subContainerHead %}
+{% endblock %}
+{% block contenido %}
+      <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Agregar Municipio en Sistema LegalBit</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                    {% csrf_token %}
+                    {% for field in form.visible_fields %}
+                        {{ field.label }}
+                        {{ field }}
+                        {% for error in field.errors %}
+                        {% endfor %}
+                    {% endfor %}
+                <button type="submit" class="btn btn-success btn-sm mt-2">Agregar</button>
+                </form>
+
+
+                </div>
+            </div>
+
+
+
+
+
+
+{% endblock %}
+{% block customJS %}
+    <script>
+        var btn = document.getElementById('id_estado')
+        btn.setAttribute('class','form-control')
+    </script>
+
+{% endblock %}
+

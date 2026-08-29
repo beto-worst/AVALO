@@ -1,0 +1,128 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block title %}
+    Cat. Sustento Legal
+{% endblock %}
+{% block containerHead %}
+  <div class="flex-wrap d-flex justify-content-between align-items-center">
+    <div>
+        <h1>Catálogos del sistema / Sustento Legal (Usos de suelo) </h1>
+    </div>
+    <div>
+      <!--  <a href="/investigacion/nueva" class="btn btn-success">Nueva</a> -->
+    </div>
+</div>
+{% endblock %}
+{% block subContainerHead %}
+{% endblock %}
+{% block contenido %}
+      <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Lista de Sustento Legal en Sistema LegalBit</h4>
+                        <a href="/Normativas/SustentoLegal/add" class="btn btn-success">Agregar</a>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    <form method="get">
+                        <div class="form-group">
+                            <div class="col-auto">
+                                <span>
+                                    <input type="text" class="form-control" name="txtSearch" id="txtSearch" placeholder="Buscar por Estado, Pais..." value="{{ request.GET.txtSearch }}"/>
+                                    <input type="submit"  class="btn btn-success btn-sm mt-1" value="Buscar">
+                                    <button class="btn btn-primary btn-sm mt-1" onclick="btnReset()">Limpiar</button>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="col-auto table-responsive">
+                    <table class="table table-bordered table-sm">
+                        <thead>
+                        <th>ID</th>
+                        <th>Tipo</th>
+                        <th>Nombre</th>
+                        <th>Municipio</th>
+                        <th>Creado en</th>
+                        <th> Última modificación</th>
+                        <th>Acciones</th>
+                        </thead>
+                        <tbody>
+                                {% if object_list %}
+                                {% for d in object_list %}
+                                    <tr>
+                                    <td style="font-size: 9px">{{ d.id }}</td>
+                                    <td style="font-size: 9px"> {{ d.tipo }}</td>
+                                    <td style="font-size: 9px">{{ d.nombre }}</td>
+                                    <td style="font-size: 9px">{{ d.municipio.municipio }}</td>
+                                    <td style="font-size: 9px">{{ d.modificado_en }}</td>
+                                    <td style="font-size: 9px">{{ d.creado_en }}</td>
+                                    <td style="font-size: 9px">
+                                    <span style="font-size: 9px">
+                                        <a href="/Normativas/SustentoLegal/edit/{{ d.id }}" class="btn btn-outline-warning btn-sm">Modificar</a>
+                                        <a href="/Normativas/SustentoLegal/delete/{{ d.id }}" class="btn btn-outline-danger btn-sm">Eliminar</a>
+                                    </span>
+                                    </td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                        </tbody>
+
+                    </table>
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if page_obj.has_previous %}
+                                <a href="?page=1">&laquo; first</a>
+                                <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+                            {% endif %}
+
+                            <span class="current">
+                                Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+                            </span>
+
+                            {% if page_obj.has_next %}
+                                <a href="?page={{ page_obj.next_page_number }}">Siguente</a>
+                                <a href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a>
+                            {% endif %}
+                        </span>
+                    </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+<div class="modal" tabindex="-1">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p>Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+    </div>
+</div>
+</div>
+
+
+{% endblock %}
+{% block customJS %}
+    <script>
+    function btnReset(){
+
+          const searchInput = document.querySelector('input[name="txtSearch"]');
+            searchInput.value = '';
+    }
+    </script>
+
+{% endblock %}

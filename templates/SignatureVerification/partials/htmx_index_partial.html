@@ -1,0 +1,42 @@
+<div id="index_reload">
+    <div class='card'>
+        <div class='card-header'>
+            <div class="card-header d-flex justify-content-between">
+                <div class="header-title">
+                    <h4 class="card-title">Administracion de Verificación de firmas</h4>
+                </div>
+            </div>
+            <div class='card-body'>
+                <!-- Insert content below -->
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Preparación de contratos</h5>
+                        <br>
+                        <p class="fst-italic">Este es un paso preliminar antes de enviar los documentos a firmar, por
+                            favor complete el siguiente formulario.
+                            Cuando el documento aparezca en la "<b>Lista de contratos</b>", podrás hacer clic en el
+                            botón <b>enviar</b> del documento.
+                        </p>
+                        <br>
+                        <!-- Add a form here -->
+
+                        <div id="reload_index_form">
+                            {% include 'SignatureVerification/partials/htmx_index_form.html' %}
+                        </div>
+
+                        <!-- end form here  -->
+                    </div>
+                </div>
+
+                <div id="reload_contract_lst">
+                    {% if contracts %}
+                    {% include 'SignatureVerification/partials/htmx_doc_list.html' %}
+                    {% endif %}
+                </div>
+
+                <!-- End Insert content -->
+            </div>
+        </div>
+    </div>
+</div>

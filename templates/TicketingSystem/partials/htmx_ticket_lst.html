@@ -1,0 +1,68 @@
+
+<div id="select_swap">
+    {% if show_form %}
+    <div class="col-sm-8">
+        <label for="formGroupInput" class="form-label">Seleccione una categoría</label>
+        <select     hx-get="{% url 'TicketingSystem:index_htmx' %}"
+                    hx-trigger="change"
+                    hx-target="#SubCategories"
+                    hx-swap="outerHTML"
+                    name="selected_category"
+                    class="form-select"
+                    aria-label="select example"
+                    id="CategorySelection" required>
+            <option value="">Elegir...</option>
+            {% for category in categories %}
+            <option value="{{category.0}}"> {{category.1}} </option>
+            {% endfor %}
+        </select>
+    </div>
+    <br>
+        {# This returns subcategory partial #}
+        {% include 'TicketingSystem/partials/htmx_subcategory.html' %}
+    <br>
+    {% endif %}
+</div>
+
+
+
+
+<div id="ticket_list">
+
+    {% if tickets.count != 0 %}
+    <div class="card w-100">
+        <div class="card-header">
+            <h5>Tu historial de tickets</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Título</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Creado</th>
+                            <th scope="col">Actualizado</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        {% for ticket in tickets %}
+                        <tr>
+                            <td><a href="/tickets/ticket/{{ticket.id}}">{{ticket.title}}</a></td>
+                            <td>{{ticket.status_name}}</td>
+                            <td>{{ticket.created_at|date:"d/m/Y H:i"}}</td>
+                            {% if ticket.latest_comment == None %}
+                            <td>Este ticket está siendo procesado.</td>
+                            {% else %}
+                            <td>{{ticket.latest_comment|date:"d/m/Y H:i"}}</td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+</div>

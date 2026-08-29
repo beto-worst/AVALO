@@ -1,0 +1,691 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block title %}
+
+{% endblock %}
+{% block containerHead %}
+  <div class="flex-wrap d-flex justify-content-between align-items-center">
+    <div>
+        <h1>Investigaciones </h1>
+    </div>
+    <div>
+
+      <!--  <a href="/investigacion/nueva" class="btn btn-success">Nueva</a> -->
+    </div>
+</div>
+{% endblock %}
+{% block subContainerHead %}
+{% endblock %}
+{% block contenido %}
+      <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Iniciar investigación</h4>
+
+                    </div>
+                    <div>
+                        <a href="/Investigaciones/Lista" class="btn btn-danger">Regresar</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                   
+
+    <form method="post" action="" id='frmInvestigacion'>
+    {% csrf_token %}
+                <div class="form-group">
+                            <label class="form-label" for="Estado Civil">Nombre:</label>
+                            <select name="personaID"  id="personaID" class="form-select" onchange='selPersona(this)'>
+                                <option value="">--Selecciona una persona para iniciar--</option>
+                               
+                                {% for e in personas %}
+                                    <option value="{{ e.id }}">{{ e.nombreCompleto }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+               
+                <div class="form-group">
+                    <!-- <input type="submit" value="Iniciar" class="btn btn-success  btn-lb-primary "> -->
+                     
+                </div>
+
+            </form>
+
+            <button  class="btn btn-success  btn-lb-primary " onclick="openDialogAntecedentes()">Iniciar Investigacion</button>
+
+
+                </div>
+            </div>
+
+
+
+
+        <div class="modal" tabindex="-1" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Fotos del inmueble</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" >
+                        <div class="carousel-inner">
+
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only"></span>
+                        </a>
+
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+
+                    </div>
+                </div>
+        </div>
+</div>
+
+   <dialog id="DialogoNotificacion" style='background-color:#488fc3; color:#ffffff; border-radius: 5px;margin-top=10%'>
+                    <h3 style='color:#ffffff'>Por favor espere.</h3>
+                    <p>Iniciando proceso de investigación. No cierre esta ventana.</p>
+   </dialog>
+
+   <dialog id="dialogAntecedentes" style='color:#488fc3; background-color:#ffffff; border-radius: 5px; width: 80%; max-width: 1100px;  margin: auto;'>
+    <button onclick="cerrarDialogoAntecedentes()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 20px; cursor: pointer; color: red;">X</button>    <center>
+          <img src="{% static 'resources/legalbit-logo-dark.png' %}" width="150">
+    </center>
+    <h3 style='color:#488fc3;'>Estudios profesionales</h3>
+    <h5 style='color:#488fc3;'>Seleccione los resultados de su interés</h5>
+    <p>Determine las cédulas profesionales a incluir en el reporte</p>
+        <div id="resCedulas">
+            <center>
+                <img src="{% static 'loading.gif' %}" alt="">
+                <p>Por favor espere, cargando resultados.</p>
+            </center>
+        </div>
+    <hr style=" border: 1px solid #333 !important; ">
+    <h3 style='color:#488fc3;'>Antecedentes Nacionales</h3>
+     <h5 style='color:#488fc3;'>Seleccione los resultados de su interés</h5>
+     
+    <p>Determine los antecedentes a incluir en el reporte</p>
+        <div id="resultados" class="table-responsive">
+            <center>
+                <img src="{% static 'loading.gif' %}" alt="">
+                <p>Por favor espere, cargando resultados.</p>
+            </center>
+           
+
+        </div>
+        <button class='btn btn-primary' onclick="openDialgoContinuarInv()" id="btnContinuar">Continuar</button>
+</dialog>
+
+<dialog id="dialogContinuarInv" style='color:#488fc3; background-color:#ffffff; border-radius: 5px; width: 80%; max-width: 900px;  margin: auto;'>
+    <button onclick="cerrarDialogoContinuar()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 20px; cursor: pointer; color: red;">X</button>    <center>
+          <img src="{% static 'resources/legalbit-logo-dark.png' %}" width="150">
+          <h4 style='color:#488fc3;'>Generando reporte de investigación</h4>
+          <p>Conectando a nustros servicios, espere un momento</p>
+          <label id="lblIdInv">..</label>
+          <label id="lblNombreInv">..</label>
+          <center>
+            <img src="{% static 'loading.gif' %}" alt="" id="statusInsert" width="50" class="mt-2">
+            <br>
+            <label id="lblstatus">Por favor espere.</label>
+            <br>
+            <a href="" class="btn btn-success  btn-lb-primary d-none" id="linkver" >ver PDF</a>
+            <br>
+            <a href="" class="btn btn-success  btn-lb-primary d-none" id="linkverAvanzado" >ver PDF (Avanzado) </a>
+          </center>
+          <br>
+          <input type="hidden" width="90%" name="apiInvestigacion" id="apiInvestigacion">
+          <input type="hidden" name="apiCedulas" id="apiCedulas">
+
+    </center>
+    
+</dialog>
+
+{% endblock %}
+{% block customJS %}
+    <script>
+
+function leerCedulasProfesionales() {
+    var jsonData = {
+        "status": "success",
+        "code": 999,
+        "message": [],
+        "data": [] // Inicializa "data" como un array vacío
+    };
+
+    var tabla = document.getElementById('tblResCedulas');
+    var filas = tabla.getElementsByTagName('tr');
+    var txtCedulas = document.getElementById("apiCedulas");
+    var resultados = [];
+
+    for (var i = 0; i < filas.length; i++) {
+        var celdas = filas[i].getElementsByTagName('td');
+        var selAntecedente = filas[i].querySelector('#selEstudios');
+
+        // Verificar si el input selAntecedente está marcado
+        if (selAntecedente && selAntecedente.checked) {
+            var estado = celdas[1].textContent;
+            var nombre = celdas[2].textContent;
+            var profesion = celdas[3].textContent;
+            var anio = celdas[4].textContent;
+            var cedula = celdas[5].textContent;
+
+            var nuevoObjeto = {
+                "nombre": nombre,
+                "numCedula": cedula,
+                "profesion": profesion,
+                "genero": '',
+                "institucion": '',
+                "fechaRegistro": anio,
+                "tipo": '',
+                "estado": estado
+            };
+
+            jsonData.data.push(nuevoObjeto);
+        }
+    }
+
+    console.log('Cedulas seleccionadas:');
+    console.log(jsonData);
+
+    var txtEstudios = document.getElementById('apiCedulas');
+    txtEstudios.value = JSON.stringify(jsonData, null, 2); // Muestra el JSON formateado en el elemento HTML
+}
+
+
+       
+function leerAntecedentesSels() {
+    var tabla = document.getElementById('tblResAntNacionales');
+    var filas = tabla.getElementsByTagName('tr');
+    var txtinvestigacion = document.getElementById("apiInvestigacion");
+    var resultados = [];  // Cambiado a array
+
+    for (var i = 0; i < filas.length; i++) {
+        var celdas = filas[i].getElementsByTagName('td');
+        var selAntecedente = filas[i].querySelector('#selAntecedente');
+
+        // Verificar si el input selAntecedente está marcado
+        if (selAntecedente && selAntecedente.checked) {
+           
+            var entidad = celdas[1].textContent;
+            
+            var expediente = celdas[2].textContent;
+            var demandado = celdas[3].textContent;
+            var actor = celdas[4].textContent;
+            var fecha = celdas[5].textContent;
+
+            // Buscar la entidad en resultados
+            var entidadExistente = resultados.find(function (item) {
+                return item.entidad === entidad;
+            });
+
+            // Si la entidad ya existe, agregar el expediente al array de expedientes de esa entidad
+            if (entidadExistente) {
+                entidadExistente.expedientes.push({
+                    'expediente': expediente,
+                    'demandado': demandado,
+                    'actor': actor,
+                    'juzgado': '',
+                    'fecha': fecha,
+                    'acuerdos': {}
+                });
+            } else {
+                // Si la entidad no existe, agregar la entidad con el array de expedientes
+                resultados.push({
+                    'entidad': entidad,
+                    'expedientes': [{
+                        'expediente': expediente,
+                        'demandado': demandado,
+                        'actor': actor,
+                        'juzgado': '',
+                        'fecha': fecha,
+                        'acuerdos': {}
+                    }]
+                });
+            }
+        }
+    }
+
+    var resultadoFinal = {
+        'code': 999,
+        'status': 'success',
+        'message': 'Consulta exitosa',
+        'data': {
+            'numero_resultados': resultados.length,
+            'resultados': resultados
+        }
+    };
+
+    // Convertir el objeto a JSON y asignar el valor al campo de texto
+    txtinvestigacion.value = JSON.stringify(resultadoFinal);
+}
+
+
+        function iniciarInvestigacion(id, ant, est){
+            var datos = {
+                idPersona: id,
+                antecedentes:ant,
+                estudios:est,
+                clave2: "valor2"
+            };
+            fetch("/Investigaciones/APIiniciarInvestigacion", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(datos)
+        })
+        .then(response => response.json())
+        .then(data => {
+            var img = document.getElementById('statusInsert')
+            img.src = '/static/check_blue.png'
+            var lblstatus = document.getElementById('lblstatus');
+            lblstatus.textContent = 'Se ha generado la investigación.'
+            var linkVer = document.getElementById('linkver');
+            var linkVer2 = document.getElementById('linkverAvanzado');
+
+            // Quita la clase d-none para mostrar el elemento
+            linkVer.classList.remove('d-none');
+            linkVer.href ='/Investigaciones/verPDF7/'+data.id
+            linkVer2.href ='/Investigaciones/verPDFX/'+data.id
+           
+            // La respuesta del servidor está en la variable 'data'
+            console.log("Respuesta del servidor:", data);
+        })
+        .catch(error => {
+            console.log("Error en la solicitud:", error);
+        });
+        }   
+        function cerrarDialogoContinuar(){
+        var dialogo = document.getElementById('dialogContinuarInv');
+        dialogo.close();
+         }
+        function openDialgoContinuarInv(){
+                var dialogo = document.getElementById('dialogContinuarInv');
+                var lblIdInv = document.getElementById('lblIdInv');
+                var lblNombrePersona = document.getElementById('lblNombreInv');
+                var select = document.getElementById('personaID');
+                var txtAntecedentes = document.getElementById('apiInvestigacion')
+                var txtEstudios = document.getElementById('apiCedulas')
+
+                    // Obtener la opción seleccionada
+                    var opcionSeleccionada = select.options[select.selectedIndex];
+
+                    // Obtener el texto de la opción seleccionada
+                    var txtNombrePersona = opcionSeleccionada.textContent;
+                    //console.log('modal Id'+ txtIdPersona)
+                lblNombrePersona.textContent=""
+                lblIdInv.textContent = ""
+                lblIdInv.textContent = select.value
+                lblNombrePersona.textContent= txtNombrePersona
+                leerAntecedentesSels()
+                leerCedulasProfesionales()
+                iniciarInvestigacion(select.value, txtAntecedentes.value, txtEstudios.value )
+                dialogo.showModal();
+        }
+        function dividirTextoEnLineas(texto, caracteresPorLinea) {
+        var resultado = "";
+        for (var i = 0; i < texto.length; i += caracteresPorLinea) {
+            resultado += texto.substring(i, i + caracteresPorLinea) + "<br>";
+        }
+        return resultado;
+        }
+
+    function getEstudiosProfesionalesAPI(id){
+        fetch('/Investigaciones/getJSONEstudiosProfesionales/'+id)
+            .then(function(response) {
+                if (response.ok) {
+                return response.json();
+                } else {
+                throw new Error('Error al obtener los datos del JSON');
+                }
+            }).then(function(data) {
+                //console.log('datos cedulas')
+                console.log(data)
+                cedulas =  JSON.stringify(data);
+               var cedulasObj = JSON.parse(cedulas)
+               var stringJSON = JSON.parse(cedulasObj.cedulasprof.replace(/'/g, '"'))
+               var resultados = document.getElementById('resCedulas');
+               //console.log('Resultados')
+               //console.log(stringJSON.data)
+               
+               var resultadosArray = stringJSON.data;
+               
+                    var tabla = "<table class='table table-sm table-striped table-bordered' id='tblResCedulas'><thead class='thead-dark'><th style='width:80px !important'>Seleccionar</th><th>Estado</th><th>Nombre</th><th>Profesión</th><th>Año</th><th>Cédula</th></thead>";
+                        tabla+= "<td colspan='4' style='color:#488fc3;'> <input type='checkbox'   onclick='marcarChkEstudios(this)' class='btn btn-primary btn-sm' ><label id='lblMarcaEstudios'>  Desmarcar todos</label> </td>"
+                    
+                        if( resultadosArray.length > 0 )
+                        {
+
+                                for (var i = 0; i < resultadosArray.length; i++) {
+                                var resultado = resultadosArray[i];
+                                //console.log(resultado);
+                                
+                                tabla+= "<tr>"
+                                tabla+="<td><input type='checkbox' onclick='desmarcaNingunoEstudios()' id='selEstudios'  checked ></td>"
+                                tabla+= "<td>"+ resultado.estado + "</td>"
+                                tabla+= "<td>"+ resultado.nombre + "</td>"
+                                tabla+= "<td>"+ dividirTextoEnLineas(resultado.profesion,10) + "</td>"
+                                tabla+= "<td>"+ resultado.fechaRegistro + "</td>"
+                                tabla+= "<td>"+ resultado.numCedula + "</td>"
+                            
+                                // Accede a las propiedades específicas de cada resultado según sea necesario
+                            // console.log("Entidad:", resultado.estado);
+                            // console.log("Entidad:", resultado.profesion);
+                            // console.log("Escuela:", resultado.institucion);
+                            // console.log("nombre ceduala:", resultado.nombre);
+                            // console.log("fecharegistro", resultado.fechaRegistro);
+                                // ... y así sucesivamente
+                        
+                                    tabla+= "</tr>"
+                                }
+                            tabla+= "<tr><td colspan='5'><input type='checkbox' onclick='ningunoEstudios()' name='estudiosNinguno' id='estudiosNinguno'>Ninguno de los anteriores</td> </tr>"
+                    
+                            tabla+= "</table>"
+                        resultados.innerHTML=tabla
+                        }else{
+                            var resultados = document.getElementById('resCedulas');
+                            var tabla = "<table class='table table-sm table-striped table-bordered' id='tblResCedulas'><thead class='thead-dark'><th>Seleccionar</th><th>Estado</th><th>Expediente</th><th>Demandado</th></thead>";
+                            tabla+="<tbody><tr><td colspan='4'> No se encontraron resultados </td></tr></tbody>"
+                            tabla+= "</table>"  
+                            resultados.innerHTML=tabla 
+                        }
+            }).catch(function(error) {
+                console.log(error);
+                var resultados = document.getElementById('resCedulas');
+                            var tabla = "<table class='table table-sm table-striped table-bordered' id='tblResCedulas'><thead class='thead-dark'><th>Seleccionar</th><th>Estado</th><th>Expediente</th><th>Demandado</th></thead>";
+                            tabla+="<tbody><tr><td colspan='4'> Resultados no disponibles </td></tr></tbody>"
+                            tabla+= "</table>"  
+                            resultados.innerHTML=tabla 
+            });
+    }
+    function desmarcaNingunoEstudios(){
+        var chkmarca  = document.getElementById('estudiosNinguno')
+        chkmarca.checked = false   
+        }
+
+    function desmarcaNinguno(){
+        var chkmarca  = document.getElementById('antNacNinguno')
+        chkmarca.checked = false    
+        }
+function getAntecedentesNacionalesAPI(d){
+            fetch('/Investigaciones/getJSONAntecedentesNacionales/'+d)
+            .then(function(response) {
+                if (response.ok) {
+                // Devuelve el objeto JSON del cuerpo de la respuesta
+                return response.json();
+            } else {
+                // Lanza un error si la respuesta no es exitosa
+                throw new Error('Error al obtener los datos del JSON');
+            }
+            })
+            .then(function(data) {    
+               
+                        console.log('Si no ND')
+                        //var antecedentesObj = JSON.parse(data);
+                        var numeroResultados = data.numero_resultados
+                        console.log('Número de resultados:', data.numero_resultados);
+                            // Acceder a la propiedad numero_resultados
+                        
+                        //var numeroResultados = antecedentesObj.data.numero_resultados;
+                        //console.log('Numero Resultados ' + antecedentesObj )
+                        //console.log(data.antecedentesjson)
+                        var stringJSON = ''
+                        //  try {
+                        //      stringJSON = JSON.parse(antecedentesObj.antecedentesjson)
+                        //      stringJSON = JSON.parse(antecedentesObj.antecedentesjson.replace(/'/g, '"'));
+                        //  } catch (ex) {
+                        //     console.log('error' + ex);
+                        // }
+                        console.log('Resultados antecedentes')
+                       // var antecen = JSON.stringify(antecedentesObj.antecedentesjson)
+                    //var antece = JSON.parse(antecen)
+                        
+                        //console.log(jsonData.antecedentesjson.data )
+                        if(numeroResultados != 0){
+                            
+                            var resultadosArray = data.resultados;
+                            for (var i = 0; i < resultadosArray.length; i++) {
+                                var resultado = resultadosArray[i];
+                                console.log(resultado);
+
+                                // Accede a las propiedades específicas de cada resultado según sea necesario
+                                console.log("Entidad:", resultado.entidad);
+                            
+                                // ... y así sucesivamente
+                            }
+                            
+                            var resultados = document.getElementById('resultados');
+                        
+                            var tabla = "<table class='table table-sm table-striped table-bordered' id='tblResAntNacionales'><thead class='thead-dark'><th width='100px'>Seleccionar</th><th>Estado</th><th>Expediente</th><th>Demandado</th><th>Actor</th><th>Fecha</th></thead>";
+                            
+                                tabla+= "<td colspan='4' style='color:#488fc3;'><input type='checkbox'   onclick='marcarChkAntResNac(this)' class='btn btn-primary btn-sm' checked><label id='lblMarcAnt'>  Desmarcar todos</label></td>"
+                                tabla+= "</tr>"
+                                //  for (var i = 0; i < resultadosArray.length; i++) {
+                            //  var resultado = resultadosArray[i];
+                            //  console.log(resultado);
+                                    
+                                    
+                                
+                                // Accede a las propiedades específicas de cada resultado según sea necesario
+                                
+                                // ... y así sucesivamente
+                                
+                                //}
+                                var expedientesArray = resultado.expedientes    
+                                console.log(expedientesArray)   
+                                for(z = 0 ; z< expedientesArray.length ; z++ ){
+                                    tabla+= "<tr>"
+                                        tabla+="<td><input type='checkbox' id='selAntecedente' onclick='desmarcaNinguno()' checked></td>"
+                                        tabla+="<td>"+expedientesArray[z].entidad+"</td>"
+                                    console.log(expedientesArray[z].expediente)
+                                    tabla+="<td>"+expedientesArray[z].expediente+"</td>"
+                                    
+                                    tabla+="<td>"+ dividirTextoEnLineas(expedientesArray[z].demandado,30)+"</td>"
+                                    tabla+="<td>"+ dividirTextoEnLineas(expedientesArray[z].actor,30)+"</td>"
+                                    tabla+="<td>"+expedientesArray[z].fecha+"</td>"
+                                    tabla+="</tr>"
+                                
+                                }
+                                tabla+= "<tr>"
+                                tabla+= "<td colspan='4' style='color:#488fc3;' ><input type='checkbox' onclick='ningunoAntNac()' name='antNacNinguno' id='antNacNinguno'>Ninguno de los anteriores</td>"
+                                tabla+= "</tr>"
+                            
+                                tabla+= "</table>"
+                                console.log('tabla')
+                                console.log(tabla)
+                            resultados.innerHTML=tabla
+                        }else{
+                            var resultados = document.getElementById('resultados');
+                            var tabla = "<table class='table table-sm table-striped table-bordered' id='tblResAntNacionales'><thead class='thead-dark'><th>Seleccionar</th><th>Estado</th><th>Expediente</th><th>Demandado</th></thead>";
+                            tabla+="<tbody><tr><td colspan='4'> No se encontraron resultados </td></tr></tbody>"
+                            tabla+= "</table>"  
+                            resultados.innerHTML=tabla 
+                    }
+               
+                
+            })
+            .catch(function(error) {
+                console.log('Error al obtener el JSON')
+                console.error(error);
+                var resultados = document.getElementById('resultados');
+                        var tabla = "<table class='table table-sm table-striped table-bordered' id='tblResAntNacionales'><thead class='thead-dark'><th>Seleccionar</th><th>Estado</th><th>Expediente</th><th>Demandado</th></thead>";
+                        tabla+="<tbody><tr><td colspan='4'> No se pudieron obtener los resultados, contacte a soporte</td></tr></tbody>"
+                        tabla+= "</table>"  
+                        resultados.innerHTML=tabla 
+            });
+      }
+
+      function ningunoEstudios(){
+            // Obtén la referencia a la tabla por su ID
+        var tabla = document.getElementById('tblResCedulas');
+
+        // Obtén todos los elementos checkbox dentro de la tabla
+        var checkboxes = tabla.querySelectorAll('input[type="checkbox"]');
+
+        // Obtén el checkbox específico por su nombre
+        var checkboxEspecial = tabla.querySelector('input[name="estudiosNinguno"]');
+
+        // Itera sobre los checkboxes y marca o desmarca, excepto el checkbox especial
+        checkboxes.forEach(function(checkbox) {
+            if (checkbox !== checkboxEspecial) {
+                // Marcar o desmarcar cada checkbox
+                checkbox.checked = 0;
+            }
+        });
+      }
+
+      function ningunoAntNac(){
+            // Obtén la referencia a la tabla por su ID
+        var tabla = document.getElementById('tblResAntNacionales');
+
+        // Obtén todos los elementos checkbox dentro de la tabla
+        var checkboxes = tabla.querySelectorAll('input[type="checkbox"]');
+
+        // Obtén el checkbox específico por su nombre
+        var checkboxEspecial = tabla.querySelector('input[name="antNacNinguno"]');
+
+        // Itera sobre los checkboxes y marca o desmarca, excepto el checkbox especial
+        checkboxes.forEach(function(checkbox) {
+            if (checkbox !== checkboxEspecial) {
+                // Marcar o desmarcar cada checkbox
+                checkbox.checked = 0;
+            }
+        });
+      }
+
+      function marcarChkEstudios(d){
+         d.checked = ! d.checked;
+            // Obtén la referencia a la tabla por su ID
+        var tabla = document.getElementById('tblResCedulas');
+        var lbl = document.getElementById('lblMarcaEstudios')
+        if(d.checked){
+            lbl.innerHTML ='Marcar todos'
+        }else{
+            lbl.innerHTML ='Desmarcar todos'
+        }
+        // Obtén todos los elementos checkbox dentro de la tabla
+        var checkboxes = tabla.querySelectorAll('input[type="checkbox"]');
+
+        // Obtén el checkbox específico por su nombre
+        var checkboxEspecial = tabla.querySelector('input[name="estudiosNinguno"]');
+
+        // Itera sobre los checkboxes y marca o desmarca, excepto el checkbox especial
+        checkboxes.forEach(function(checkbox) {
+            if (checkbox !== checkboxEspecial) {
+                // Marcar o desmarcar cada checkbox
+                checkbox.checked = !checkbox.checked;
+            }
+        });
+      }
+
+
+
+      function marcarChkAntResNac(d){
+         d.checked = ! d.checked;
+            // Obtén la referencia a la tabla por su ID
+        var tabla = document.getElementById('tblResAntNacionales');
+        var lbl = document.getElementById('lblMarcAnt')
+        if(d.checked){
+            lblMarcAnt.innerHTML ='Marcar todos'
+        }else{
+            lblMarcAnt.innerHTML ='Desmarcar todos'
+        }
+        // Obtén todos los elementos checkbox dentro de la tabla
+        var checkboxes = tabla.querySelectorAll('input[type="checkbox"]');
+
+        // Obtén el checkbox específico por su nombre
+        var checkboxEspecial = tabla.querySelector('input[name="estudiosNinguno"]');
+
+        // Itera sobre los checkboxes y marca o desmarca, excepto el checkbox especial
+        checkboxes.forEach(function(checkbox) {
+            if (checkbox !== checkboxEspecial) {
+                // Marcar o desmarcar cada checkbox
+                checkbox.checked = !checkbox.checked;
+            }
+        });
+      }
+
+        function cerrarDialogoAntecedentes(){
+        var dialogo = document.getElementById('dialogAntecedentes');
+        dialogo.close();
+     }
+        function openDialogAntecedentes(){
+
+            var dialogo = document.getElementById('dialogAntecedentes');
+            var persona = document.getElementById('personaID')
+            var divAnt = document.getElementById('resultados')
+            var divCedulas = document.getElementById('resCedulas')
+            if(persona.value  != ""){
+            divAnt.innerHTML=' <center><img src="{% static "loading.gif" %}" alt=""><p>Por favor espere, cargando resultados.</p></center>'
+            divCedulas.innerHTML=' <center><img src="{% static "loading.gif" %}" alt=""><p>Por favor espere, cargando resultados.</p></center>'
+            dialogo.showModal();
+            getEstudiosProfesionalesAPI(persona.value)
+            getAntecedentesNacionalesAPI(persona.value)
+            }else{
+                alert('Selecciona una opcion válida')
+            }
+        }
+var modal = document.getElementById('dialogoReporte')
+modal.close();
+function muestraModal(){
+  var modal = document.getElementById('dialogoReporte')
+  
+   modal.showModal();
+}
+
+    function marcaTodos(){
+        // Obtén una referencia al formulario
+        var formulario = document.getElementById('frmInvestigacion');
+        var chkmarca  = document.getElementById('marcat')
+
+        if (marcat.checked ) {
+
+            // Obtén una lista de todos los elementos de tipo checkbox dentro del formulario
+            var checkboxes = formulario.querySelectorAll('input[type="checkbox"]');
+
+            // Itera sobre la lista de checkboxes y márcalos
+            checkboxes.forEach(function (checkbox) {
+                checkbox.checked = true;
+            });
+        }else{
+              // Obtén una lista de todos los elementos de tipo checkbox dentro del formulario
+            var checkboxes = formulario.querySelectorAll('input[type="checkbox"]');
+
+            // Itera sobre la lista de checkboxes y márcalos
+            checkboxes.forEach(function (checkbox) {
+                checkbox.checked = false;
+            });
+        }
+    }
+    
+    var form = document.getElementById('frmInvestigacion')
+    var modal = document.getElementById('DialogoNotificacion')
+    form.addEventListener('submit', function(event){
+        modal.showModal();
+    })
+    function btnReset(){
+
+          const searchInput = document.querySelector('input[name="txtSearch"]');
+            searchInput.value = '';
+    }
+
+
+    function selPersona(d){
+       if(d.value == 'add')
+       {
+        window.location.href = "./InvestigacionManual";
+       }
+    }
+    </script>
+
+{% endblock %}

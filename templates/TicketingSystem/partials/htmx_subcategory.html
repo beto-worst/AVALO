@@ -1,0 +1,33 @@
+<div id="CategoryList">
+</div>
+
+<div id="SubCategories">
+
+    {% if is_category_selected %}
+    <div class="col-sm-8">
+        <label for="formGroupInput" class="form-label">Seleccione una sub categoría</label>
+        <select name="selected_subcategory" class="form-select" aria-label="select example" id="SubCategorySelection"
+            required>
+            <!-- <option value="">Elegir...</option> -->
+            {% for subcategory in subcategories %}
+            <option value="{{ subcategory.sub_name}}"> {{subcategory.sub_name}} </option>
+            {% endfor %}
+        </select>
+    </div>
+
+
+    {%if es_tecnica%}
+    <br>
+    <div class="col-sm-8">
+        <label for="formGroupInput" class="form-label">Seleccione un cliente</label>
+        <select name="selected_client" class="form-select" aria-label="select example" id="ClientSelection" required>
+            <option value="">Elegir...</option>
+            {% for client in client_list %}
+            <option value="{{ client.1}} {{client.2}}"> {{client.1}} {{client.2}}</option>
+            {% endfor %}
+        </select>
+        <br>
+    </div>
+    {% endif %}
+    {% endif %}
+</div>

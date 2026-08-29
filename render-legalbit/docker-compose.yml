@@ -1,0 +1,8 @@
+version: '3'
+services:
+  reports:
+    build:
+      context: .
+      dockerfile: Dockerfile # Nombre del archivo Dockerfile (si es diferente)
+    ports:
+      - "3001:3001" # Mapeo del puerto del contenedor al puerto de la máquina host

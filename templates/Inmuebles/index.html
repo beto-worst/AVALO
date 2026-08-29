@@ -1,0 +1,196 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block title %}
+   - Inmuebles
+{% endblock %}
+{% block containerHead %}
+  <div class="flex-wrap d-flex justify-content-between align-items-center">
+    <div>
+        <h1>Inmuebles </h1>
+    </div>
+    <div>
+
+      <!--  <a href="/investigacion/nueva" class="btn btn-success">Nueva</a> -->
+    </div>
+</div>
+{% endblock %}
+{% block subContainerHead %}
+{% endblock %}
+{% block contenido %}
+      <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Inmuebles registrados en LegalBit</h4>
+                        <a href="/Inmuebles/add" class="btn btn-success btn-sm">Agregar</a>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    <form method="get">
+                        <div class="form-group">
+                            <div class="col-auto">
+                                <span>
+                                    <input type="text" class="form-control form-control-sm" name="txtSearch" id="txtSearch" placeholder="Buscar por Estado, Pais, nombre dueño" value="{{ request.GET.txtSearch }}"/>
+                                    <input type="submit"  class="btn btn-success btn-sm mt-1" value="Buscar">
+                                    <button class="btn btn-primary btn-sm mt-1" onclick="btnReset()">Limpiar</button>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+
+
+         <div class="col-auto table-responsive">
+             <table class="table table-bordered table-sm">
+             <thead>
+             <th>Id</th>
+             <th>Dueño</th>
+             <th style="max-width: 200px;">Uso de suelo</th>
+             <th>Estado</th>
+             <th>Municipio</th>
+             <th>Colonia</th>
+             <th>Dirección</th>
+             <th>Acciones</th>
+             </thead>
+             <tbdoy>
+             <tr>
+              {% if objects %}
+                {% for d in objects %}
+                    <td style="font-size: 8px">{{ d.id }}</td>
+                     <td style="font-size: 8px">{{ d.nombreduenio }}</td>
+                    <td class="text-truncate" style="max-width: 200px; word-wrap: break-word; font-size: 8px">{{ d.uso }}</td>
+                    <td style="font-size: 8px">{{ d.colonia.municipio.estado.estado }}</td>
+                    <td style="font-size: 8px">{{ d.colonia.municipio.municipio }}</td>
+                    <td style="font-size: 8px">{{ d.colonia.colonia }}</td>
+                    <td style="font-size: 8px">{{ d.direccioncompleta }} </td>
+                    <td>
+                    <span>
+                        <button class="btn btn-sm btn-info" data-id='{{ d.id }}' onclick="btnVerImagen(this)">Fotos</button>
+                    </span>
+                    </td>
+                {% endfor %}
+            {% endif %}
+             </tr>
+             </tbdoy>
+             </table>
+             <div class="pagination">
+                        <span class="step-links">
+                            {% if page_obj.has_previous %}
+                                <a href="?page=1">&laquo; first</a>
+                                <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+                            {% endif %}
+
+                            <span class="current">
+                                Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                            </span>
+
+                            {% if page_obj.has_next %}
+                                <a href="?page={{ page_obj.next_page_number }}">Siguente</a>
+                                <a href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a>
+                            {% endif %}
+                        </span>
+                    </div>
+
+
+
+         </div>
+
+
+
+
+                </div>
+            </div>
+
+
+
+
+<div class="modal" tabindex="-1" id="myModal">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Fotos del inmueble</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" >
+              <div class="carousel-inner">
+
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only"></span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only"></span>
+            </a>
+
+
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+{% endblock %}
+{% block customJS %}
+    <script>
+    function btnReset(){
+
+          const searchInput = document.querySelector('input[name="txtSearch"]');
+            searchInput.value = '';
+    }
+    function btnVerImagen(button){
+    const id = button.dataset.id;
+   fetch('/Inmuebles/inmueblesfotos', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ 'id':id})
+  })
+ .then(response => response.json())
+.then(data => {
+    console.log(data)
+    var myModal = new bootstrap.Modal(document.getElementById('myModal'), {});
+  const imagenes = JSON.parse(data);
+  // Obtener referencia al carrusel
+    const carousel = document.querySelector('#carouselExampleControls .carousel-inner');
+
+    // Crear fragmento de documento con los elementos del carrusel
+    const fragment = document.createDocumentFragment();
+    //carousel.innerHTML = '';
+
+  imagenes.forEach(imagen => {
+    console.log(imagen.fields.foto);
+    const div = document.createElement('div');
+      div.classList.add('carousel-item');
+      div.setAttribute('data-bs-interval','1000')
+
+      const img = document.createElement('img');
+      img.classList.add('d-block', 'w-100');
+      console.log("{% get_media_prefix %}"+imagen.fields.foto)
+      img.setAttribute('src', "../media/"+imagen.fields.foto);
+
+
+      div.appendChild(img);
+      fragment.appendChild(div);
+      carousel.appendChild(fragment);
+  });
+
+  carousel.firstElementChild.classList.add('active');
+   myModal.show();
+
+})
+.catch(error => console.error(error));
+    }
+
+
+    </script>
+
+{% endblock %}

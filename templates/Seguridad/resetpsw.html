@@ -1,0 +1,94 @@
+{% extends 'template.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cambio de contraseña</title>
+</head>
+<body>
+    <h1>Cambio de contraseña</h1>
+
+</body>
+</html>
+
+{% load static %}
+{% block title %}
+    Perfil de usuario
+{% endblock %}
+{% block containerHead %}
+  <div class="flex-wrap d-flex justify-content-between align-items-center">
+    <div>
+        <h1>Cambiar contraseña de {{ request.user.username }}</h1>
+    </div>
+    <div>
+      <!--  <a href="/investigacion/nueva" class="btn btn-success">Nueva</a> -->
+    </div>
+</div>
+{% endblock %}
+{% block subContainerHead %}
+{% endblock %}
+{% block contenido %}
+      <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Cambio de contraseña</h4>
+                        <a href="/perfil" class="btn btn-success btn-sm">Regresar</a>
+                    </div>
+
+                </div>
+                <div class="card-body">
+
+                 <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    {% if form.errors %}
+                        <ul>
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                    <br>
+                    <input type="submit" value="Cambiar contraseña">
+                </form>
+
+                </div>
+            </div>
+
+
+
+
+<div class="modal" tabindex="-1">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p>Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+    </div>
+</div>
+</div>
+
+
+{% endblock %}
+{% block customJS %}
+<script>
+      var boton = document.querySelector('input[type="submit"]');
+      var newpsw2 = document.getElementById('id_new_password2')
+       var newpsw = document.getElementById('id_new_password1')
+      var oldpsw = document.getElementById('id_old_password')
+      oldpsw.setAttribute('class','form-control')
+      newpsw.setAttribute('class','form-control')
+      newpsw2.setAttribute('class','form-control')
+      boton.setAttribute('class','btn btn-success');
+</script>
+
+{% endblock %}

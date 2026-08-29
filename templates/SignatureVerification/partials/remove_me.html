@@ -1,0 +1,63 @@
+                            <!-- modal button -->
+                            <button type="button" class="btn btn-success btn-sm btn-lb-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Mostrar opciones
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Opciones para: {{contract.client.apellido1}}-{{contract.contract_id.uuid_archivo|slice:'-8:'}}</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                            <!-- menu -->
+                                            <div class="list-group">
+                                                <a href=""
+                                                hx-post="{% url 'SignatureVerification:resend_verification' %}"
+                                                hx-vars="{'wtc_id': '{{contract.id}}', 'wt_contract_id': '{{ contract.wt_contract_id }}'}"
+                                                hx-target="#reload_contract_lst"
+                                                data-bs-dismiss="modal"
+                                                class="list-group-item list-group-item-action">Reenviar contrato a firmar</a>
+                                            </div>
+                                            <!-- end of menu -->
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-success btn-sm btn-lb-primary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <!-- modal end -->
+
+
+                            <!-- modal button -->
+                            <button type="button" class="btn btn-success btn-sm btn-lb-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Mostrar opciones
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Opciones para: {{contract.client.apellido1}}-{{contract.contract_id.uuid_archivo|slice:'-8:'}}</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <!-- menu -->
+                                        <div class="list-group">
+                                            <a href="" data-bs-dismiss="modal" class="list-group-item list-group-item-action">Descargar</a>
+                                            <a href="" data-bs-dismiss="modal" class="list-group-item list-group-item-action">Constancia PSC (asn)</a>
+                                            <a href="" data-bs-dismiss="modal" class="list-group-item list-group-item-action">Certificado Blockchain</a>
+                                        </div>
+                                        <!-- end of menu -->
+
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-success btn-sm btn-lb-primary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <!-- modal end -->

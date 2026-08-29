@@ -1,0 +1,40 @@
+{% load humanize %}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Transacciones detalladas</h5>
+        <br>
+        <p class="fst-italic">La base de datos puede tardar unos minutos en actualizarse y mostrar los resultados de la
+            transacción aquí.</p>
+        <br>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Plan</th>
+                        <th scope="col">Monto</th>
+                        <th scope="col">Estatus</th>
+                        <th scope="col">Transacción actualizada</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for payment in payment_history %}
+                    <tr>
+                        <th scope="row">{{payment.id}}</th>
+                        <td>{{payment.plan}}</td>
+                        <td> {%if payment.amount == None %} MX$ ----- {%else%} MX$ {{payment.amount|intcomma}}{%endif%}</td>
+                        <td>{%if payment.payment_bool == 1%}
+                            Pagado
+                            {%else%}<div class="spinner-border spinner-border-sm text-success" role="status"
+                            hx-get="{% url 'CargarCredito:index' %}" hx-trigger="every 4s" hx-target="#reload_details"
+                            hx-swap="innerHTML"><span class="visually-hidden">Loading...</span></div>&nbsp; Procesando...
+                            {%endif%}
+                        </td>
+                        <td>{{payment.date_updated|date:"d/m/Y H:i"}}</td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

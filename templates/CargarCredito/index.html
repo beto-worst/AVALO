@@ -1,0 +1,139 @@
+{% extends 'template.html' %}
+{% load humanize %}
+{% load static %}
+{% block title %}
+
+{% endblock %}
+{% block containerHead %}
+<div class="flex-wrap d-flex justify-content-between align-items-center">
+    <div>
+        <h1>Recarga de Creditos</h1>
+    </div>
+    <div>
+        <!--  <a href="/investigacion/nueva" class="btn btn-success">Nueva</a> -->
+    </div>
+</div>
+{% endblock %}
+{% block subContainerHead %}
+{% endblock %}
+{% block contenido %}
+<div class='card'>
+    <div class='card-header'>
+        <div class="card-header d-flex justify-content-between">
+            <div class="header-title">
+                <h4 class="card-title">Administracion de recargas</h4>
+            </div>
+        </div>
+        <div class='card-body'>
+            <!-- Insert content below -->
+
+            <div class="row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Elige un producto para comprar</h5>
+
+                            <!-- Insert new form here -->
+                            <div id="reload_form">
+                                {% include 'CargarCredito/partials/htmx_prod_select.html' %}
+                            </div>
+                            <!-- End Insert new form here -->
+
+                            <center>
+                            <img src="{% static 'logo-stripe.png' %}" alt="visa">
+                            </center>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+
+                    <!-- <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Plan { Basico }</h5>
+                            <br>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.
+                            </p>
+                        </div>
+                    </div> -->
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Estado de la cuenta</h5>
+                            <br>
+                            <p class="card-text">Crédito disponible: <b>MX$ 100.00</b>
+                            </p>
+
+                            <div class="accordion accordion-flush" id="accordionExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseOne" aria-expanded="true"
+                                            aria-controls="collapseOne">
+                                            Gastos detallados
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse"
+                                        data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+
+                                        <div class="table-responsive">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">ID</th>
+                                                        <th scope="col">Nombre</th>
+                                                        <th scope="col">Monto</th>
+                                                        <th scope="col">Fecha</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row">1</th>
+                                                        <td>Mark Otto</td>
+                                                        <td> MX$ -20.00</td>
+                                                        <td>28/01/2024</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">2</th>
+                                                        <td>Jacob Thornton</td>
+                                                        <td> MX$ -20.00</td>
+                                                        <td>05/01/2024</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row">3</th>
+                                                        <td>Larry the Bird</td>
+                                                        <td> MX$ -10.00</td>
+                                                        <td>15/11/2023</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- transaction list if it exists -->
+            <div id="reload_details">
+            {% if payment_history %}
+            {% include 'CargarCredito/partials/htmx_reload_transactions.html' %}
+            {% endif %}
+            </div>
+
+            <!-- End Insert content -->
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block customJS %}
+
+{% endblock %}

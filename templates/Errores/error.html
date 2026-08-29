@@ -1,0 +1,47 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block title %}
+    LegalBit - Error
+{% endblock %}
+{% block containerHead %}
+  <div class="flex-wrap d-flex justify-content-between align-items-center">
+    <div>
+        <h1>Error</h1>
+    </div>
+    <div>
+      <!--  <a href="/investigacion/nueva" class="btn btn-success">Nueva</a> -->
+    </div>
+</div>
+{% endblock %}
+{% block subContainerHead %}
+{% endblock %}
+{% block contenido %}
+      <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">No fue posible realizar esta acción</h4>
+                    </div>
+                    <div>
+                        <a href="{{ url_ant }}" class="btn btn-danger">Regresar</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    
+                    {{ mensaje }}
+                </form>
+
+
+                </div>
+            </div>
+
+
+
+
+
+
+{% endblock %}
+{% block customJS %}
+    
+
+{% endblock %}
+

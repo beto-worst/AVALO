@@ -1,0 +1,173 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block title %}
+
+{% endblock %}
+{% block containerHead %}
+  <div class="flex-wrap d-flex justify-content-between align-items-center">
+    <div>
+        <h1>Investigación Premium </h1>
+    </div>
+    <div>
+
+      <!--  <a href="/investigacion/nueva" class="btn btn-success">Nueva</a> -->
+    </div>
+</div>
+{% endblock %}
+{% block subContainerHead %}
+{% endblock %}
+{% block contenido %}
+      <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Cuestionario personalizado</h4>
+
+                    </div>
+                    <div>
+                        <a href="/Investigaciones/Lista" class="btn btn-danger">Regresar</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                <div class="mt-2 col-md-12">
+                <div class="form-group">
+                    <label for="">Pregunta 1</label>
+                    <input type="text" name="" id="" class="form-control">
+
+                </div>
+                <div class="mt-2 col-md-12">
+                    <div class="form-group">
+                        <label for="">Pregunta 2</label>
+                        <input type="text" name="" id="" class="form-control">
+    
+                    </div>
+                    <div class="mt-2 col-md-12">
+                        <div class="form-group">
+                            <label for="">Pregunta 3</label>
+                            <input type="text" name="" id="" class="form-control">
+        
+                        </div>
+                </div>
+                <div class="mt-2 col-md-12">
+                    Ingrese 3 referencias personales
+                    <div class="form-group">
+                        <label for="">Referencia 1</label>
+                        <input type="text" name="" id="" class="form-control">
+    
+                    </div>
+                    <div class="form-group">
+                        <label for="">Referencia 2</label>
+                        <input type="text" name="" id="" class="form-control">
+    
+                    </div>
+                    <div class="form-group">
+                        <label for="">Referencia 3</label>
+                        <input type="text" name="" id="" class="form-control">
+    
+                    </div>
+            </div>
+   
+                <button  class="btn btn-success  btn-lb-primary ">Guardar</button>
+
+
+                </div>
+            </div>
+
+
+
+
+        <div class="modal" tabindex="-1" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Fotos del inmueble</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" >
+                        <div class="carousel-inner">
+
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only"></span>
+                        </a>
+
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+
+                    </div>
+                </div>
+        </div>
+</div>
+
+   <dialog id="DialogoNotificacion" style='background-color:#488fc3; color:#ffffff; border-radius: 5px;margin-top=10%'>
+                    <h3 style='color:#ffffff'>Por favor espere.</h3>
+                    <p>Iniciando proceso de investigación. No cierre esta ventana.</p>
+   </dialog>
+
+   <dialog id="dialogAntecedentes" style='color:#488fc3; background-color:#ffffff; border-radius: 5px; width: 80%; max-width: 1100px;  margin: auto;'>
+    <button onclick="cerrarDialogoAntecedentes()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 20px; cursor: pointer; color: red;">X</button>    <center>
+          <img src="{% static 'resources/legalbit-logo-dark.png' %}" width="150">
+    </center>
+    <h3 style='color:#488fc3;'>Estudios profesionales</h3>
+    <h5 style='color:#488fc3;'>Seleccione los resultados de su interés</h5>
+    <p>Determine las cédulas profesionales a incluir en el reporte</p>
+        <div id="resCedulas">
+            <center>
+                <img src="{% static 'loading.gif' %}" alt="">
+                <p>Por favor espere, cargando resultados.</p>
+            </center>
+        </div>
+    <hr style=" border: 1px solid #333 !important; ">
+    <h3 style='color:#488fc3;'>Antecedentes Nacionales</h3>
+     <h5 style='color:#488fc3;'>Seleccione los resultados de su interés</h5>
+     
+    <p>Determine los antecedentes a incluir en el reporte</p>
+        <div id="resultados" class="table-responsive">
+            <center>
+                <img src="{% static 'loading.gif' %}" alt="">
+                <p>Por favor espere, cargando resultados.</p>
+            </center>
+           
+
+        </div>
+        <button class='btn btn-primary' onclick="openDialgoContinuarInv()" id="btnContinuar">Continuar</button>
+</dialog>
+
+<dialog id="dialogContinuarInv" style='color:#488fc3; background-color:#ffffff; border-radius: 5px; width: 80%; max-width: 900px;  margin: auto;'>
+    <button onclick="cerrarDialogoContinuar()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 20px; cursor: pointer; color: red;">X</button>    <center>
+          <img src="{% static 'resources/legalbit-logo-dark.png' %}" width="150">
+          <h4 style='color:#488fc3;'>Generando reporte de investigación</h4>
+          <p>Conectando a nustros servicios, espere un momento</p>
+          <label id="lblIdInv">..</label>
+          <label id="lblNombreInv">..</label>
+          <center>
+            <img src="{% static 'loading.gif' %}" alt="" id="statusInsert" width="50" class="mt-2">
+            <br>
+            <label id="lblstatus">Por favor espere.</label>
+            <br>
+            <a href="" class="btn btn-success  btn-lb-primary d-none" id="linkver" >ver PDF</a>
+            <br>
+            <a href="" class="btn btn-success  btn-lb-primary d-none" id="linkverAvanzado" >ver PDF (Avanzado) </a>
+          </center>
+          <br>
+          <input type="hidden" width="90%" name="apiInvestigacion" id="apiInvestigacion">
+          <input type="hidden" name="apiCedulas" id="apiCedulas">
+
+    </center>
+    
+</dialog>
+
+{% endblock %}
+{% block customJS %}
+    <script>
+    </script>
+{% endblock %}

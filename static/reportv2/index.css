@@ -1,0 +1,351 @@
+:root {
+    --colorPrimario: #fff;
+    --colorPrimarioVariante: #f6f6f6;
+    --colorSecundario: #000;
+    --colorSecundarioVariante: #766f71;
+    --colorTerciario: #4E7E80;
+    --colorTerciarioVariante: rgba(16, 26, 28, 0.3);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+    print-color-adjust: exact;
+}
+html {
+    font-size: 62.5%;
+}
+body {
+    width: 100%;
+}
+main {
+    width: 100%;
+    margin-bottom: 10vh;
+}
+table {
+    border-collapse: separate;
+    border-spacing: 3px;
+  }
+  
+  td {
+    border: none;
+    padding: 10px;
+  }
+  
+  tr:first-child td:first-child { border-top-left-radius: 7px; }
+  tr:first-child td:last-child { border-top-right-radius: 7px; }
+  
+  tr:last-child td:first-child { border-bottom-left-radius: 7px; }
+  tr:last-child td:last-child { border-bottom-right-radius: 7px; }
+
+/*Estilos repetitivos*/
+.main-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 5rem;
+}
+.main-heading {
+    background-color: #000000;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1.5rem 2rem;
+}
+.main-heading h3 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #fff;
+}
+.main-section-info {
+    font-size: 1.3rem;
+    margin: 0 2rem 1.5rem 2rem;
+}
+.main-table {
+    width: 95%;
+    margin: 0 auto 1rem auto;
+}
+table td {
+    font-size: 1.2rem;
+    font-weight: 400;
+    padding: 1rem;
+    border: none;
+    text-align: center;
+    background-color: rgba(76, 122, 124, 0.075);
+}
+table td.left {
+    text-align: left;
+}
+table td.right {
+    text-align: right;
+}
+table tr.colored {
+    background-color: rgba(45, 73, 74, 0.25);
+}
+table .head-cell {
+    background-color: rgba(45, 73, 74, 0.55);
+    color: #000000;
+    font-weight: 700;
+    min-width: 12ch;
+}
+.table-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 3rem;
+}
+.table-wrapper h4 {
+    width: fit-content;
+    font-size: 1.8rem;
+    font-weight: 700;
+    padding: 1rem 5rem;
+    border: 1px solid rgba(45, 73, 74, 0.5);
+    background-color: rgba(76, 122, 128, 0.8);
+    color: #fff;
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+}
+.table-wrapper p {
+    width: 95%;
+    padding: 2rem;
+    font-size: 1.5rem;
+    text-align: center;
+    border: 1px solid #033A18;
+    border-bottom: none;
+    border-radius: 7px 7px 0 0;
+}
+.results-disclaimer {
+    width: 60%;
+    padding: 2rem;
+    font-size: 1.5rem;
+    background-color: #4E7E80;
+    color: #fff;
+    text-align: center;
+    margin: 0 auto;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.portada-wrapper{
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+.portada-wrapper, .contraportada {
+    background: linear-gradient(to top left, #4E7E80, #101A1C);
+}
+.portada-left{
+    display: flex;
+    align-items: top;
+}
+.legalbit-logo {
+    aspect-ratio: 1080/270;
+    width: min(30vh, 30vw);
+    height: auto;
+    margin-top: 4rem;
+    margin-left: 4rem;
+    background-image: url('./res/legalbit-logo-white.png');
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.portada-right{
+    display: flex;
+    justify-content: end;
+    align-items:end;
+    margin-bottom: 20px;
+    /* color: white; */
+}
+.portada-right p{
+    max-width: 200px;
+    margin-right: 10px;
+    border-left: 4px solid white;
+    padding-left: 20px;
+    color: white;
+    /* SE AGREGA AUMENTO DE FUENTE PARA EL NOMBRE DE LA PORTADA*/
+    font-size: 1.7rem;
+}
+
+/*Datos Generales styles*/
+.general-data {
+    width: 100%;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.general-data h2 {
+    width: 100%;
+    color: #fff;
+    background-color: #000000;
+    padding: 1rem 2rem;
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center !important;
+    margin-bottom: 2rem;
+}
+.general-data-fields {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    gap: 2rem;
+}
+.general-data-fields span {
+    font-size: 1.5rem;
+}
+.general-data table {
+    width: 100%;
+}
+.general-data table .head-cell, .general-data table .content-cell{
+    width: 16%;
+}
+
+/*Validación de identidad styles*/
+.identity-validation {
+    gap: 1rem;
+}
+.identity-validation-tables-container {
+    width: 95%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+/*Situacion fiscal styles*/
+.fiscal-situation {
+    gap: 1rem;
+}
+.fiscal-description-table .verif-cell {
+    vertical-align: middle;
+    padding: 1rem;
+    max-width: 40ch;
+}
+.fiscal-description-table .verif-cell img {
+    max-width: 55%;
+    aspect-ratio: 1/1.2;
+    margin: 0 auto;
+    display: none;
+}
+.fiscal-description-table .verif-cell img.visible {
+    display: block;
+}
+.fiscal-description-table .head-cell{
+    min-width: 20ch;
+}
+.fiscal-results-tables {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.fiscal-result-table {
+    width: 60%;
+}
+.fiscal-result-table.long {
+    width: 95%;
+}
+.fiscal-result-table.long .head-cell {
+    width: 30%;
+}
+.fiscal-result-table.long .content-cell {
+    width: 20%;
+}
+
+/*Perfil de ingresos styles*/
+.income-profile {
+    gap: 1rem;
+}
+.income-profile .table-wrapper {
+    width: 100%;
+    gap: 0;
+}
+.income-profile .table-wrapper table {
+    width: 95%;
+}
+.income-profile .table-wrapper table td {
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+.income-profile-table td.head-cell.left {
+    width: 50%;
+}
+.income-profile-mini-table td.head-cell.left {
+    padding-left: 1rem;
+    width: 50ch;
+}
+.income-profile-mini-table td.spacing-cell {
+    padding: 1rem !important;
+    background-color: rgba(76, 122, 128, 0.35);
+}
+.income-profile-mini-table td.big-cell {
+    width: 20ch;
+}
+
+/*Score crediticio styles*/
+.credit-score {
+    gap: 1rem;
+}
+.results-disclaimer.big {
+    width: 30%;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+/*Perfil de riesgo styles*/
+.risk-profile {
+    gap: 1rem;
+}
+.risk-profile table {
+    margin-bottom: 3rem;
+}
+.risk-profile .table-wrapper h4 {
+    width: 95%;
+    text-align: center;
+}
+.risk-profile table {
+    width: 95%;
+}
+.risk-profile table .head-cell {
+    width: 50%;
+}
+.risk-profile .head-cell.short {
+    width: 20ch;
+}
+.international-record-table .head-cell {
+    width: 20% !important;
+}
+.complex-risk-profile-table.long .head-cell{
+    width: 20ch;
+}
+
+
+/*Marca de agua*/
+.page-watermark {
+    opacity: 0.05;
+    aspect-ratio: 1/1;
+    width: 60vw;
+    height: auto;
+    visibility: hidden;
+    display: block;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    background-image: url('./res/legalbit-wtmk.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+@media print {
+    .page-watermark {
+        visibility: visible;
+    }
+}

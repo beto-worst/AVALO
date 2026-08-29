@@ -1,0 +1,2034 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block title %}
+
+{% endblock %}
+{% block customstyle %}
+.detalles {
+    border-radius: 10px;
+    color:white;
+    background-color: #488fc3;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+{% endblock %}
+{% block containerHead %}
+  <div class="flex-wrap d-flex justify-content-between align-items-center">
+    <div>
+        <h1>Investigación Premium </h1>
+    </div>
+    <div>
+
+      <!--  <a href="/investigacion/nueva" class="btn btn-success">Nueva</a> -->
+    </div>
+</div>
+{% endblock %}
+{% block subContainerHead %}
+{% endblock %}
+{% block contenido %}
+      <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Iniciar investigación</h4>
+
+                    </div>
+                    <div>
+                        <a href="/Investigaciones/PremiumList" class="btn btn-danger">Regresar</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <details open>
+                        <summary class='detalles' id='detalle1'>
+                            Datos del arrendatario
+
+                        </summary>
+                        <div id="dviPrincipal">
+                        <div class='row'>
+                            <div class='col-md-5'>
+                                <div class='form-group'>
+                                    C.U.R.P:
+                                    <input class='form-control' ' name='txtCURP' id='txtCURP' required maxlength='18'  oninput="convertToUppercase(this)">
+                                </div>
+                                
+                            </div>
+                            <div class='col-md-2'>
+                                <div class="col-12 col-md-2 mt-4">
+                                    <div class="form-group">
+                                     <button id='principal' onclick="openDialogoConfirm2('dviPrincipal')" class='btn btn-success btn-lb-primary'>Iniciar</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='col-md-5'>
+                                <div class='form-group'>
+                                    R.F.C:
+                                    <input id='txtRFC' class='form-control'>
+                                </div>
+                            </div>
+                            <div class='col-12'>
+                                <div class='row'>
+                                  <div class='col-12 col-md-3'>
+                                      <div class='form-group'>
+                                          <label labelfor='txtNombre' class='form-label'>Nombres:</label>
+                                          <input class='form-control ' name='txtNombre' id='txtNombre'  required   oninput="convertToUppercase(this)" readonly />
+                                      </div>
+                                  </div> 
+                                  <div class='col-12 col-md-3'>
+                                      <div class='form-group'>
+                                          <label labelfor='txtApellido1' class='form-label'>Primer Apellido:</label>
+                                          <input class='form-control' name='txtApellido1' id='txtApellido1'  oninput="convertToUppercase(this)" readonly />
+                                      </div>
+  
+                                  </div> 
+                                  <div class='col-12 col-md-3'>
+                                      <div class='form-group'>
+                                          <label labelfor='txtApellido2' class='form-label'>Segundo apellido:</label>
+                                          <input class='form-control ' name='txtApellido2' id='txtApellido2'  oninput="convertToUppercase(this)" readonly />
+                                      </div>
+  
+                                  </div> 
+                                  <div class='col-12 col-md-3'>
+                                    <div class='form-group'>
+                                        <label labelfor='txtFNac' class='form-label'>Fecha de nacimiento:</label>
+                                        <input  type='date' class='form-control' name='txtFNac' id='txtFNac'  readonly />
+                                    </div> 
+
+                                </div> 
+                                <div class='row'>
+                                    <div class='col-12 col-md-4'>
+                                      <div class='form-group'>
+                                          <label labelfor='selSEXO' class='form-label'>Sexo</label>
+                                          <select name='selSEXO' id='selSEXO' class='form-select' onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;" >
+                                              <option value=''>-Selecione Sexo-</option>
+                                              <option value='H'>HOMBRE</option>
+                                              <option value='M'>MUJER</option>
+                                          </select>
+                                      </div>
+  
+                                  </div> 
+                                  <div class='col-12 col-md-4'>
+                                      <div class='form-group'>
+                                          <label labelfor='selLugarNacimiento' class='form-label'>Lugar de nacimiento</label>
+                                          <select name='selLugarNacimiento' id='selLugarNacimiento' class='form-select'  onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;" >
+                                              <option value=''>-Seleccione una opción-</option>
+                                          </select>
+                                      </div>
+  
+                                  </div> 
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-12 mt-2">
+                                        <h5>Servicios de investigación</h5>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-12 col-md-3 mt-2">
+                                        <center>
+                                       <h6> Antecedentes nacionales </h6>
+                                        <img src="{% static "espera.png" %}" width="15%" alt="" id="imgAntecedentes">
+                                        </center>
+                                    </div>
+                                    <div class="col-12 col-md-3">
+                                        <center>
+                                        <h6> Listas Negras SAT</h6>
+                                         <img src="{% static "espera.png" %}"width="15%" alt="" id="imgSAT">
+                                         </center>  
+                                     </div>
+                                     <div class="col-12 col-md-3">
+                                        <center>
+                                        <h6> Antecedentes internacionales </h6>
+                                         <img src="{% static "espera.png" %}" width="15%" alt="" id="imgIntl">
+                                        </center>
+                                     </div>
+                                     <div class="col-12 col-md-3">
+                                        <center>
+                                        <h6> Buró de crédito </h6>
+                                         <img src="{% static "espera.png" %}" width="15%" alt="" id="imgBuro">
+                                        </center>
+                                    </div>
+                                </div>
+                                  <div class="row mt-2">
+                                    <div class="col-12 col-md-1 mt-2">
+                                     <button class="btn btn-primary" id="btnGuardar" disabled onclick="guardarInvestigacion('dviPrincipal')">Guardar</button>
+                                     </div>
+                                     <div class="col-12 col-md-1 mt-2">
+                                        <center>
+                                            <label for="" id="estatus">Sin guardar</label>
+                                        </center>
+                                     </div>
+                                  </div>
+                                 
+                                  
+                                </div>
+                            </div>
+                           
+                            <input type="hidden" id="idPersona">
+                            
+                            <input type="hidden" id="idInvestigacion">
+                           
+                            <input type="hidden" id="buro">
+                            
+                            <input type="hidden" id="antecedentes">
+                           
+                            <input type="hidden" id="internacional">
+                          
+                            <input type="hidden" id="sat">
+                            
+                        </div>
+                        
+                      
+                        </div>  
+                    </details>
+                    <details>
+                        <summary class='detalles' id='detalle1'>
+                           Validación referencias personales
+                        </summary>
+                        <details open>
+                            <summary class='detalles' id='detalle1'>
+                               Conyugue
+                            </summary>
+                            <div id="divConyugue">
+                            <div class='row'>
+                                <div class='col-md-5'>
+                                    <div class='form-group'>
+                                        C.U.R.P:
+                                        <input class='form-control' ' name='txtCURP' id='txtCURP' required maxlength='18'  oninput="convertToUppercase(this)">
+                                    </div>
+                                    
+                                </div>
+                                <div class='col-md-2'>
+                                    <div class="col-12 col-md-2 mt-4">
+                                        <div class="form-group">
+                                         <button onclick="openDialogoConfirm2('divConyugue')" class='btn btn-success btn-lb-primary'>Iniciar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='col-md-5'>
+                                    <div class='form-group'>
+                                        R.F.C:
+                                        <input id='txtRFC' class='form-control'>
+                                    </div>
+                                </div>
+                                <div class='col-12'>
+                                    <div class='row'>
+                                      <div class='col-12 col-md-3'>
+                                          <div class='form-group'>
+                                              <label labelfor='txtNombre' class='form-label'>Nombres:</label>
+                                              <input class='form-control ' name='txtNombre' id='txtNombre'  required   oninput="convertToUppercase(this)" readonly />
+                                          </div>
+                                      </div> 
+                                      <div class='col-12 col-md-3'>
+                                          <div class='form-group'>
+                                              <label labelfor='txtApellido1' class='form-label'>Primer Apellido:</label>
+                                              <input class='form-control' name='txtApellido1' id='txtApellido1'  oninput="convertToUppercase(this)" readonly />
+                                          </div>
+      
+                                      </div> 
+                                      <div class='col-12 col-md-3'>
+                                          <div class='form-group'>
+                                              <label labelfor='txtApellido2' class='form-label'>Segundo apellido:</label>
+                                              <input class='form-control ' name='txtApellido2' id='txtApellido2'  oninput="convertToUppercase(this)" readonly />
+                                          </div>
+      
+                                      </div> 
+                                      <div class='col-12 col-md-3'>
+                                        <div class='form-group'>
+                                            <label labelfor='txtFNac' class='form-label'>Fecha de nacimiento:</label>
+                                            <input  type='date' class='form-control' name='txtFNac' id='txtFNac'  readonly />
+                                        </div> 
+    
+                                    </div> 
+                                    <div class='row'>
+                                        <div class='col-12 col-md-4'>
+                                          <div class='form-group'>
+                                              <label labelfor='selSEXO' class='form-label'>Sexo</label>
+                                              <select name='selSEXO' id='selSEXO' class='form-select' onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;" >
+                                                  <option value=''>-Selecione Sexo-</option>
+                                                  <option value='H'>HOMBRE</option>
+                                                  <option value='M'>MUJER</option>
+                                              </select>
+                                          </div>
+      
+                                      </div> 
+                                      <div class='col-12 col-md-4'>
+                                          <div class='form-group'>
+                                              <label labelfor='selLugarNacimiento' class='form-label'>Lugar de nacimiento</label>
+                                              <select name='selLugarNacimiento' id='selLugarNacimiento' class='form-select'  onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;" >
+                                                  <option value=''>-Seleccione una opción-</option>
+                                              </select>
+                                          </div>
+      
+                                      </div> 
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-12 mt-2">
+                                            <h5>Servicios de investigación</h5>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-12 col-md-3 mt-2">
+                                            <center>
+                                           <h6> Antecedentes nacionales </h6>
+                                            <img src="{% static "espera.png" %}" width="15%" alt="" id="imgAntecedentes">
+                                            </center>
+                                        </div>
+                                        <div class="col-12 col-md-3">
+                                            <center>
+                                            <h6> Listas Negras SAT</h6>
+                                             <img src="{% static "espera.png" %}"width="15%" alt="" id="imgSAT">
+                                             </center>  
+                                         </div>
+                                         <div class="col-12 col-md-3">
+                                            <center>
+                                            <h6> Antecedentes internacionales </h6>
+                                             <img src="{% static "espera.png" %}" width="15%" alt="" id="imgIntl">
+                                            </center>
+                                         </div>
+                                         <div class="col-12 col-md-3">
+                                            <center>
+                                            <h6> Buró de crédito </h6>
+                                             <img src="{% static "espera.png" %}" width="15%" alt="" id="imgBuro">
+                                            </center>
+                                        </div>
+            
+                                    </div>
+    
+                                    <div class="row mt-2">
+                                        <div class="col-12 col-md-1 mt-2">
+                                         <button class="btn btn-primary" id="btnGuardar" disabled onclick="guardarInvestigacion('divConyugue')">Guardar</button>
+                                         </div>
+                                         <div class="col-12 col-md-1 mt-2">
+                                            <center>
+                                                <label for="" id="estatus">Sin guardar</label>
+                                            </center>
+                                         </div>
+                                      </div>
+                                      
+                                    </div>
+                                </div>
+                                
+                            <input type="hidden" id="idPersona">
+                            
+                            <input type="hidden" id="idInvestigacion">
+                               
+                                <input type="hidden" id="buro">
+                               
+                                <input type="hidden" id="antecedentes">
+                                
+                                <input type="hidden" id="internacional">
+                              
+                                <input type="hidden" id="sat">
+                            </div>
+                            </div>  
+                        </details>
+                        
+                         <details open>
+                             <summary class='detalles' id='detalle1'>
+                                Padre del arrendatario
+                             </summary>
+                             <div id="divPadreArrendatario">
+                             <div class='row'>
+                                 <div class='col-md-5'>
+                                     <div class='form-group'>
+                                         C.U.R.P:
+                                         <input class='form-control' ' name='txtCURP' id='txtCURP' required maxlength='18'  oninput="convertToUppercase(this)">
+                                     </div>
+                                     
+                                 </div>
+                                 <div class='col-md-2'>
+                                     <div class="col-12 col-md-2 mt-4">
+                                         <div class="form-group">
+                                          <button onclick="openDialogoConfirm2('divPadreArrendatario')" class='btn btn-success btn-lb-primary'>Iniciar</button>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class='col-md-5'>
+                                     <div class='form-group'>
+                                         R.F.C:
+                                         <input id='txtRFC' class='form-control'>
+                                     </div>
+                                 </div>
+                                 <div class='col-12'>
+                                     <div class='row'>
+                                       <div class='col-12 col-md-3'>
+                                           <div class='form-group'>
+                                               <label labelfor='txtNombre' class='form-label'>Nombres:</label>
+                                               <input class='form-control ' name='txtNombre' id='txtNombre'  required   oninput="convertToUppercase(this)" readonly />
+                                           </div>
+                                       </div> 
+                                       <div class='col-12 col-md-3'>
+                                           <div class='form-group'>
+                                               <label labelfor='txtApellido1' class='form-label'>Primer Apellido:</label>
+                                               <input class='form-control' name='txtApellido1' id='txtApellido1'  oninput="convertToUppercase(this)" readonly />
+                                           </div>
+       
+                                       </div> 
+                                       <div class='col-12 col-md-3'>
+                                           <div class='form-group'>
+                                               <label labelfor='txtApellido2' class='form-label'>Segundo apellido:</label>
+                                               <input class='form-control ' name='txtApellido2' id='txtApellido2'  oninput="convertToUppercase(this)" readonly />
+                                           </div>
+       
+                                       </div> 
+                                       <div class='col-12 col-md-3'>
+                                         <div class='form-group'>
+                                             <label labelfor='txtFNac' class='form-label'>Fecha de nacimiento:</label>
+                                             <input  type='date' class='form-control' name='txtFNac' id='txtFNac'  readonly />
+                                         </div> 
+     
+                                     </div> 
+                                     <div class='row'>
+                                         <div class='col-12 col-md-4'>
+                                           <div class='form-group'>
+                                               <label labelfor='selSEXO' class='form-label'>Sexo</label>
+                                               <select name='selSEXO' id='selSEXO' class='form-select' onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;" >
+                                                   <option value=''>-Selecione Sexo-</option>
+                                                   <option value='H'>HOMBRE</option>
+                                                   <option value='M'>MUJER</option>
+                                               </select>
+                                           </div>
+       
+                                       </div> 
+                                       <div class='col-12 col-md-4'>
+                                           <div class='form-group'>
+                                               <label labelfor='selLugarNacimiento' class='form-label'>Lugar de nacimiento</label>
+                                               <select name='selLugarNacimiento' id='selLugarNacimiento' class='form-select'  onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;" >
+                                                   <option value=''>-Seleccione una opción-</option>
+                                               </select>
+                                           </div>
+       
+                                       </div> 
+                                       </div>
+                                       <div class="row">
+                                        <div class="col-12 mt-2">
+                                            <h5>Servicios de investigación</h5>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-12 col-md-3 mt-2">
+                                            <center>
+                                           <h6> Antecedentes nacionales </h6>
+                                            <img src="{% static "espera.png" %}" width="15%" alt="" id="imgAntecedentes">
+                                            </center>
+                                        </div>
+                                        <div class="col-12 col-md-3">
+                                            <center>
+                                            <h6> Listas Negras SAT</h6>
+                                             <img src="{% static "espera.png" %}"width="15%" alt="" id="imgSAT">
+                                             </center>  
+                                         </div>
+                                         <div class="col-12 col-md-3">
+                                            <center>
+                                            <h6> Antecedentes internacionales </h6>
+                                             <img src="{% static "espera.png" %}" width="15%" alt="" id="imgIntl">
+                                            </center>
+                                         </div>
+                                         <div class="col-12 col-md-3">
+                                            <center>
+                                            <h6> Buró de crédito </h6>
+                                             <img src="{% static "espera.png" %}" width="15%" alt="" id="imgBuro">
+                                            </center>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-12 col-md-1 mt-2">
+                                         <button class="btn btn-primary" id="btnGuardar" disabled onclick="guardarInvestigacion('divPadreArrendatario')">Guardar</button>
+                                         </div>
+                                         <div class="col-12 col-md-1 mt-2">
+                                            <center>
+                                                <label for="" id="estatus">Sin guardar</label>
+                                            </center>
+                                         </div>
+                                      </div>
+                                       
+                                     </div>
+                                 </div>
+                               
+                                 <input type="hidden" id="idInvestigacion">
+                                 
+                            <input type="hidden" id="idPersona">
+                               
+                                 <input type="hidden" id="buro">
+                              
+                                 <input type="hidden" id="antecedentes">
+                               
+                                 <input type="hidden" id="internacional">
+                              
+                                 <input type="hidden" id="sat">
+                             </div>
+                             </div>
+                         </details>
+                        
+                         <details open>
+                            <summary class='detalles' id='detalle1'>
+                               Madre del arrendatario
+                            </summary>
+                            <div id="divMadreArrendatario">
+                            <div class='row'>
+                                <div class='col-md-5'>
+                                    <div class='form-group'>
+                                        C.U.R.P:
+                                        <input class='form-control'  name='txtCURP' id='txtCURP' required maxlength='18'  oninput="convertToUppercase(this)">
+                                    </div>
+                                    
+                                </div>
+                                <div class='col-md-2'>
+                                    <div class="col-12 col-md-2 mt-4">
+                                        <div class="form-group">
+                                         <button onclick="openDialogoConfirm2('divMadreArrendatario')" class='btn btn-success btn-lb-primary'>Iniciar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='col-md-5'>
+                                    <div class='form-group'>
+                                        R.F.C:
+                                        <input id='txtRFC' type class='form-control'>
+                                    </div>
+                                </div>
+                                <div class='col-12'>
+                                    <div class='row'>
+                                      <div class='col-12 col-md-3'>
+                                          <div class='form-group'>
+                                              <label labelfor='txtNombre' class='form-label'>Nombres:</label>
+                                              <input class='form-control ' name='txtNombre' id='txtNombre'  required   oninput="convertToUppercase(this)" readonly />
+                                          </div>
+                                      </div> 
+                                      <div class='col-12 col-md-3'>
+                                          <div class='form-group'>
+                                              <label labelfor='txtApellido1' class='form-label'>Primer Apellido:</label>
+                                              <input class='form-control' name='txtApellido1' id='txtApellido1'  oninput="convertToUppercase(this)" readonly />
+                                          </div>
+      
+                                      </div> 
+                                      <div class='col-12 col-md-3'>
+                                          <div class='form-group'>
+                                              <label labelfor='txtApellido2' class='form-label'>Segundo apellido:</label>
+                                              <input class='form-control ' name='txtApellido2' id='txtApellido2'  oninput="convertToUppercase(this)" readonly />
+                                          </div>
+      
+                                      </div> 
+                                      <div class='col-12 col-md-3'>
+                                        <div class='form-group'>
+                                            <label labelfor='txtFNac' class='form-label'>Fecha de nacimiento:</label>
+                                            <input  type='date' class='form-control' name='txtFNac' id='txtFNac'  readonly />
+                                        </div> 
+    
+                                    </div> 
+                                    <div class='row'>
+                                        <div class='col-12 col-md-4'>
+                                          <div class='form-group'>
+                                              <label labelfor='selSEXO' class='form-label'>Sexo</label>
+                                              <select name='selSEXO' id='selSEXO' class='form-select' onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;" >
+                                                  <option value=''>-Selecione Sexo-</option>
+                                                  <option value='H'>HOMBRE</option>
+                                                  <option value='M'>MUJER</option>
+                                              </select>
+                                          </div>
+      
+                                      </div> 
+                                      <div class='col-12 col-md-4'>
+                                          <div class='form-group'>
+                                              <label labelfor='selLugarNacimiento' class='form-label'>Lugar de nacimiento</label>
+                                              <select name='selLugarNacimiento' id='selLugarNacimiento' class='form-select'  onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;" >
+                                                  <option value=''>-Seleccione una opción-</option>
+                                              </select>
+                                          </div>
+      
+                                      </div> 
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-12 mt-2">
+                                            <h5>Servicios de investigación</h5>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-12 col-md-3 mt-2">
+                                            <center>
+                                           <h6> Antecedentes nacionales </h6>
+                                            <img src="{% static "espera.png" %}" width="15%" alt="" id="imgAntecedentes">
+                                            </center>
+                                        </div>
+                                        <div class="col-12 col-md-3">
+                                            <center>
+                                            <h6> Listas Negras SAT</h6>
+                                             <img src="{% static "espera.png" %}"width="15%" alt="" id="imgSAT">
+                                             </center>  
+                                         </div>
+                                         <div class="col-12 col-md-3">
+                                            <center>
+                                            <h6> Antecedentes internacionales </h6>
+                                             <img src="{% static "espera.png" %}" width="15%" alt="" id="imgIntl">
+                                            </center>
+                                         </div>
+                                         <div class="col-12 col-md-3">
+                                            <center>
+                                            <h6> Buró de crédito </h6>
+                                             <img src="{% static "espera.png" %}" width="15%" alt="" id="imgBuro">
+                                            </center>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-12 col-md-1 mt-2">
+                                         <button class="btn btn-primary" id="btnGuardar" disabled onclick="guardarInvestigacion('divMadreArrendatario')">Guardar</button>
+                                         </div>
+                                         <div class="col-12 col-md-1 mt-2">
+                                            <center>
+                                                <label for="" id="estatus">Sin guardar</label>
+                                            </center>
+                                         </div>
+                                      </div>
+                                      
+                                    </div>
+                                </div>
+                               
+                                <input type="hidden" id="idInvestigacion">
+                                
+                            <input type="hidden" id="idPersona">
+                               
+                                <input type="hidden" id="buro">
+                                
+                                <input type="hidden" id="antecedentes">
+                              
+                                <input type="hidden" id="internacional">
+                              
+                                <input type="hidden" id="sat">
+                            </div>
+                            </div>
+                        </details>
+
+
+                         <details open>
+                            <summary class='detalles' id='detalle1'>
+                               Padre Conyugue
+                            </summary>
+                            <div id="divPadreConyugue">
+                            <div class='row'>
+                                <div class='col-md-5'>
+                                    <div class='form-group'>
+                                        C.U.R.P:
+                                        <input class='form-control'  name='txtCURP' id='txtCURP' required maxlength='18'  oninput="convertToUppercase(this)">
+                                    </div>
+                                    
+                                </div>
+                                <div class='col-md-2'>
+                                    <div class="col-12 col-md-2 mt-4">
+                                        <div class="form-group">
+                                         <button onclick="openDialogoConfirm2('divPadreConyugue')" class='btn btn-success btn-lb-primary'>Iniciar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='col-md-5'>
+                                    <div class='form-group'>
+                                        R.F.C:
+                                        <input id='txtRFC' class='form-control'>
+                                    </div>
+                                </div>
+                                <div class='col-12'>
+                                    <div class='row'>
+                                      <div class='col-12 col-md-3'>
+                                          <div class='form-group'>
+                                              <label labelfor='txtNombre' class='form-label'>Nombres:</label>
+                                              <input class='form-control ' name='txtNombre' id='txtNombre'  required   oninput="convertToUppercase(this)" readonly />
+                                          </div>
+                                      </div> 
+                                      <div class='col-12 col-md-3'>
+                                          <div class='form-group'>
+                                              <label labelfor='txtApellido1' class='form-label'>Primer Apellido:</label>
+                                              <input class='form-control' name='txtApellido1' id='txtApellido1'  oninput="convertToUppercase(this)" readonly />
+                                          </div>
+      
+                                      </div> 
+                                      <div class='col-12 col-md-3'>
+                                          <div class='form-group'>
+                                              <label labelfor='txtApellido2' class='form-label'>Segundo apellido:</label>
+                                              <input class='form-control ' name='txtApellido2' id='txtApellido2'  oninput="convertToUppercase(this)" readonly />
+                                          </div>
+      
+                                      </div> 
+                                      <div class='col-12 col-md-3'>
+                                        <div class='form-group'>
+                                            <label labelfor='txtFNac' class='form-label'>Fecha de nacimiento:</label>
+                                            <input  type='date' class='form-control' name='txtFNac' id='txtFNac'  readonly />
+                                        </div> 
+    
+                                    </div> 
+                                    <div class='row'>
+                                        <div class='col-12 col-md-4'>
+                                          <div class='form-group'>
+                                              <label labelfor='selSEXO' class='form-label'>Sexo</label>
+                                              <select name='selSEXO' id='selSEXO' class='form-select' onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;" >
+                                                  <option value=''>-Selecione Sexo-</option>
+                                                  <option value='H'>HOMBRE</option>
+                                                  <option value='M'>MUJER</option>
+                                              </select>
+                                          </div>
+      
+                                      </div> 
+                                      <div class='col-12 col-md-4'>
+                                          <div class='form-group'>
+                                              <label labelfor='selLugarNacimiento' class='form-label'>Lugar de nacimiento</label>
+                                              <select name='selLugarNacimiento' id='selLugarNacimiento' class='form-select'  onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;" >
+                                                  <option value=''>-Seleccione una opción-</option>
+                                              </select>
+                                          </div>
+      
+                                      </div> 
+                                      </div>
+                                      
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 mt-2">
+                                            <h5>Servicios de investigación</h5>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-12 col-md-3 mt-2">
+                                            <center>
+                                           <h6> Antecedentes nacionales </h6>
+                                            <img src="{% static "espera.png" %}" width="15%" alt="" id="imgAntecedentes">
+                                            </center>
+                                        </div>
+                                        <div class="col-12 col-md-3">
+                                            <center>
+                                            <h6> Listas Negras SAT</h6>
+                                             <img src="{% static "espera.png" %}"width="15%" alt="" id="imgSAT">
+                                             </center>  
+                                         </div>
+                                         <div class="col-12 col-md-3">
+                                            <center>
+                                            <h6> Antecedentes internacionales </h6>
+                                             <img src="{% static "espera.png" %}" width="15%" alt="" id="imgIntl">
+                                            </center>
+                                         </div>
+                                         <div class="col-12 col-md-3">
+                                            <center>
+                                            <h6> Buró de crédito </h6>
+                                             <img src="{% static "espera.png" %}" width="15%" alt="" id="imgBuro">
+                                            </center>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-12 col-md-1 mt-2">
+                                         <button class="btn btn-primary" id="btnGuardar" disabled onclick="guardarInvestigacion('divPadreConyugue')">Guardar</button>
+                                         </div>
+                                         <div class="col-12 col-md-1 mt-2">
+                                            <center>
+                                                <label for="" id="estatus">Sin guardar</label>
+                                            </center>
+                                         </div>
+                                      </div>
+                                </div>
+                               
+                                <input type="hidden" id="idInvestigacion">
+                               
+                                <input type="hidden" id="idPersona">
+                              
+                                <input type="hidden" id="buro">
+                               
+                                <input type="hidden" id="antecedentes">
+                              
+                                <input type="hidden" id="internacional">
+                               
+                                <input type="hidden" id="sat">
+                            </div>
+                            </div>
+                        </details>
+                        <details open>
+                            <summary class='detalles' id='detalle1'>
+                               Madre Conyugue
+                            </summary>
+                            <div id="divMadreConyugue">
+                            <div class='row'>
+                                <div class='col-md-5'>
+                                    <div class='form-group'>
+                                        C.U.R.P:
+                                        <input class='form-control'  name='txtCURP' id='txtCURP' required maxlength='18'  oninput="convertToUppercase(this)">
+                                    </div>
+                                    
+                                </div>
+                                <div class='col-md-2'>
+                                    <div class="col-12 col-md-2 mt-4">
+                                        <div class="form-group">
+                                         <button onclick="openDialogoConfirm2('divMadreConyugue')" class='btn btn-success btn-lb-primary'>Iniciar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='col-md-5'>
+                                    <div class='form-group'>
+                                        R.F.C:
+                                        <input id='txtRFC' class='form-control'>
+                                    </div>
+                                </div>
+                                <div class='col-12'>
+                                    <div class='row'>
+                                      <div class='col-12 col-md-3'>
+                                          <div class='form-group'>
+                                              <label labelfor='txtNombre' class='form-label'>Nombres:</label>
+                                              <input class='form-control' name='txtNombre' id='txtNombre'  required   oninput="convertToUppercase(this)" readonly />
+                                          </div>
+                                      </div> 
+                                      <div class='col-12 col-md-3'>
+                                          <div class='form-group'>
+                                              <label labelfor='txtApellido1' class='form-label'>Primer Apellido:</label>
+                                              <input class='form-control' name='txtApellido1' id='txtApellido1'  oninput="convertToUppercase(this)" readonly />
+                                          </div>
+      
+                                      </div> 
+                                      <div class='col-12 col-md-3'>
+                                          <div class='form-group'>
+                                              <label labelfor='txtApellido2' class='form-label'>Segundo apellido:</label>
+                                              <input class='form-control ' name='txtApellido2' id='txtApellido2'  oninput="convertToUppercase(this)" readonly />
+                                          </div>
+      
+                                      </div> 
+                                      <div class='col-12 col-md-3'>
+                                        <div class='form-group'>
+                                            <label labelfor='txtFNac' class='form-label'>Fecha de nacimiento:</label>
+                                            <input  type='date' class='form-control' name='txtFNac' id='txtFNac'  readonly />
+                                        </div> 
+    
+                                    </div> 
+                                    <div class='row'>
+                                        <div class='col-12 col-md-4'>
+                                          <div class='form-group'>
+                                              <label labelfor='selSEXO' class='form-label'>Sexo</label>
+                                              <select name='selSEXO' id='selSEXO' class='form-select' onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;" >
+                                                  <option value=''>-Selecione Sexo-</option>
+                                                  <option value='H'>HOMBRE</option>
+                                                  <option value='M'>MUJER</option>
+                                              </select>
+                                          </div>
+      
+                                      </div> 
+                                      <div class='col-12 col-md-4'>
+                                          <div class='form-group'>
+                                              <label labelfor='selLugarNacimiento' class='form-label'>Lugar de nacimiento</label>
+                                              <select name='selLugarNacimiento' id='selLugarNacimiento' class='form-select'  onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;" >
+                                                  <option value=''>-Seleccione una opción-</option>
+                                              </select>
+                                          </div>
+      
+                                      </div> 
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-12 mt-2">
+                                            <h5>Servicios de investigación</h5>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-12 col-md-3 mt-2">
+                                            <center>
+                                           <h6> Antecedentes nacionales </h6>
+                                            <img src="{% static "espera.png" %}" width="15%" alt="" id="imgAntecedentes">
+                                            </center>
+                                        </div>
+                                        <div class="col-12 col-md-3">
+                                            <center>
+                                            <h6> Listas Negras SAT</h6>
+                                             <img src="{% static "espera.png" %}"width="15%" alt="" id="imgSAT">
+                                             </center>  
+                                         </div>
+                                         <div class="col-12 col-md-3">
+                                            <center>
+                                            <h6> Antecedentes internacionales </h6>
+                                             <img src="{% static "espera.png" %}" width="15%" alt="" id="imgIntl">
+                                            </center>
+                                         </div>
+                                         <div class="col-12 col-md-3">
+                                            <center>
+                                            <h6> Buró de crédito </h6>
+                                             <img src="{% static "espera.png" %}" width="15%" alt="" id="imgBuro">
+                                            </center>
+                                        </div>
+                                    </div>
+                                      
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-12 col-md-1 mt-2">
+                                         <button class="btn btn-primary" id="btnGuardar" disabled onclick="guardarInvestigacion('divMadreConyugue')">Guardar</button>
+                                         </div>
+                                         <div class="col-12 col-md-1 mt-2">
+                                            <center>
+                                                <label for="" id="estatus">Sin guardar</label>
+                                            </center>
+                                         </div>
+                                      </div>
+                                </div>
+                               
+                                <input type="hidden" id="idInvestigacion">
+                               
+                            <input type="hidden" id="idPersona">
+                               
+                                <input type="hidden" id="buro">
+                               
+                                <input type="hidden" id="antecedentes">
+                               
+                                <input type="hidden" id="internacional">
+                              
+                                <input type="hidden" id="sat">
+                            </div>
+                            </div>
+                        </details>
+                        <details open>
+                            <summary class='detalles' id='detalle1'>
+                              Aval
+                            </summary>
+                            <div id="divAval">
+                            <div class='row'>
+                                <div class='col-md-5'>
+                                    <div class='form-group'>
+                                        C.U.R.P:
+                                        <input class='form-control' ' name='txtCURP' id='txtCURP' required maxlength='18'  oninput="convertToUppercase(this)">
+                                    </div>
+                                    
+                                </div>
+                                <div class='col-md-2'>
+                                    <div class="col-12 col-md-2 mt-4">
+                                        <div class="form-group">
+                                         <button onclick="openDialogoConfirm2('divAval')" class='btn btn-success btn-lb-primary'>Iniciar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class='col-md-5'>
+                                    <div class='form-group'>
+                                        R.F.C:
+                                        <input id='txtRFC' class='form-control'>
+                                    </div>
+                                </div>
+                                <div class='col-12'>
+                                    <div class='row'>
+                                      <div class='col-12 col-md-3'>
+                                          <div class='form-group'>
+                                              <label labelfor='txtNombre' class='form-label'>Nombres:</label>
+                                              <input class='form-control ' name='txtNombre' id='txtNombre'  required   oninput="convertToUppercase(this)" readonly />
+                                          </div>
+                                      </div> 
+                                      <div class='col-12 col-md-3'>
+                                          <div class='form-group'>
+                                              <label labelfor='txtApellido1' class='form-label'>Primer Apellido:</label>
+                                              <input class='form-control' name='txtApellido1' id='txtApellido1'  oninput="convertToUppercase(this)" readonly />
+                                          </div>
+      
+                                      </div> 
+                                      <div class='col-12 col-md-3'>
+                                          <div class='form-group'>
+                                              <label labelfor='txtApellido2' class='form-label'>Segundo apellido:</label>
+                                              <input class='form-control ' name='txtApellido2' id='txtApellido2'  oninput="convertToUppercase(this)" readonly />
+                                          </div>
+      
+                                      </div> 
+                                      <div class='col-12 col-md-3'>
+                                        <div class='form-group'>
+                                            <label labelfor='txtFNac' class='form-label'>Fecha de nacimiento:</label>
+                                            <input  type='date' class='form-control' name='txtFNac' id='txtFNac'  readonly />
+                                        </div> 
+    
+                                    </div> 
+                                    <div class='row'>
+                                        <div class='col-12 col-md-4'>
+                                          <div class='form-group'>
+                                              <label labelfor='selSEXO' class='form-label'>Sexo</label>
+                                              <select name='selSEXO' id='selSEXO' class='form-select' onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;" >
+                                                  <option value=''>-Selecione Sexo-</option>
+                                                  <option value='H'>HOMBRE</option>
+                                                  <option value='M'>MUJER</option>
+                                              </select>
+                                          </div>
+      
+                                      </div> 
+                                      <div class='col-12 col-md-4'>
+                                          <div class='form-group'>
+                                              <label labelfor='selLugarNacimiento' class='form-label'>Lugar de nacimiento</label>
+                                              <select name='selLugarNacimiento' id='selLugarNacimiento' class='form-select'  onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;" >
+                                                  <option value=''>-Seleccione una opción-</option>
+                                              </select>
+                                          </div>
+      
+                                      </div> 
+                                      </div>
+                                      
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 mt-2">
+                                            <h5>Servicios de investigación</h5>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-12 col-md-3 mt-2">
+                                            <center>
+                                           <h6> Antecedentes nacionales </h6>
+                                            <img src="{% static "espera.png" %}" width="15%" alt="" id="imgAntecedentes">
+                                            </center>
+                                        </div>
+                                        <div class="col-12 col-md-3">
+                                            <center>
+                                            <h6> Listas Negras SAT</h6>
+                                             <img src="{% static "espera.png" %}"width="15%" alt="" id="imgSAT">
+                                             </center>  
+                                         </div>
+                                         <div class="col-12 col-md-3">
+                                            <center>
+                                            <h6> Antecedentes internacionales </h6>
+                                             <img src="{% static "espera.png" %}" width="15%" alt="" id="imgIntl">
+                                            </center>
+                                         </div>
+                                         <div class="col-12 col-md-3">
+                                            <center>
+                                            <h6> Buró de crédito </h6>
+                                             <img src="{% static "espera.png" %}" width="15%" alt="" id="imgBuro">
+                                            </center>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-12 col-md-1 mt-2">
+                                         <button class="btn btn-primary" id="btnGuardar" disabled onclick="guardarInvestigacion('divAval')">Guardar</button>
+                                         </div>
+                                         <div class="col-12 col-md-1 mt-2">
+                                            <center>
+                                                <label for="" id="estatus">Sin guardar</label>
+                                            </center>
+                                         </div>
+                                      </div>
+                                </div>
+                            </div>
+                            
+                            <input type="hidden" id="idInvestigacion">
+                           
+                            <input type="hidden" id="idPersona">
+                          
+                            <input type="hidden" id="buro">
+                           
+                            <input type="hidden" id="antecedentes">
+                            
+                            <input type="hidden" id="internacional">
+                           
+                            <input type="hidden" id="sat">
+                            </div>
+                        </details>
+                                           </details>
+                    <details>
+                        <summary class='detalles' id='detalle1'>
+                            Validación Empresarial
+                        </summary>
+                        <div class='form-group'>
+                            ¿Es dueño de alguna empresa?:
+                            <select class='form-control'>
+                                <option>-Marca una opción-</option>
+                                <option>SI</option>
+                                <option>NO</option>
+                            </select>
+                        </div>
+                       
+                        <div class='form-group'>
+                            Nombre de cliente/proveedor:
+                            <input class='form-control'>
+                        </div>
+                        <div class='form-group'>
+                            Razón social:
+                            <input class='form-control'>
+                        </div>
+                        <div class='form-group'>
+                            R.F.C:
+                            <input class='form-control'>
+                        </div>
+                        <div class='form-group'>
+                            Número de teléfono:
+                            <input class='form-control'>
+                        </div>
+                        <div class='form-group'>
+                           Notas de la llamada:
+                            <textarea class='form-control' placeholder='¿Lo conoce?,¿Qué relación tiene?, ¿Hace cuanto tiempo que lo conoce?, Comentarios'></textarea>
+                        </div>
+                        
+                    </details>
+                    
+                    <details>
+                    <summary class='detalles' id='detalle1'>
+                        Validación Laboral
+                      </summary>
+                      <div class='form-group'>
+                        ¿Es empleado?
+                         <select class='form-select'>
+                            <option>-Selecciona una opcion-</option>
+                            <option>SI</option>
+                            <option>NO</option>
+                         </select>
+                     </div>
+                      <div class='form-group'>
+                         ¿Trabaja ahí?
+                          <input class='form-control'>
+                      </div>
+                      <div class='form-group'>
+                          Puesto:
+                          <input class='form-control'>
+                      </div>
+                      <div class='form-group'>
+                          Antiguedad:
+                          <input class='form-control'>
+                      </div>
+                      <div class='form-group'>
+                        Salario:
+                        <input class='form-control'>
+                    </div>
+                      <div class='form-group'>
+                          Desempeño laboral:
+                          <textarea class='form-control' placeholder='' ></textarea>
+                      </div>
+
+                    <!--  <div class="form-group">
+                          <button onclick="" class='btn btn-success btn-lb-primary'>Agregar referencia</button>
+                         </div> -->
+                        
+                  </details>
+
+                       <details>
+                        
+                        <summary class='detalles' id='detalle1'>
+                          Llamadas a referencias
+                        </summary>
+                        <div id="referencias" name="referencias">
+                            <input type="hidden" id="contRef" value="1">
+                            <div class='form-group'>
+                            Nombre referencia
+                                <input class='form-control' id="txtNombreReferencia">
+                            </div>
+                            <div class='form-group'>
+                                Parentesco:
+                                <input class='form-control' id="txtParentescoReferencia">
+                            </div>
+                            <div class='form-group'>
+                                Número de télefono:
+                                <input class='form-control' id="txtTelefonoReferencia">
+                            </div>
+                            <div class='form-group'>
+                                Notas de la llamada:
+                                <textarea class='form-control'  id='txtNotasReferencia' placeholder='¿Lo conoce?,¿Qué relación tiene?, ¿Hace cuanto tiempo que lo conoce?, Comentarios' ></textarea>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                                <button onclick="addReferencias()" class='btn btn-success btn-lb-primary'>Agregar referencia</button>
+                            </div>
+                        
+                          
+                    </details>
+
+                    <details>
+                        
+                        <summary class='detalles' id='detalle1'>
+                         Notas periodisticas
+                        </summary>
+                        <div class='form-group'>
+                           Arrendatario
+                            <input class='form-control'>
+                        </div>
+                        <div class='form-group'>
+                            Padre Arrendatario:
+                            <input class='form-control'>
+                        </div>
+                        <div class='form-group'>
+                            Madre Arrendatario:
+                            <input class='form-control'>
+                        </div>
+                        <div class='form-group'>
+                            Padre Conyuguye:
+                            <input class='form-control'>
+                        </div>
+                        <div class='form-group'>
+                            Madre Conyuguye:
+                            <input class='form-control'>
+                        </div>
+                        <div class='form-group'>
+                            Aval:
+                            <input class='form-control'>
+                        </div>
+                        
+                          
+                    </details>
+
+                    <div class="form-group">
+                        <button onclick="saveAll()" class='btn btn-success btn-lb-primary'>Guardar Premium</button>
+                    </div>
+                    
+                    
+                </div>
+
+                
+               
+            </div>
+                
+        </div>
+        <dialog id="DialogoNotificacion" style='background-color:#488fc3; color:#ffffff; border-radius: 5px;margin-top:10%'>
+            <h3 style='color:#ffffff;'>Por favor espere.</h3>
+            <p>Se están obteniendo los datos del investigado a través de su C.U.R.P.</p>
+        </dialog>
+        <dialog id="DialogSave" style='background-color:#488fc3; color:#ffffff; border-radius: 5px;margin-top:10%'>
+          <h3 style='color:#ffffff;'>Por favor espere.</h3>
+          <p>Guardando información</p>
+      </dialog>
+      <dialog id="DialogoNotificacion2" style='background-color:#488fc3; color:#ffffff; border-radius: 5px;margin-top:10%'>
+        <h3 style='color:#ffffff;'>Por favor espere.</h3>
+        <p>Guardando Investigación</p>
+    </dialog>
+    <dialog id="DialogSave" style='background-color:#488fc3; color:#ffffff; border-radius: 5px;margin-top:10%'>
+      <h3 style='color:#ffffff;'>Por favor espere.</h3>
+      <p>Guardando información</p>
+  </dialog>
+        <dialog id="DialogoConfirmacion" style='color:#488fc3; background-color:#ffffff; border-radius: 5px; margin-top:10%'>
+            <center>
+                  <img src="{% static 'resources/legalbit-logo-dark.png' %}" width="150">
+            </center>
+             <h3 style='color:#488fc3;'>Atención</h3>
+
+          <p>La siguiente consulta genera el consumo de sus créditos disponibles, ¿desea continuar?</p>
+          <button onclick="getDataByCURP()" class="btn btn-success">Sí</button>
+          <button onclick="cerrarDialogoC(this)" class="btn btn-danger">No</button>
+        </dialog>
+        <dialog id="DialogoConfirmacion2" style='color:#488fc3; background-color:#ffffff; border-radius: 5px; margin-top:10%'>
+            <center>
+                  <img src="{% static 'resources/legalbit-logo-dark.png' %}" width="150">
+            </center>
+             <h3 style='color:#488fc3;'>Atención</h3>
+
+          <p>La siguiente consulta genera el consumo de sus créditos disponibles, ¿desea continuar?</p>
+          <button id='btnParentId' onclick="getDataByCURP2(this.value)" class="btn btn-success">Sí</button>
+          <button onclick="cerrarDialogo2(this)" class="btn btn-danger">No</button>
+        </dialog>
+        <dialog id="dialogoGuardando" style='color:#488fc3; background-color:#ffffff; border-radius: 5px; width: 80%; max-width: 900px;  margin: auto;'>
+            <button onclick="cerrarDialogoContinuar()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 20px; cursor: pointer; color: red;">X</button>    <center>
+                  <img src="{% static 'resources/legalbit-logo-dark.png' %}" width="150">
+                  <h4 style='color:#488fc3;'>Guardando datos</h4>
+                  <p>Guardando datos, por favor espere.</p>
+        
+            </center>
+            
+        </dialog>
+            
+{% endblock %}
+{% block customJS %}
+<script>
+     function addReferencias() {
+            const referenciaDiv = document.getElementById("referencias");
+
+            const formularioHTML = "<hr/> <div class='form-group'> " +
+              "  Nombre referencia "+
+             "   <input class='form-control' id='txtNombreReferencia'> "+
+            "</div>"+
+            "<div class='form-group'>"+
+             "   Parentesco: "+
+             "   <input class='form-control' id='txtParentescoReferencia'> "+
+            "</div>"+
+            "<div class='form-group'>"+
+             "   Número de télefono:"+
+             "   <input class='form-control' id='txtTelefonoReferencia'>"+
+            "</div>"+
+            "<div class='form-group'>"+
+            "    Notas de la llamada: "+
+            "    <textarea class='form-control' id='txtNotasReferencia' placeholder='¿Lo conoce?,¿Qué relación tiene?, ¿Hace cuanto tiempo que lo conoce?, Comentarios'></textarea> "+
+            "</div>"
+            ;
+
+            referenciaDiv.innerHTML += formularioHTML;
+        }
+    function cerrarDialogoC(){
+        event.preventDefault();
+        var dialogo = document.getElementById('DialogoConfirmacion');
+        dialogo.close();
+    }
+
+
+    function cerrarDialogo2(){
+        event.preventDefault();
+        var dialogo = document.getElementById('DialogoConfirmacion2');
+        dialogo.close();
+    }
+
+    function openDialogoConfirm(){
+        event.preventDefault();
+       
+        var dialogo = document.getElementById('DialogoConfirmacion');
+        dialogo.showModal();
+    }
+    function openDialogoConfirm2(valor){
+        event.preventDefault();
+        var btnParentId = document.getElementById('btnParentId')
+        btnParentId.value = valor;
+        var dialogo = document.getElementById('DialogoConfirmacion2');
+        dialogo.showModal();
+    }
+    function getBlacklistSAT(parentDivId){
+    var parentDiv = document.getElementById(parentDivId);
+        var sat = parentDiv.querySelector('#sat')
+        var txtRFC = parentDiv.querySelector('#txtRFC')
+        var dialogo = document.getElementById('DialogoNotificacion');
+        var imgSAT = parentDiv.querySelector('#imgSAT')
+        console.log('RFC' + txtRFC.value)
+        imgSAT.src="{% static 'loading.gif' %}"
+        dialogo.showModal()
+        fetch('/Investigaciones/getSAT/' + txtRFC.value)
+            .then(function(response) {
+                console.log('response obtener'+  response);
+                if (response.ok) {
+                    return response.text();
+                } else {
+                    throw new Error('Error al obtener los datos del JSON');
+                }
+            })
+            
+            .then(function(data) {
+                sat.value=data
+                dialogo.close()
+                imgSAT.src='{% static "check_blue.png" %}'
+            })
+            .then(function(){
+                getBuro(parentDivId)
+            })
+       
+}
+
+
+
+
+function addPersona(parentDivId){
+    var parentDiv = document.getElementById(parentDivId);
+        var antecedentes = parentDiv.querySelector('#antecedentes')
+        var persona = parentDiv.querySelector('#idPersona')
+        var txtNombre = parentDiv.querySelector('#txtNombre')
+        var txtApellido1 = parentDiv.querySelector('#txtApellido1')
+        var txtApellido2 = parentDiv.querySelector('#txtApellido2')
+        var txtFechaNac = parentDiv.querySelector('#txtFNac')
+        var selLugarNacimiento = parentDiv.querySelector('#selLugarNacimiento')
+        var txtCURP = parentDiv.querySelector('#txtCURP')
+        var txtRFC = parentDiv.querySelector('#txtRFC')
+        var dialogo = document.getElementById('DialogoNotificacion');
+        dialogo.showModal()
+        var datos = {
+                rfc:txtRFC.value,
+                curp:txtCURP.value,
+                nombre:txtNombre.value,
+                apellido1:txtApellido1.value,
+                fechanac: txtFechaNac.value,
+                apellido2:txtApellido2.value,
+                lugarnac:selLugarNacimiento.value,
+                clave2: "valor2"
+            };
+            fetch("/Investigaciones/addPersonaAPI", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(datos)
+        })
+        .then(response => response.json())
+        .then(data => {
+            //var img = document.getElementById('statusInsert')
+            console.log("Respuesta del servidor:", data);
+            persona.value = data.id
+        })
+        dialogo.close()
+}
+
+
+function guardarInvestigacion(parentDivId){
+    console.log('Iniciando investigacion')
+    var parentDiv = document.getElementById(parentDivId);
+    var persona = parentDiv.querySelector('#idPersona')
+    console.log('Persona' + persona.value)
+    var investigacion = parentDiv.querySelector('#idInvestigacion')
+    var buro = parentDiv.querySelector('#buro')
+    var antecedentes = parentDiv.querySelector('#antecedentes')
+    var internacional = parentDiv.querySelector('#internacional')
+    var sat = parentDiv.querySelector('#sat')
+    var dialogo = document.getElementById('DialogoNotificacion2');
+    var estatus = parentDiv.querySelector('#estatus')
+    dialogo.showModal();
+
+    var datos = {
+        persona: persona.value,
+        intl: internacional.value,
+        buro: buro.value,
+        sat: sat.value,
+        ant: antecedentes.value,
+        clave2: "valor2"
+    };
+
+    try {
+        fetch("/Investigaciones/APIiniciarInvestigacion2", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(datos)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la solicitud: ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            dialogo.close();
+            console.log("Respuesta del servidor:", data);
+            estatus.innerHTML='Guardado con ID'+ data.id
+            investigacion.value=data.id
+        })
+        .catch(error => {
+            console.error('Error en la solicitud:', error);
+            // Puedes manejar el error aquí si es necesario
+            dialogo.close();
+        })
+        .finally(() => {
+            console.log('La solicitud ha finalizado'); // Agregamos un mensaje para mostrar que la solicitud ha finalizado, independientemente de si fue exitosa o no
+        });
+    } catch(error) {
+        console.error('Error en la solicitud:', error);
+        dialogo.close();
+    }
+}
+
+
+function getAntecedentes(parentDivId){
+    var parentDiv = document.getElementById(parentDivId);
+        var antecedentes = parentDiv.querySelector('#antecedentes')
+        var txtNombre = parentDiv.querySelector('#txtNombre')
+        var txtApellido1 = parentDiv.querySelector('#txtApellido1')
+        var txtApellido2 = parentDiv.querySelector('#txtApellido2')
+        var txtRFC =  parentDiv.querySelector('#txtRFC')
+        var dialogo = document.getElementById('DialogoNotificacion');
+        var imgAntecedentes = parentDiv.querySelector('#imgAntecedentes')
+        imgAntecedentes.src = '{% static "loading.gif" %}'
+        console.log('RFC' + txtRFC.value)
+        dialogo.showModal()
+        fetch('/Investigaciones/getJSONAntecedentesNacionales2/' + txtNombre.value +'/' + txtApellido1.value + '/' + txtApellido2.value)
+            .then(function(response) {
+                console.log('response obtener'+  response);
+                if (response.ok) {
+                    return response.text();
+                } else {
+                    throw new Error('Error al obtener los datos del JSON');
+                }
+            })
+            .then(function(data) {
+                antecedentes.value=data
+                imgAntecedentes.src = '{% static "check_blue.png" %}'
+                dialogo.close()
+            })
+       
+}
+
+function getBuro(parentDivId){
+    var parentDiv = document.getElementById(parentDivId);
+       
+        var buro = parentDiv.querySelector('#buro')
+        var persona = parentDiv.querySelector('#idPersona')
+        var imgBuro = parentDiv.querySelector('#imgBuro')
+        //alert('Persona ' + persona.value)
+        var dialogo = document.getElementById('DialogoNotificacion');
+        dialogo.showModal()
+        imgBuro.src ='{% static "loading.gif" %}'
+        fetch('/Investigaciones/getBUROJSON2/' + persona.value)
+            .then(function(response) {
+                console.log('response obtener'+  response);
+                if (response.ok) {
+                    return response.text();
+                } else {
+                    throw new Error('Error al obtener los datos del JSON');
+                }
+            })
+            .then(function(data) {
+                buro.value=data
+                imgBuro.src ='{% static "check_blue.png" %}'
+                dialogo.close()
+            })
+            .catch(function(error) {
+                console.error(error);
+                // Ocultar animación de carga en caso de error
+                dialogo.close();
+                imgBuro.src ='{% static "check_blue.png" %}'
+                buro.value = 'ND'
+                // Obtener todos los elementos dialog abiertos
+
+            });
+       
+}
+
+function getInternacional(parentDivId){
+    var parentDiv = document.getElementById(parentDivId);
+       
+        var txtNombre = parentDiv.querySelector('#txtNombre')
+        var txtApellido1 = parentDiv.querySelector('#txtApellido1')
+        var txtApellido2 = parentDiv.querySelector('#txtApellido2')
+        var internacional = parentDiv.querySelector('#internacional')
+        var imgIntl = parentDiv.querySelector('#imgIntl')
+        var dialogo = document.getElementById('DialogoNotificacion');
+        console.log('RFC' + txtRFC.value)
+        dialogo.showModal()
+        imgIntl.src ="{% static 'loading.gif' %}"
+        fetch('/Investigaciones/getListaInt/' + txtNombre.value +' ' + txtApellido1.value + ' ' + txtApellido2.value)
+            .then(function(response) {
+                console.log('response obtener'+  response);
+                if (response.ok) {
+                    return response.text();
+                } else {
+                    throw new Error('Error al obtener los datos del JSON');
+                }
+            })
+            .then(function(data) {
+                internacional.value=data
+                dialogo.close()
+                imgIntl.src ='{% static "check_blue.png" %}'
+            })
+            .catch(function(error) {
+                console.error(error);
+                // Ocultar animación de carga en caso de error
+                dialogo.close();
+                internacional.value = 'ND'
+                imgIntl.src ='{% static "check_blue.png" %}'
+                // Obtener todos los elementos dialog abiertos
+
+            });
+       
+}
+
+    function getDataFromCURPX(valor) {
+        console.log('obtener datos por curp')
+        if(valor !== ""){
+            var txtCURP = document.getElementById('txtCURP');
+            var txtNombre = document.getElementById('txtNombre');
+            var txtApellido1 = document.getElementById('txtApellido1');
+            var txtApellido2 = document.getElementById('txtApellido2');
+            //var loading = document.getElementById('cargando');
+            var txtFNac =  document.getElementById('txtFNac')
+            // Mostrar animación de carga
+            var dialogo = document.getElementById('DialogoNotificacion');
+            dialogo.showModal();
+            fetch('/Investigaciones/ObtenerDatosxCURP/' + valor)
+            .then(function(response) {
+              console.log('response obtener')
+              //print(response)
+                if (response.ok) {
+                return response.json();
+                } else {
+                throw new Error('Error al obtener los datos del JSON');
+                }
+            })
+            .then(function(data) {
+              console.log('consutla curp existosa')
+                console.log(data);
+                txtNombre.value = data.data.curpdata[0].nombres;
+                txtApellido1.value = data.data.curpdata[0].primerApellido;
+                txtApellido2.value = data.data.curpdata[0].segundoApellido;
+                var partesFecha = data.data.curpdata[0].fechaNacimiento.split('/');
+                var fechaFormateada = partesFecha[2] + '-' + partesFecha[1] + '-' + partesFecha[0];
+                txtFNac.value = fechaFormateada;
+                txtFNac.classList.add('is-valid')
+                txtNombre.classList.add('is-valid')
+                txtApellido1.classList.add('is-valid')
+                txtApellido2.classList.add('is-valid')
+                txtCURP.classList.add('is-valid')
+                // Extraer el sexo de la CURP
+                var sexo = valor.charAt(10);
+                // Obtener la referencia al elemento <select>
+                    var selectSexo = document.getElementById('selSEXO');
+
+                    // Asignar el valor al elemento <select>
+                    selectSexo.value = sexo;
+                    selectSexo.classList.add('is-valid')
+                    console.log(sexo)
+                    //console.log(curp)
+
+                    claveEntidad = data.data.curpdata[0].claveEntidad;
+                    console.log(claveEntidad)
+                    var selLugarNac = document.getElementById('selLugarNacimiento');
+                    selLugarNac.value = claveEntidad
+                    selLugarNac.classList.add('is-valid')
+
+                // Ocultar animación de carga
+                dialogo.close();
+                getCalcularRFC();
+                // Obtener todos los elementos dialog abiertos
+
+            })
+            .catch(function(error) {
+                console.error(error);
+                // Ocultar animación de carga en caso de error
+                dialogo.close();
+                // Obtener todos los elementos dialog abiertos
+
+            });
+        }
+      }
+
+    function getDataByCURP(){
+        const json = '{"status": "success", "message": "resolve!", "data": {"gdata": "", "curpdata": [{"parametro": "", "fechaNacimiento": "17/04/1977", "docProbatorio": 1, "segundoApellido": "BRAVO", "curp": "CABC770417HDFMRR09", "nombres": "CARLOS", "primerApellido": "CAMACHO", "sexo": "HOMBRE", "claveEntidad": "DF", "statusCurp": "RCN", "nacionalidad": "MEX", "entidad": "Ciudad de M\u00e9xico", "datosDocProbatorio": {"entidadRegistro": "09", "tomo": "", "claveMunicipioRegistro": "015", "anioReg": "1977", "claveEntidadRegistro": "DF", "foja": "", "numActa": "00073", "libro": "", "municipioRegistro": ""}, "descriptionStatusCurp": "Registro de cambio no afectando a curp"}], "files": [], "guid": "e6b5c9d0-f38b-4150-98ef-61d7ad0bd14d"}, "code": 200}';
+
+        const data = JSON.parse(json);
+
+        // Obtenemos el primer registro de curpdata
+        const primerRegistro = data.data.curpdata[0];
+
+        // Extraemos los nombres y apellidos
+        const nombres = primerRegistro.nombres;
+        const curp = primerRegistro.curp;
+        const primerApellido = primerRegistro.primerApellido;
+        const segundoApellido = primerRegistro.segundoApellido;
+        const lugarNac = primerRegistro.claveEntidad;
+        const fechaNac = primerRegistro.fechaNacimiento;
+        const partesFecha = fechaNac.split('/');
+        const fechaNacDate = new Date(partesFecha[2], partesFecha[1] - 1, partesFecha[0]);
+
+        const fechaFormateada = fechaNacDate.getFullYear() + '-' + 
+                                ('0' + (fechaNacDate.getMonth() + 1)).slice(-2) + '-' + 
+                                ('0' + fechaNacDate.getDate()).slice(-2);
+
+        console.log(fechaFormateada);
+        console.log(lugarNac)
+        var txtApellido1 = document.getElementById('txtApellido1')
+        var txtApellido2 = document.getElementById('txtApellido2')
+        var txtNombre = document.getElementById('txtNombre')
+        var selLugarNacimiento = document.getElementById('selLugarNacimiento')
+        var txtFNac = document.getElementById('txtFNac')
+        var selSexo = document.getElementById('selSEXO')
+        txtApellido1.value = primerApellido;
+        txtApellido2.value = segundoApellido;
+        txtNombre.value = nombres;
+        selLugarNacimiento.value = lugarNac;
+        txtFNac.value = fechaFormateada;
+
+        selSexo.value = curp[10]
+
+        console.log("Nombre:", nombres);
+        console.log("Primer Apellido:", primerApellido);
+        console.log("Segundo Apellido:", segundoApellido);
+
+        cerrarDialogoC()
+        
+    }
+    
+
+    function getCalcularRFC(parentDivId) {
+    var parentDiv = document.getElementById(parentDivId);
+    var nombre = parentDiv.querySelector('#txtNombre');
+    var apellido1 = parentDiv.querySelector('#txtApellido1');
+    var apellido2 = parentDiv.querySelector('#txtApellido2');
+    var fNac = parentDiv.querySelector('#txtFNac');
+    var txtRFC = parentDiv.querySelector('#txtRFC');
+
+    var fechaParts = fNac.value.split('-');
+    var dia = fechaParts[2];
+    var mes = fechaParts[1];
+    var anio = fechaParts[0];
+    var fechaFormateada = dia + '/' + mes + '/' + anio;
+    var apellido1x = "";
+    var apellido2x = "";
+
+    if (apellido1.value == '') {
+        apellido1x = "X";
+    } else {
+        apellido1x = apellido1.value;
+    }
+
+    if (apellido2.value == "") {
+        apellido2x = "X";
+    } else {
+        apellido2x = apellido2.value;
+    }
+
+    // Mostrar animación de carga
+    var dialogo = document.getElementById('DialogoNotificacion');
+    dialogo.showModal();
+    fetch('/Investigaciones/CalculadoraRFC/' + nombre.value + '/' + apellido1x + '/' + apellido2x + '/' + dia + '/' + mes + '/' + anio)
+        .then(function (response) {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Error al obtener los datos del JSON');
+            }
+        })
+        .then(function (data) {
+            console.log(data);
+            txtRFC.value = data.data.rfc;
+            txtRFC.classList.add('is-valid');
+            //txtNombre.value = data.data.curpdata[0].nombres;
+            dialogo.close();
+            cerrarDialogs()
+        })
+        .then(function(){
+                getBlacklistSAT(parentDivId)
+         })
+         .then(function(){
+          //      getBuro(parentDivId)
+         }).then(function(){
+            addPersona(parentDivId)
+         })
+        
+        
+        .catch(function (error) {
+            txtRFC.value = "XAXA010101000";
+            console.error(error);
+            // Ocultar animación de carga en caso de error
+            dialogo.close();
+            // Obtener todos los elementos dialog abiertos
+        });
+      
+    }
+function cerrarDialogs() {
+    var dialogs = document.querySelectorAll('dialog'); // Obtener todos los elementos <dialog>
+    dialogs.forEach(function(dialog) { // Iterar sobre cada elemento <dialog>
+        if (dialog.open) { // Verificar si el dialog está abierto
+            dialog.close(); // Cerrar el dialog
+        }
+    });
+}
+
+
+function getDataByCURP2(parentDivId) {
+    console.log('obtener datos por curp');
+    
+    var parentDiv = document.getElementById(parentDivId);
+    var txtCURP = parentDiv.querySelector('#txtCURP');
+    var txtNombre = parentDiv.querySelector('#txtNombre');
+    var txtApellido1 = parentDiv.querySelector('#txtApellido1');
+    var txtApellido2 = parentDiv.querySelector('#txtApellido2');
+    var imgAntecedentes = parentDiv.querySelector('#imgAntecedentes')
+    //var lblEstatus = parentDiv.querySelector('#lblEstatus')
+    var btnGuardar = parentDiv.querySelector('#btnGuardar')
+    var buro = parentDiv.querySelector('#buro');
+    buro.value = 'ND';
+    var txtFNac = parentDiv.querySelector('#txtFNac');
+    
+    if (txtCURP.value != "") {
+        // Mostrar animación de carga
+        var dialogo = document.getElementById('DialogoNotificacion');
+        dialogo.showModal();
+     
+        fetch('/Investigaciones/ObtenerDatosxCURP/' + txtCURP.value)
+            .then(function(response) {
+                console.log('response obtener');
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Error al obtener los datos del JSON');
+                }
+            })
+            .then(function(data) {
+                console.log('consulta curp exitosa');
+                console.log(data);
+                txtNombre.value = data.data.curpdata[0].nombres;
+                txtApellido1.value = data.data.curpdata[0].primerApellido;
+                txtApellido2.value = data.data.curpdata[0].segundoApellido;
+                var partesFecha = data.data.curpdata[0].fechaNacimiento.split('/');
+                var fechaFormateada = partesFecha[2] + '-' + partesFecha[1] + '-' + partesFecha[0];
+                txtFNac.value = fechaFormateada;
+                txtFNac.classList.add('is-valid');
+                txtNombre.classList.add('is-valid');
+                txtApellido1.classList.add('is-valid');
+                txtApellido2.classList.add('is-valid');
+                txtCURP.classList.add('is-valid');
+
+                // Extraer el sexo de la CURP
+                var sexo = txtCURP.value.charAt(10);
+                // Obtener la referencia al elemento <select>
+                var selectSexo = parentDiv.querySelector('#selSEXO');
+                // Asignar el valor al elemento <select>
+                selectSexo.value = sexo;
+                selectSexo.classList.add('is-valid');
+                console.log(sexo);
+
+                claveEntidad = data.data.curpdata[0].claveEntidad;
+                console.log(claveEntidad);
+                var selLugarNac = parentDiv.querySelector('#selLugarNacimiento');
+                selLugarNac.value = claveEntidad;
+                selLugarNac.classList.add('is-valid');
+
+                // Ocultar animación de carga
+                dialogo.close();
+               
+                // Retornar una promesa para encadenarla en el siguiente then
+                return getCalcularRFC(parentDivId);
+            })
+            .then(function() {
+                // Llamar a la siguiente función
+                return getAntecedentes(parentDivId);
+            })
+            .then(function() {
+                // Llamar a la siguiente función
+                return getInternacional(parentDivId);
+            })
+            .then(function(){
+            // return getBuro(parentDivId)
+            })
+           
+            .then(function(){
+                return cerrarDialogs();
+            })
+            .then(function(){
+               btnGuardar.disabled = false;
+            })
+            .catch(function(error) {
+                console.error(error);
+                // Ocultar animación de carga en caso de error
+                dialogo.close();
+                cerrarDialogs();
+            });
+    }
+    
+}
+
+
+function cerrarDialogs() {
+    var dialogs = document.querySelectorAll('dialog'); // Obtener todos los elementos <dialog>
+    dialogs.forEach(function(dialog) { // Iterar sobre cada elemento <dialog>
+        if (dialog.open) { // Verificar si el dialog está abierto
+            dialog.close(); // Cerrar el dialog
+        }
+    });
+}
+
+
+    function autoSave(parentDivId){
+        var parentDiv = document.getElementById(parentDivId);
+        var buro = parentDiv.querySelector('#buro');
+        var estatus = parentDiv.querySelector('#estatus');
+        var persona = parentDiv.querySelector('#idPersona')
+        var sat = parentDiv.querySelector('#idPersona')
+        var antecedentes = parentDiv.querySelector('#antecedentes')
+        var investigacion = parentDiv.querySelector('#idInvestigacion')
+        var internacional = parentDiv.querySelector('#internacional')
+        if (buro.value !== '' && persona.value !== '' && sat.value !== '' && antecedentes.value !== '' && internacional.value !== '') {
+    // Todos los valores son diferentes de vacío
+        console.log('Todos los valores son diferentes de vacío.');
+        guardarInvestigacion(parentDivId);
+        } else {
+            // Al menos uno de los valores está vacío
+            console.log('Al menos uno de los valores está vacío.');
+        }
+
+        if(investigacion.value !== '')
+        {
+            clearInterval();
+        }
+
+
+    }
+
+    function getDataByCURP3(parent){
+    const json = '{"status": "success", "message": "resolve!", "data": {"gdata": "", "curpdata": [{"parametro": "", "fechaNacimiento": "17/04/1977", "docProbatorio": 1, "segundoApellido": "BRAVO", "curp": "CABC770417HDFMRR09", "nombres": "CARLOS", "primerApellido": "CAMACHO", "sexo": "HOMBRE", "claveEntidad": "DF", "statusCurp": "RCN", "nacionalidad": "MEX", "entidad": "Ciudad de M\u00e9xico", "datosDocProbatorio": {"entidadRegistro": "09", "tomo": "", "claveMunicipioRegistro": "015", "anioReg": "1977", "claveEntidadRegistro": "DF", "foja": "", "numActa": "00073", "libro": "", "municipioRegistro": ""}, "descriptionStatusCurp": "Registro de cambio no afectando a curp"}], "files": [], "guid": "e6b5c9d0-f38b-4150-98ef-61d7ad0bd14d"}, "code": 200}';
+
+    const data = JSON.parse(json);
+
+    // Obtenemos el primer registro de curpdata
+    const primerRegistro = data.data.curpdata[0];
+
+    // Extraemos los nombres y apellidos
+    const nombres = primerRegistro.nombres;
+    const curp = primerRegistro.curp;
+    const primerApellido = primerRegistro.primerApellido;
+    const segundoApellido = primerRegistro.segundoApellido;
+    const lugarNac = primerRegistro.claveEntidad;
+    const fechaNac = primerRegistro.fechaNacimiento;
+    const partesFecha = fechaNac.split('/');
+    const fechaNacDate = new Date(partesFecha[2], partesFecha[1] - 1, partesFecha[0]);
+
+    const fechaFormateada = fechaNacDate.getFullYear() + '-' + 
+                            ('0' + (fechaNacDate.getMonth() + 1)).slice(-2) + '-' + 
+                            ('0' + fechaNacDate.getDate()).slice(-2);
+
+    console.log(fechaFormateada);
+    console.log(lugarNac)
+    
+    // Obtener el div con id "conyugue"
+    var divConyugue = document.getElementById(parent);
+
+    // Obtener todos los elementos dentro del div "conyugue"
+    var controles = divConyugue.querySelectorAll('*');
+
+    // Iterar sobre los controles y establecer los valores según lo necesario
+    controles.forEach(control => {
+        switch(control.id) {
+            case 'txtApellido1':
+                control.value = primerApellido;
+                break;
+            case 'txtApellido2':
+                control.value = segundoApellido;
+                break;
+            case 'txtNombre':
+                control.value = nombres;
+                break;
+            case 'selLugarNacimiento':
+                control.value = lugarNac;
+                break;
+            case 'txtFNac':
+                control.value = fechaFormateada;
+                break;
+            case 'selSEXO':
+                control.value = curp[10];
+                break;
+            default:
+                break;
+        }
+    });
+
+    console.log("Nombre:", nombres);
+    console.log("Primer Apellido:", primerApellido);
+    console.log("Segundo Apellido:", segundoApellido);
+
+    cerrarDialogo2()
+    getCalcularRFC(parent)
+}
+
+
+
+    function convertToUppercase(input) {
+        input.value = input.value.toUpperCase();
+      }
+
+    function populateLugarNacimiento2(parent) {
+    var divConyugue = document.getElementById(parent);
+
+    // Obtener todos los elementos dentro del div "conyugue"
+    var controles = divConyugue.querySelectorAll('*');
+
+    // Iterar sobre los controles y establecer los valores según lo necesario
+    controles.forEach(control => {
+        switch (control.id) {
+            case 'selLugarNacimiento':
+                fetch('/Generales/apiLugarNacimiento')
+                    .then(function (response) {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            throw new Error('Error al obtener los datos del JSON');
+                        }
+                    })
+                    .then(function (data) {
+                        console.log(data);
+                        for (var i = 0; i < data.length; i++) {
+                            var option = document.createElement('option');
+                            option.value = data[i].clave;
+                            option.textContent = data[i].lugar;
+                            control.appendChild(option); // Agregar la opción al select
+                        }
+                    })
+                    .catch(function (error) {
+                        console.error(error);
+                    });
+                break;
+            default:
+                break;
+        }
+    });
+}
+
+
+
+    populateLugarNacimiento2('divConyugue')
+    populateLugarNacimiento2('divPadreArrendatario')
+    populateLugarNacimiento2('divMadreArrendatario')
+    populateLugarNacimiento2('divMadreConyugue')
+    populateLugarNacimiento2('divPadreConyugue')
+    populateLugarNacimiento2('divAval')
+    function populateLugarNacimiento() {
+        var select = document.getElementById('selLugarNacimiento');
+      
+        fetch('/Generales/apiLugarNacimiento')
+          .then(function(response) {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error('Error al obtener los datos del JSON');
+            }
+          })
+          .then(function(data) {
+            console.log(data)
+            for (var i = 0; i < data.length; i++) {
+              var option = document.createElement('option');
+              option.value = data[i].clave;
+              option.textContent = data[i].lugar;  // Corrección aquí
+              select.appendChild(option);
+            }
+          })
+          .catch(function(error) {
+            console.error(error);
+          });
+      }
+      function openDialogoConfirm(){
+        event.preventDefault();
+        var dialogo = document.getElementById('DialogoConfirmacion');
+        dialogo.showModal();
+    }
+
+    function saveAll(){
+        var principal= document.getElementById('dviPrincipal');
+        var inv_principal = principal.querySelector('#idInvestigacion');
+        var conyugue = document.getElementById('divConyugue');
+        var inv_conyugue = conyugue.querySelector('#idInvestigacion')
+        var padreArrendatario = document.getElementById('divPadreArrendatario');
+        var inv_padrearrendatario = padreArrendatario.querySelector('#idInvestigacion')
+        var madreArrendatario = document.getElementById('divMadreArrendatario');
+        var inv_madrearrendatario = madreArrendatario.querySelector('#idInvestigacion')
+        var padreConyugue = document.getElementById('divPadreConyugue');
+        var inv_padreconyuge = padreConyugue.querySelector('#idInvestigacion')
+        var madreConyugue= document.getElementById('divMadreConyugue');
+        var inv_madreconyugue = madreConyugue.querySelector('#idInvestigacion')
+        var aval = document.getElementById('divAval');
+        var inv_aval = aval.querySelector('#idInvestigacion')
+
+        var datos = {
+        principal: inv_principal.value,
+        conyugue: inv_conyugue.value,
+        padreArrendatario : inv_padrearrendatario.value,
+        madreArrendatario: inv_madrearrendatario.value,
+        madreConyugue: inv_madreconyugue.value,
+        padreConyugue: inv_padreconyuge.value,
+        aval: inv_aval.value,
+        clave2: "valor2"
+        };
+
+       console.log('Datos all')
+       console.log(datos)
+       if(inv_principal.value ===''){
+        alert('La investigación principal no puede estar en blanco, válide su información')
+       }else{
+
+        try {
+        fetch("/Investigaciones/APISavePremium", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(datos)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la solicitud: ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            //dialogo.close();
+            console.log("Respuesta del servidor:", data);
+            window.location.href = "/Investigaciones/PremiumList";
+
+          //  estatus.innerHTML='Guardado con ID'+ data.id
+          //  investigacion.value=data.id
+        })
+        .catch(error => {
+            console.error('Error en la solicitud:', error);
+            // Puedes manejar el error aquí si es necesario
+           // dialogo.close();
+        })
+        .finally(() => {
+            console.log('La solicitud ha finalizado'); // Agregamos un mensaje para mostrar que la solicitud ha finalizado, independientemente de si fue exitosa o no
+        });
+    } catch(error) {
+        console.error('Error en la solicitud:', error);
+     //   dialogo.close();
+    }
+
+       }
+
+    }
+
+      populateLugarNacimiento();
+      
+</script>
+{% endblock %}

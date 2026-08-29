@@ -1,0 +1,753 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block title %}
+    Investigaciones
+{% endblock %}
+
+{% block containerHead %}
+  <div class="flex-wrap d-flex justify-content-between align-items-center">
+    <div>
+        <h1>Captura de datos del Investigado</h1>
+    </div>
+    <div>
+      <!--  <a href="/investigacion/nueva" class="btn btn-success">Nueva</a> -->
+    </div>
+</div>
+{% endblock %}
+{% block subContainerHead %}
+{% endblock %}
+{% block contenido %}
+
+      <div class="card">
+
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Datos del investigado</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    
+                    <p>Capture los siguientes Datos</p>
+                    <form method="post" action="{% url 'Investigaciones:AgregarPersonaM' %}" enctype="multipart/form-data" id="upload-form">
+                    {% csrf_token %}
+                   
+                            <div class='row mt-3'>
+                                <div class='col-3'>
+                                    <div class='form-group'>
+                                        <label labelfor='txtCURP' class='form-label'>CURP:</label>
+                                        <input class='form-control' name='txtCURP' id='txtCURP' required maxlength='18'  oninput="convertToUppercase(this)" onblur="getDataFromCURP(this.value)" />
+                                    </div>
+
+                                </div> 
+                                
+                                    <div class='col-3'>
+                                        <div class='form-group'>
+                                            <label labelfor='txtNombre' class='form-label'>Nombres:</label>
+                                            <input class='form-control' name='txtNombre' id='txtNombre'  required   oninput="convertToUppercase(this)"/>
+                                        </div>
+                                    </div> 
+                                    <div class='col-3'>
+                                        <div class='form-group'>
+                                            <label labelfor='txtApellido1' class='form-label'>Primer Apellido:</label>
+                                            <input class='form-control' name='txtApellido1' id='txtApellido1'  oninput="convertToUppercase(this)" />
+                                        </div>
+    
+                                    </div> 
+                                    <div class='col-3'>
+                                        <div class='form-group'>
+                                            <label labelfor='txtApellido2' class='form-label'>Segundo Apellido:</label>
+                                            <input class='form-control' name='txtApellido2' id='txtApellido2'  oninput="convertToUppercase(this)" />
+                                        </div>
+    
+                                    </div> 
+                                    
+                                    
+                                    <div class='col-3'>
+                                        <div class='form-group'>
+                                            <label labelfor='txtFNac' class='form-label'>Fecha de Nacimiento:</label>
+                                            <input  type='date' class='form-control' name='txtFNac' id='txtFNac'  />
+                                        </div>
+    
+                                    </div> 
+
+
+
+                                    <div class='col-3'>
+                                        <div class='form-group'>
+                                            <label labelfor='selSEXO' class='form-label'>Sexo</label>
+                                            <select name='selSEXO' id='selSEXO' class='form-select'>
+                                                <option value=''>-Selecione Sexo-</option>
+                                                <option value='H'>HOMBRE</option>
+                                                <option value='M'>MUJER</option>
+                                            </select>
+                                        </div>
+    
+                                    </div> 
+                                    <div class='col-3'>
+                                        <div class='form-group'>
+                                            <label labelfor='selLugarNacimiento' class='form-label'>Lugar de Nacimiento</label>
+                                            <select name='selLugarNacimiento' id='selLugarNacimiento' class='form-select' onchange='obtenerCURPPorDatos()'>
+                                                <option value=''>-Seleccione una opción-</option>
+                                            </select>
+                                        </div>
+    
+                                    </div> 
+
+                                    <div class='col-2'>
+                                      <div class='form-group'>
+                                        <span>
+                                          <label for='SelTipoINE' class='form-label'>Clase de INE/IFE</label>
+                                          <select name='selTipoINE' id='selTipoINE' class='form-select' >
+                                            <option value=''>-Seleccione un tipo de INE/IFE-</option>
+                                          </select>
+                                       
+                                        </span>
+                                        
+                                      </div>
+                                    </div>
+
+				<div class='col-1'>
+					<br>
+                                      <div class='form-group'>
+                                        
+                                          <button class='btn btn-sm btn-primary' style='margin-botom=10px !important;position:absolute !important;margin-top:-30px !important; bottom:65%;' id='btnAyuda' >Ayuda</button>
+                                      </div>
+                                    </div>
+                                   
+
+                                <div class='col-2'>
+                                    <div class='form-group'>
+                                        <label labelfor='txtEmision' class='form-label'>Núm. Emisión</label>
+                                        <input class='form-control' name='txtEmision' id='txtEmision'  maxlength='2' required />
+                                    </div>
+
+                                </div> 
+                                <div class='col-4'>
+                                    <div class='form-group'>
+                                        <label labelfor='txtClaveElector' class='form-label'>Clave de elector</label>
+                                        <input class='form-control' name='txtClaveElector' id='txtClaveElector' maxlength='18' required   oninput="convertToUppercase(this)"/>
+                                    </div>
+
+                                </div> 
+                                <div class='col-4'>
+                                    <div class='form-group'>
+                                        <label labelfor='txtCIC' class='form-label'>CIC</label>
+                                        <input class='form-control' name='txtCIC' id='txtCIC' maxlength='18' required   oninput="convertToUppercase(this)"/>
+                                    </div>
+    
+                                </div> 
+                                <div class='col-4'>
+                                    <div class='form-group'>
+                                        <label labelfor='txtIdentificador' class='form-label'>Identificador del Ciudadano</label>
+                                        <input class='form-control' name='txtIdentificador' id='txtIdentificador' maxlength='13' required   oninput="convertToUppercase(this)"/>
+                                    </div>
+    
+                                </div> 
+                              
+                              
+                                
+
+                                <div class='col-4'>
+                                    <div class="form-group">
+                                        <label class="form-label" for="email">Imagen frontal de la INE</label>
+                                        <input type="file" name="userfile" id="userfile" onchange="previewImagen(event)" class='form-control' accept="image/*" />
+                                    </div>
+                                </div>
+                                <div class='col-4'>
+                                    <div class="form-group">
+                                        <label class="form-label" for="email">Imagen frontal de la INE</label>
+                                        <input type="file" name="userfile2" id="userfile2" onchange="previewImagen2(event)" class='form-control'  accept="image/*" />
+                                    </div>
+                                </div>
+                                <hr>
+                                <h5>Datos Fiscales</h5>
+                                <div class='col-3 mt-2'>
+                                    <div class='form-group'>
+                                        <label labelfor='txtRFC' class='form-label'>RFC</label>
+                                        <input class='form-control' name='txtRFC' id='txtRFC' maxlength='18' required  onclick='getCalcularRFC()'  oninput="convertToUppercase(this)"/>
+                                    </div>
+    
+                                </div> 
+                                <div class='col-6'>
+                                    <div class='row'>
+                                        <div class='col-6'> 
+                                            <img src="{% static "img/inefrente.jpg" %}" alt="" name='archivo1' class="img-thumbnail" id="imagen-preview" width="300" height="150" src="{{ foto }}">
+                                        </div>
+                                        <div class='col-6'>
+                                            
+                                            <img src="{% static "img/inetrasera.png" %}" alt="" name='archivo2' class="img-thumbnail" id="imagen-preview2" width="300" height="150" src="{{ foto2 }}">
+                        
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <input type='hidden' name='valINE' id='valINE'>
+                                
+                               
+                                  <div class='col-3 mt-2'>
+                                    
+                                      <input type='submit' value='Guardar' class='btn btn-success'>
+                                      <input type='reset' class='btn btn-warning' onclick='limpiarFormulario()' value="Limpiar">
+                                   
+                                  </div>
+                               
+                                
+                                
+
+
+                            </div> 
+                            
+
+                         
+
+
+                    </form>
+                    <pre></pre>
+                    <pre></pre>
+                    <pre></pre>
+                    <pre></pre>
+                    <pre></pre>
+
+                </div>
+            </div>
+            <!-- MODAL  -->
+            <div class="modal" tabindex="-1" id='modalError'>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Ocurrio un error al procesar los datos</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="modal-body">
+                           
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                            
+                        </div>
+                    </div>
+                </div>
+                </div>
+                  <!-- MODAL  -->
+            <div class="modal" tabindex="-1" id='modalConsejos'>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Recomendaciones para un escaneo correcto de la INE</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="modal-body">
+                            <ol>
+                            <li>Tomar la foto con poca distancia y que no sea solo los bordes de la credencial. </li>
+                            <li>Evitar luz sobre los hologramas ya que hace que brillen y afectan el procesamiento de la imagen.</li>
+                            <li> Una resolución entre 800px y 2000px sería lo ideal para no forzar tanto el procesamiento de la imagen.</li>
+                            <li> Evitar que el color del fondo sea similar al de la credencial.</li>
+                            <li> Evitar sombras al momento de tomar la fotografía.</li>
+                            <li>La orientación se recomienda que estén en posición normal de frente en horizontal.</li>
+                            <li> Evitar sostener la imagen con los dedos, se puede reposar sobre la palma de la mano.</li>
+                            <li>Se recomienda que no se cubra nada en la credencial.</li>
+                            <li>No es recomendable hacerlo con imágenes escaneadas, pero en caso de hacerlo que sean legibles y de preferencia a color.</li>
+                            </ol>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                            
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <dialog id="DialogoNotificacion" style='background-color:#2F7BEE; color:#ffffff; border-radius: 5px;margin-top=10%'>
+                    <h3 style='color:#ffffff'>Por favor espere.</h3>
+                    <p>Se estan obteniendo los datos del investigado a través de su C.U.R.P</p>
+                </dialog>
+
+
+                <dialog id="errorTIPO"  style='background-color:#ff0000; color:#ffffff; border-radius: 25px;margin-top=10%'>
+                    <p><b>Esta Identifiación Ya no es válida.</b></p>
+                    <button id="btnOK" class='btn btn-primary btn-sm'>OK</button>
+                  </dialog>
+
+                  <dialog id="dConsulaINE"  style='background-color:#2F7BEE; color:#ffffff; border-radius: 25px;margin-top=10%'>
+                    <h3 style='color:#ffffff'>Por favor espere.</h3>
+                    <p>Validando información de la INE/IFE</p>
+                  </dialog>
+
+                  <dialog id="confirmDialog">
+                    <p>¿Estás seguro de continuar con dar de alta al investigado?</p>
+                    <button id="confirmYes">Sí</button>
+                    <button id="confirmNo">No</button>
+                  </dialog>
+                  
+
+                  <div class="modal" tabindex="-1" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Identifica el tipo de INE/IFE a capturar</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval="30000" >
+                                <div class="carousel-inner" id="carouselTipoINE">
+
+                                  <div class="carousel-item" id="A">
+                                    <img src="{% static 'img/INE_A.jpg' %}" class="d-block w-100" alt="Imagen 1">
+                                  </div>
+                                  <div class="carousel-item" id="B">
+                                    <img src="{% static 'img/INE_B.jpg' %}" class="d-block w-100" alt="Imagen 1">
+                                  </div>
+                                  <div class="carousel-item" id="C">
+                                    <img src="{% static 'img/INE_C.jpg' %}" class="d-block w-100" alt="Imagen 1">
+                                  </div>
+                                  <div class="carousel-item" id="D">
+                                    <img src="{% static 'img/INE_D.jpg' %}" class="d-block w-100" alt="Imagen 1">
+                                  </div>
+                                  <div class="carousel-item" id="EF">
+                                    <img src="{% static 'img/INE_EF.jpg' %}" class="d-block w-100" alt="Imagen 1">
+                                    <div class="carousel-caption d-none d-md-block">
+                                      <h5>Qué datos capturar:</h5>
+                                      <p>
+                                           Codigo de Identificacion de la Credencial (CIC); son los primeros 9 digitos del MRZ
+                                            OCR (identificador del ciudadano): 9 ultimos digitos de la primera linea del MRZ
+
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <div class="carousel-item" id="GH">
+                                    <img src="{% static 'img/INE_GH.jpg' %}" class="d-block w-100" alt="Imagen 1">
+                                    
+
+                                  </div>
+                  
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only"></span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only"></span>
+                                </a>
+        
+        
+                                </div>
+        
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        
+                            </div>
+                        </div>
+                </div>
+                  
+              
+{% endblock %}
+{% block customJS %}
+<script>
+
+var carousel = document.getElementById('carouselExampleControls');
+
+carousel.pause = true;
+carousel.interval = false;
+
+ var btn = document.getElementById("btnAyuda");
+  btn.addEventListener("click", function(event) {
+    // Prevenir la validación del formulario
+    event.preventDefault();
+    displayTipoINE();
+  });
+
+function displayTipoINE() {
+ var identificador = document.getElementById('txtIdentificador');
+  var mySelect = document.getElementById('selTipoINE');
+  var selectedOption = mySelect.selectedOptions[0];
+  var selectedText = selectedOption.textContent.trim();
+  var divName = selectedText;
+  
+  if (divName == 'D')
+  {
+	identificador.maxLenght=13;
+  }else{
+  	identificador.maxLength=9;
+  }
+  if(divName =='E' || divName == 'F'){
+    divName = 'EF';
+  }
+  if(divName =='G' || divName == 'H'){
+    divName = 'GH';
+  }
+  var divImg = document.getElementById(CSS.escape(divName));
+  divImg.classList.add('active');
+
+ 
+
+  var modal = new bootstrap.Modal(document.getElementById('myModal'));
+  // Abre el modal
+  modal.show();
+}
+
+
+
+    function generarCURP(){
+        alert('hola')
+    }
+    function limpiarFormulario() {
+        var form = document.getElementById('upload-form');
+        var foto1 = document.getElementById('imagen-preview')
+        var foto2 = document.getElementById('imagen-preview2')
+        foto1.src="{% static "img/inefrente.jpg" %}"
+        foto2.src="{% static "img/inetrasera.png" %}"
+        var formElements = form.elements;
+      
+        for (var i = 0; i < formElements.length; i++) {
+          var element = formElements[i];
+      
+          if (element.tagName === 'INPUT' && element.classList.contains('is-valid') || element.tagName === 'SELECT' && element.classList.contains('is-valid')) {
+            element.classList.remove('is-valid');
+          }
+        }
+      }
+    function convertToUppercase(input) {
+        input.value = input.value.toUpperCase();
+      }
+
+      function obtenerCURPPorDatos()
+      {
+        var nombre = document.getElementById('txtNombre');
+        var apellido1 = document.getElementById('txtApellido1');
+        var apellido2 = document.getElementById('txtApellido2');
+        var selLugarNac = document.getElementById('selLugarNacimiento');
+        var fNac =  document.getElementById('txtFNac')
+        var txtRFC = document.getElementById('txtRFC')
+        var fechaParts = fNac.value.split('-');
+        var dia = fechaParts[2];
+        var mes = fechaParts[1];
+        var anio = fechaParts[0];
+        var selectSexo = document.getElementById('selSEXO');
+        // Mostrar animación de carga
+        console.log('/Investigaciones/GenerarCURP/'+selLugarNac.value +"/"+dia+"/"+mes+"/"+nombre.value+"/"+apellido1.value+"/"+apellido2.value+"/"+anio + '/'+selectSexo.value)
+        var dialogo = document.getElementById('DialogoNotificacion');
+        dialogo.showModal();
+
+        fetch('/Investigaciones/GenerarCURP/'+selLugarNac.value +"/"+dia+"/"+mes+"/"+nombre.value+"/"+apellido1.value+"/"+apellido2.value+"/"+anio + '/'+selectSexo.value)
+          .then(function(response) {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error('Error al obtener los datos del JSON');
+            }
+          })
+          .then(function(data) {
+            console.log(data);
+            txtNombre.value = data.data.curpdata[0].nombres;
+            txtApellido1.value = data.data.curpdata[0].primerApellido;
+            txtApellido2.value = data.data.curpdata[0].segundoApellido;
+            var partesFecha = data.data.curpdata[0].fechaNacimiento.split('/');
+            var fechaFormateada = partesFecha[2] + '-' + partesFecha[1] + '-' + partesFecha[0];
+            txtFNac.value = fechaFormateada;
+            txtFNac.classList.add('is-valid')
+            txtNombre.classList.add('is-valid')
+            txtApellido1.classList.add('is-valid')
+            txtApellido2.classList.add('is-valid')
+            txtCURP.classList.add('is-valid')
+            txtCURP.value = data.data.curpdata[0].curp;
+            //
+           
+
+            // Extraer el sexo de la CURP
+            var sexo = data.data.curpdata[0].curp.charAt(10);
+            // Obtener la referencia al elemento <select>
+                var selectSexo = document.getElementById('selSEXO');
+                
+                // Asignar el valor al elemento <select>
+                selectSexo.value = sexo;
+                selectSexo.classList.add('is-valid')
+                console.log(sexo)
+                //console.log(curp)
+
+                claveEntidad = data.data.curpdata[0].claveEntidad;
+                console.log(claveEntidad)
+                var selLugarNac = document.getElementById('selLugarNacimiento');
+                selLugarNac.value = claveEntidad
+                selLugarNac.classList.add('is-valid')
+                
+           
+            // Ocultar animación de carga
+            dialogo.close();
+            getCalcularRFC();
+          })
+          .catch(function(error) {
+            console.error(error);
+            // Ocultar animación de carga en caso de error
+            dialogo.close();
+          });
+      }
+
+      function getCalcularRFC(){
+        var nombre = document.getElementById('txtNombre');
+        var apellido1 = document.getElementById('txtApellido1');
+        var apellido2 = document.getElementById('txtApellido2');
+        var fNac =  document.getElementById('txtFNac')
+        var txtRFC = document.getElementById('txtRFC')
+       
+        var fechaParts = fNac.value.split('-');
+        var dia = fechaParts[2];
+        var mes = fechaParts[1];
+        var anio = fechaParts[0];
+
+        var fechaFormateada = dia + '/' + mes + '/' + anio;
+        
+
+          // Mostrar animación de carga
+          var dialogo = document.getElementById('DialogoNotificacion');
+          dialogo.showModal();
+          fetch('/Investigaciones/CalculadoraRFC/'+ nombre.value +'/'+apellido1.value+'/'+apellido2.value+'/'+dia+'/'+mes+'/'+anio)
+          .then(function(response) {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error('Error al obtener los datos del JSON');
+            }
+          })
+          .then(function(data) {
+            console.log(data);
+            txtRFC.value = data.data.rfc;
+            txtRFC.classList.add('is-valid')
+            //txtNombre.value = data.data.curpdata[0].nombres;
+            dialogo.close();
+          })
+          .catch(function(error) {
+            console.error(error);
+            // Ocultar animación de carga en caso de error
+            dialogo.close();
+          });
+      }
+
+      function getDataFromCURP(valor) {
+        if(!valor == ""){
+            var txtCURP = document.getElementById('txtCURP');
+            var txtNombre = document.getElementById('txtNombre');
+            var txtApellido1 = document.getElementById('txtApellido1');
+            var txtApellido2 = document.getElementById('txtApellido2');
+            var loading = document.getElementById('cargando');
+            var fNac =  document.getElementById('txtFNac')
+            
+            // Mostrar animación de carga
+            var dialogo = document.getElementById('DialogoNotificacion');
+            dialogo.showModal();
+            
+        
+            fetch('/Investigaciones/ObtenerDatosxCURP/' + valor)
+            .then(function(response) {
+                if (response.ok) {
+                return response.json();
+                } else {
+                throw new Error('Error al obtener los datos del JSON');
+                }
+            })
+            .then(function(data) {
+                console.log(data);
+                txtNombre.value = data.data.curpdata[0].nombres;
+                txtApellido1.value = data.data.curpdata[0].primerApellido;
+                txtApellido2.value = data.data.curpdata[0].segundoApellido;
+                var partesFecha = data.data.curpdata[0].fechaNacimiento.split('/');
+                var fechaFormateada = partesFecha[2] + '-' + partesFecha[1] + '-' + partesFecha[0];
+                txtFNac.value = fechaFormateada;
+                txtFNac.classList.add('is-valid')
+                txtNombre.classList.add('is-valid')
+                txtApellido1.classList.add('is-valid')
+                txtApellido2.classList.add('is-valid')
+                txtCURP.classList.add('is-valid')
+                //
+            
+
+                // Extraer el sexo de la CURP
+                var sexo = valor.charAt(10);
+                // Obtener la referencia al elemento <select>
+                    var selectSexo = document.getElementById('selSEXO');
+                    
+                    // Asignar el valor al elemento <select>
+                    selectSexo.value = sexo;
+                    selectSexo.classList.add('is-valid')
+                    console.log(sexo)
+                    //console.log(curp)
+
+                    claveEntidad = data.data.curpdata[0].claveEntidad;
+                    console.log(claveEntidad)
+                    var selLugarNac = document.getElementById('selLugarNacimiento');
+                    selLugarNac.value = claveEntidad
+                    selLugarNac.classList.add('is-valid')
+
+                // Ocultar animación de carga
+                dialogo.close();
+                getCalcularRFC();
+            })
+            .catch(function(error) {
+                console.error(error);
+                // Ocultar animación de carga en caso de error
+                dialogo.close();
+            });
+        }
+             
+      }
+
+    
+      function populateLugarNacimiento() {
+        var select = document.getElementById('selLugarNacimiento');
+      
+        fetch('/Generales/apiLugarNacimiento')
+          .then(function(response) {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error('Error al obtener los datos del JSON');
+            }
+          })
+          .then(function(data) {
+            console.log(data)
+            for (var i = 0; i < data.length; i++) {
+              var option = document.createElement('option');
+              option.value = data[i].clave;
+              option.textContent = data[i].lugar;  // Corrección aquí
+              select.appendChild(option);
+            }
+          })
+          .catch(function(error) {
+            console.error(error);
+          });
+      }
+
+      populateLugarNacimiento();
+    function populateTipoINE() {
+        var select = document.getElementById('selTipoINE');
+      
+        fetch('/Generales/apiTipoINE')
+          .then(function(response) {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error('Error al obtener los datos del JSON');
+            }
+          })
+          .then(function(data) {
+            console.log(data)
+            for (var i = 0; i < data.length; i++) {
+              var option = document.createElement('option');
+              option.value = data[i].pk;
+              option.textContent = data[i].tipo;  // Corrección aquí
+              select.appendChild(option);
+            }
+          })
+          .catch(function(error) {
+            console.error(error);
+          });
+      }
+      
+
+    populateTipoINE();
+
+ function displayRecomendacion(){
+       // Obtén una referencia al elemento del modal
+var modal = new bootstrap.Modal(document.getElementById('modalConsejos'));
+// Abre el modal
+modal.show();
+}
+
+function extractFechaNacimiento(curpValue) {
+    var year = curpValue.substring(4, 6);
+    var month = curpValue.substring(6, 8);
+    var day = curpValue.substring(8, 10);
+  
+    // Verificar si el año pertenece a 1900 o 2000
+    if (year >= 0 && year <= 99) {
+      year = (year >= 0 && year <= 21) ? '20' + year : '19' + year;
+    }
+  
+    var fechaNacimiento = year + '-' + month + '-' + day;
+    document.getElementById('txtFNac').value = fechaNacimiento;
+  }
+  
+
+  function previewImagen(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const imagenPreview = document.getElementById('imagen-preview');
+                const imagenPreview2 = document.getElementById('imagen-preview2');
+                if (event.target.id === 'userfile') {
+                    imagenPreview.src = reader.result;
+                } else if (event.target.id === 'userfile2') {
+                    imagenPreview2.src = reader.result;
+                }
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+        function previewImagen2(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const imagenPreview = document.getElementById('imagen-preview');
+                const imagenPreview2 = document.getElementById('imagen-preview2');
+                if (event.target.id === 'userfile') {
+                    imagenPreview.src = reader.result;
+                } else if (event.target.id === 'userfile2') {
+                    imagenPreview2.src = reader.result;
+                }
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    
+        function validarINE(d){
+            var valINE = document.getElementById('valINE')
+            var dialog = document.getElementById('errorTIPO');
+            var btnOK = document.getElementById('btnOK');
+            var cic = document.getElementById('txtCIC');
+            var identificador = document.getElementById('txtIdentificador');
+            var selectedOption = d.options[d.selectedIndex];
+            var texto = selectedOption.text;
+            var date = new Date();
+            var year = date.getFullYear();
+            if (texto == 'A' || texto == 'B'){
+               
+               dialog.showModal();
+            }else{
+                if(year > 2024 && texto == 'C'){
+                    dialog.showModal();
+                }else{
+                    getlistaNominal(texto, cic.value , identificador.value);
+                }
+            }
+            
+
+            btnOK.addEventListener('click', function() {
+                dialog.close();
+              });
+        }
+
+        function getlistaNominal(tipo, cic, identificador){
+            console.log('/Investigaciones/ValidaINEListaNominal/'+ tipo + '/' + cic + '/' +identificador )
+            var dialogo = document.getElementById('dConsulaINE');
+            var inehidden = document.getElementById('valINE');
+            dialogo.showModal();
+            fetch('/Investigaciones/ValidaINEListaNominal/'+ tipo + '/' + cic + '/' +identificador )
+            .then(function(response) {
+              if (response.ok) {
+                return response.json();
+              } else {
+                throw new Error('Error al obtener los datos del JSON');
+              }
+            })
+            .then(function(data) {
+              console.log(data)
+              //inehidden.value = data;
+              //alert(data);
+              inehidden.value = JSON.stringify(data)
+              dialogo.close();
+              
+              
+            })
+            .catch(function(error) {
+              console.error(error);
+            });
+        }
+</script>
+{% endblock %}

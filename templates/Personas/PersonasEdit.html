@@ -1,0 +1,62 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block title %}
+    Editar Persona
+{% endblock %}
+{% block containerHead %}
+  <div class="flex-wrap d-flex justify-content-between align-items-center">
+    <div>
+        <h1>Editar datos de persona</h1>
+    </div>
+    <div>
+      <!--  <a href="/investigacion/nueva" class="btn btn-success">Nueva</a> -->
+    </div>
+</div>
+{% endblock %}
+{% block subContainerHead %}
+{% endblock %}
+{% block contenido %}
+      <div class="card" id="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Editar datos de persona física en Sistema LegalBit</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                    {% csrf_token %}
+                    {% for field in form.visible_fields %}
+                        {{ field.label }}
+                        {{ field }}
+                        {% for error in field.errors %}
+                        {% endfor %}
+                    {% endfor %}
+                <button type="submit" class="btn btn-success btn-sm mt-2">Guardar</button>
+                </form>
+
+
+                </div>
+            </div>
+
+
+
+
+
+
+{% endblock %}
+{% block customJS %}
+    <script>
+        var tel1 = document.getElementById('id_telefono_principal_0')
+        var ext1 = document.getElementById('id_telefono_principal_1')
+        var tel2 = document.getElementById('id_telefono_secundario_0')
+        var ext2 = document.getElementById('id_telefono_secundario_1')
+        ext1.setAttribute('class', 'form-control')
+        ext2.setAttribute('class', 'form-control')
+        tel1.setAttribute('class', 'form-control')
+        tel2.setAttribute('class', 'form-control')
+
+</script>
+    </script>
+
+{% endblock %}
+

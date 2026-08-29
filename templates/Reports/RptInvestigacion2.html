@@ -1,0 +1,541 @@
+{% load static %}
+{% load tz %}
+<!DOCTYPE html>
+<html class="fontawesome-i2svg-active fontawesome-i2svg-complete" lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com"  />
+         <!-- One file includes all the Font Awesome Free icons and utilities -->
+         <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;700&display=swap"
+          rel="stylesheet"
+        />
+          <style>
+    
+            :root {
+                --static-url: "{% static '' %}";
+            }
+            @font-face {
+      font-family: 'SansPro';
+      src: url( {% static '/fonts/SourceSansPro-Regular.ttf' %}) format('truetype');
+      font-style: normal;
+      font-weight: normal;
+    }
+                 @font-face {
+      font-family: 'SansProBlack';
+      src: url( {% static '/fonts/SourceSansPro-Black.ttf' %}) format('truetype');
+      font-style: normal;
+      font-weight: normal;
+    }
+               @font-face {
+      font-family: 'Carbona';
+      src: url( {% static '/fonts/carbona/Carbona-Regular.otf' %}) format('opentype');
+      font-style: normal;
+      font-weight: normal;
+    }
+                       @font-face {
+      font-family: 'CarbonaBlack';
+      src: url( {% static '/fonts/carbona/Carbona-Black.otf' %}) format('opentype');
+      font-style: normal;
+      font-weight: normal;
+    }
+    
+    .antecedentes-entidad {
+      width: 98%;
+    }
+    
+    .main-container2 {
+      gap: 20px;
+      padding: 20px;
+      padding-top: 40px;
+      display: table;
+      width: 100%;
+    }
+    .wrap-container2 {
+      display: table-cell;
+      padding: 5px;
+      vertical-align: top;
+      width: 200px;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+    
+    @media print {
+    
+    
+    
+      .main-container2 {
+        display: block;
+      }
+      .wrap-container2 {
+        display: inline-block;
+        width: auto;
+      }
+    
+      .antecedentes-entidad3 {
+        width: 98%;
+      }
+      .table-container3 {
+        display: table;
+        width: 100%;
+      }
+      .table-row3 {
+        display: table-row;
+      }
+      .table-cell3 {
+        display: table-cell;
+        padding: 5px;
+      }
+      .p-title3 {
+        font-weight: bold;
+      }
+      .p-content3 {
+        margin: 0;
+      }
+    }
+    
+    
+        </style>
+    
+         <link rel="stylesheet" href="{% static "styles2.css" %}"  />
+        <link rel="stylesheet" href="{% static "reset2.css" %}"  />
+        <link rel="stylesheet" href="{% static "resumen.css" %}"  />
+        <link rel="stylesheet" href="{% static "css2.css" %}"  />
+        <style>
+            .portada-wrapper{
+      height: 100vh;}
+        </style>
+        <title>LegalBit - Reporte</title>
+  </head>
+  <body>
+    <section class="portada" style="page-break-after: always">
+      <div class="portada-wrapper">
+        <div class="portada-left">
+          <div class="legalbit-logo"></div>
+        </div>
+        <div class="portada-right">
+          <p>
+              <b>SAFC470122HJ3</b>
+            SANCHEZ FLORES CELIA FRANCISCA
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section style="page-break-after: always" id="portada-rpt">
+      <div class="page-header">
+        <div style="background-image: url('./static/resources/legalbit-logo-dark.png');" class="header-logo"></div>
+      </div>
+
+      <div class="information-wrapper">
+        <section class="report-description">
+          <div class="left">
+              <h2>Reporte de Investigación</h2>
+          </div>
+          <div class="right">
+              <div class="report-data">
+                  <h5>Fecha de Investigación</h5>
+                  <span>19 de Julio de 2023 a las 15:02</span>
+              </div>
+              <div class="report-data">
+                  <h5>Folio </h5>
+                  <span>23LB-00063</span>
+              </div>
+          </div>
+        </section>
+        <section class="user-description">
+          <div class="user-data">
+              <h4>Nombre Completo</h4>
+              <span>SANCHEZ FLORES CELIA FRANCISCA</span>
+          </div>
+          <div style="padding: 0 3vw;" class="user-data">
+              <h4>Género</h4>
+              <span>MUJER</span>
+          </div>
+          <div class="user-data">
+              <h4>Fecha de Nacimiento</h4>
+              <span>22 de Enero de 1947</span>
+          </div>
+          <div style="padding: 0 3vw;" class="user-data">
+              <h4>Número de Identificación</h4>
+              <span>
+                
+                    SNFLCL47012219M600
+                
+  
+              </span>
+          </div>
+        </section>
+        <section class="trust-summary">
+          <div class="bordered-heading">
+              <div class="heading-border"></div>
+              <h2>Resumen</h2>
+          </div>
+          <div class="summary-categories">
+              <div class="category correct">
+                  <div class="background"></div>
+                  <span class="category-score"></span>
+                  <h6>Identidad</h6>
+              </div>
+              <div class="category correct">
+                  <div class="background"></div>
+                  <span class="category-score legal-score"></span>
+                  <h6>Legal</h6>
+              </div>
+              <div class="category correct">
+                  <div class="background"></div>
+                  <span class="category-score international-score"></span>
+                  <h6>Internacional</h6>
+              </div>
+              <div class="category none">
+                  <div class="background"></div>
+                  <span class="category-score academic-score">N/A</span>
+                  <h6>Académico</h6>
+              </div>
+              <div class="category tachometer good">
+                  <div class="background"></div>
+                  <span class="category-score"><span class="score-value">0675</span> <div class="tachometer-indicator" style="transform: rotate(36deg);"></div></span>
+                  <h6>Score Crediticio</h6>
+              </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="page-footer">
+        <div class="left">
+          <span>Legal Proptech S.C.</span>
+        </div>
+        <div class="right">
+          <div class="footer-social">
+            <img src="./static/resources/socials/facebook-icon-white.png" alt="" class="footer-icon">
+            <span>legalbit.mx</span>
+          </div>
+          <div class="footer-social">
+            <img src="./static/resources/socials/instagram-icon-white.png" alt="" class="footer-icon">
+            <span>legalbit.mx</span>
+          </div>
+          <div class="footer-social">
+            <img src="./static/resources/socials/mail-icon-white.png" alt="" class="footer-icon">
+            <span>contacto@legalbit.mx</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="user-data-1">
+           <!-- DOCUMENTO DE IDENTIDAD-->
+           <div class="page-header">
+            <div style="background-image: url('./static/resources/legalbit-logo-dark.png');" class="header-logo"></div>
+          </div>
+      <!-- FIN BLOQUE -->
+    <div class="content-wrapper">
+                  <!-- INICIO BLOQUE -->
+      <p class="p-head">Documento de Identidad</p>
+
+      <!-- Entidad -->
+      <p class="p-entidad">Documento de Identidad INE</p>
+      <!-- Contenido -->
+      <div class="main-container">
+        <div class="wrap-container">
+          <p class="p-title">Nombre completo</p>
+          <p class="p-content" style="font-size: 1.8rem !important">SANCHEZ FLORES CELIA FRANCISCA</p>
+        </div>
+        <div class="wrap-container">
+            
+          <p class="p-title">Clave de Elector</p>
+          <p class="p-content" style="font-size: 1.5rem !important">SNFLCL47012219M600</p>
+            
+        </div>
+        <div class="wrap-container">
+          <p class="p-title">Anverso</p>
+          
+          <img src="LegalBit%20-%20Reporte%20Archivos/celia.jpg" alt="Imagen INE Frontal">
+          
+        </div>
+        <div class="wrap-container">
+          
+          <p class="p-title">Reverso</p>
+          <img src="LegalBit%20-%20Reporte%20Archivos/celia_1.jpg" alt="Imagen INE Frontal">
+          
+        </div>
+      </div>
+      <div style="width: 100%; display: flex; justify-content: center;" class="main-container">
+        <center>
+        
+          
+          <p class="p-title">LA CREDENCIAL ESTÁ VIGENTE <span class="check-icon-span"></span></p>
+          
+        </center>
+      </div>
+
+      <hr class="hr-divisor">
+      <!-- FIN SAT -->
+  
+<!-- INICIO CURP RENAPO -->
+<section>
+  <!-- INICIO BLOQUE -->
+  <p class="p-head">Consulta de Clave Única de Registro de Población</p>
+  <div class="main-container3" style="margin-left:15px;">
+    <div class="table-container3">
+      <div class="table-row3">
+        <div class="table-cell3">
+          <p class="p-title">Nombre consultado:</p>
+          <p class="p-content">SANCHEZ FLORES CELIA FRANCISCA</p>
+        </div>
+        <div class="table-cell3">
+          <p class="p-title">C.U.R.P:</p>
+          <p style="word-wrap: break-word;
+          word-break: break-all;" class="p-content">SAFC470122MNLNLL07</p>
+        </div>
+        <div class="table-cell3">
+          <p class="p-title">Fecha de Nacimiento:</p>
+          <p class="p-content">22 de Enero de 1947</p>
+        </div>
+        <div class="table-cell3">
+          <p class="p-title">Lugar de Nacimiento:</p>
+          <p class="p-content">NL/NUEVO LEON</p>
+        </div>
+        <div class="table-cell3">
+          <p class="p-title">Sexo:</p>
+          <p class="p-content">MUJER</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+      <hr class="hr-divisor">
+      <!-- FIN BLOQUE -->
+    <!-- FIN SAT -->
+          </div>
+
+    <div class="page-footer">
+      <div class="left">
+        <span>Legal Proptech S.C.</span>
+      </div>
+      <div class="right">
+        <div class="footer-social">
+          <img src="./static/resources/socials/facebook-icon-white.png" alt="" class="footer-icon">
+          <span>legalbit.mx</span>
+        </div>
+        <div class="footer-social">
+          <img src="./static/resources/socials/instagram-icon-white.png" alt="" class="footer-icon">
+          <span>legalbit.mx</span>
+        </div>
+        <div class="footer-social">
+          <img src="./static/resources/socials/mail-icon-white.png" alt="" class="footer-icon">
+          <span>contacto@legalbit.mx</span>
+        </div>
+      </div>
+    </div>
+    </section>
+
+    <!-- INICIO PROFESIONES -->
+    <section class="antecedentes-entidad user-data-2" style="page-break-inside: avoid; page-break-after: always">
+      <div class="page-header">
+        <div style="background-image: url('./static/resources/legalbit-logo-dark.png');" class="header-logo"></div>
+      </div>
+
+      <div class="content-wrapper">
+        <section style="page-break-after:auto; page-break-inside: avoid;">
+          <!-- INICIO BLOQUE -->
+          <p class="p-head">Situación ante el SAT</p>
+     
+           <!-- Entidad -->
+           <p class="p-entidad">RFC consultado</p>
+           <!-- Contenido -->
+           <div class="main-container" style="grid-template-columns: 1fr 3fr;">
+             <div class="wrap-container">
+               <p class="p-title">RFC</p>
+               <p style="font-weight: 700; word-wrap: break-word;
+               word-break: break-all;" class="p-content">SAFC470122HJ3</p>
+             </div>
+             <div class="wrap-container">
+               <p class="p-title">Resultado:</p>
+               <p class="p-content">
+                 Con el criterio de búsqueda del RFC: SAFC470122HJ3 proporcionado no
+                 se encontraron coincidencias en los listados de contribuyentes con
+                 operaciones presuntamente inexistentes.
+               </p>
+             </div>
+           </div>
+     
+     
+         </section>
+            <!-- INICIO BLOQUE -->
+            <p class="p-head">Profesiones encontradas SEP</p>
+
+
+      <!-- Entidad -->
+        
+            <p class="p-entidad">No se encontraron registros.</p>
+        
+<!-- BURO -->
+ <hr class="hr-divisor">
+
+    <section id="score">
+      <p class="p-head">Score en Buró de Crédito</p>
+      <p class="p-entidad special">0675</p>
+      <p class="p-content" style="padding-left: 20px; padding-top: 10px">
+        "La puntuación mínima es de 456 puntos y la máxima de 760 puntos. A
+        menor BC Score, mayor es la probabilidad de impago del Cliente y a mayor
+        BC Score, menor es la probabilidad de incumplimiento del Cliente."
+      </p>
+
+
+    </section>
+    
+    <hr class="hr-divisor">
+
+      </div>
+
+        <div class="page-footer">
+          <div class="left">
+            <span>Legal Proptech S.C.</span>
+          </div>
+          <div class="right">
+            <div class="footer-social">
+              <img src="./static/resources/socials/facebook-icon-white.png" alt="" class="footer-icon">
+              <span>legalbit.mx</span>
+            </div>
+            <div class="footer-social">
+              <img src="./static/resources/socials/instagram-icon-white.png" alt="" class="footer-icon">
+              <span>legalbit.mx</span>
+            </div>
+            <div class="footer-social">
+              <img src="./static/resources/socials/mail-icon-white.png" alt="" class="footer-icon">
+              <span>contacto@legalbit.mx</span>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <section class="user-data-3" style="page-break-inside: avoid; page-break-after: always">
+      <div class="page-header">
+        <div style="background-image: url('./static/resources/legalbit-logo-dark.png');" class="header-logo"></div>
+      </div>
+
+      <div class="content-wrapper">
+        <div style="page-break-inside: avoid">
+          <section class="block-standard">
+            <p class="p-head">Resultados de Antecedentes Legales (Nacional)</p>
+      
+          <section id="consulta-antecedentes">
+            <p class="p-head">Consulta de antecedentes</p>
+            <div class="main-container">
+              <div class="wrap-container">
+                <p class="p-title">Fecha y hora</p>
+                <p class="p-content">19 de Julio de 2023 a las 15:02</p>
+              </div>
+              <div class="wrap-container">
+                <p class="p-title">
+                  Num. de Entidades en las que se ha encontrado antecedentes
+                </p>
+                <p style="font-weight: 700;" class="p-content">
+                    0
+                </p>
+              </div>
+              <div class="wrap-container">
+                <p class="p-title">Criterio de busqueda</p>
+                <p class="p-content">
+                    SANCHEZ FLORES CELIA FRANCISCA
+                </p>
+              </div>
+            </div>
+        
+          </section></section></div>
+        <section class="antecedentes-entidad">
+          <!-- INICIO BLOQUE -->
+          <p class="p-head">Antecedentes por Entidad</p>
+            <!-- Entidad -->
+            
+                <p class="p-entidad">No se encontraron antecedentes ante el poder judicial federal o poderes judiciales estatales.</p>
+            
+        </section>
+        
+<!-- antecedentes internacionales -->
+
+    <section class="block-standard">
+      <hr class="hr-divisor">
+     
+      <p class="p-head">Antecedentes Internacionales</p>
+  
+      
+          <div class="main-container">
+     <table>
+      
+        <tbody><tr>
+              <td class="p-head">Nombre</td>
+              <td class="p-head"> Origen Alerta</td>
+          </tr>
+          <tr>
+             <td colspan="2" class="p-content" style="padding-left: 2.4vh !important;">No se encontraron alertas internacionales</td>
+          </tr>
+  
+     
+      
+  </tbody></table>
+  
+          </div>
+      </section>
+      <!-- fin antecedentes internacionales -->
+    
+      </div>
+
+        <div class="page-footer">
+          <div class="left">
+            <span>Legal Proptech S.C.</span>
+          </div>
+          <div class="right">
+            <div class="footer-social">
+              <img src="./static/resources/socials/facebook-icon-white.png" alt="" class="footer-icon">
+              <span>legalbit.mx</span>
+            </div>
+            <div class="footer-social">
+              <img src="./static/resources/socials/instagram-icon-white.png" alt="" class="footer-icon">
+              <span>legalbit.mx</span>
+            </div>
+            <div class="footer-social">
+              <img src="./static/resources/socials/mail-icon-white.png" alt="" class="footer-icon">
+              <span>contacto@legalbit.mx</span>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <section class="contraportada" style="page-break-inside: avoid; page-break-after: always">
+      <div class="content-wrapper">
+        <div class="legalbit-logo"></div>
+        <div class="text-content">
+          <span>contacto@legalbit.mx</span>
+          <span>Blvd. Antonio L. Rodríguez 2100-Edificio B.H Piso 15, Col, Santa María, 64650 Monterrey, N.L.</span>
+          <span>www.legalbit.mx</span>
+        </div>
+        
+        <script src="./static/resumen.js"></script>
+        <script>
+              
+            setInternationalScore("")
+    
+       
+
+    
+    
+          
+           setLegalScore('')
+          
+    
+          
+          setAcademicScore('N/A')
+          
+          
+          
+        </script>
+      </div>
+    </section>
+</body>
+</html>

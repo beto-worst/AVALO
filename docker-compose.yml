@@ -1,0 +1,50 @@
+version: '3.9'
+networks:
+  legalbit-net:
+    driver: bridge
+services:
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
+      MYSQL_DATABASE: LegalBit
+      MYSQL_USER: legalbit
+      MYSQL_PASSWORD: ${DB_PASS}
+      MYSQL_TCP_PORT: 3098
+    networks:
+      - legalbit-net
+    ports:
+    - 3098:3098
+
+  web:
+    build: .
+    volumes:
+      - .:/code
+      - ./staticfiles:/code/staticfiles
+    ports:
+      - "8800:8800"
+    depends_on:
+      - db
+    networks:
+      - legalbit-net
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - web
+    networks:
+      - legalbit-net
+  reports:
+    build: ./render-legalbit
+    ports:
+      - "3001:3001"
+    depends_on:
+      - web
+    networks:
+      - legalbit-net

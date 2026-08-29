@@ -1,0 +1,15 @@
+<select name="price_id"
+hx-get="{% url 'CargarCredito:product_select' %}"
+hx-target="#qt_update"
+id="product"
+class="form-select"
+aria-label="Default select example" required>
+
+{% for product in product_list %}
+{% if product.id == selected_product %}
+<option value="{{ product.id }}" selected>{{ product.name }}: MX${{ product.price }}</option>
+{% else %}
+<option value="{{ product.id }}">{{ product.name }}: MX${{ product.price }}</option>
+{% endif %}
+{% endfor %}
+</select>

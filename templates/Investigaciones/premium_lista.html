@@ -1,0 +1,309 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block title %}
+
+{% endblock %}
+{% block customstyle %}
+#btnPrintOther {
+    margin-top: 20px;
+    background-color: black;
+    border-radius: 10px;
+    color: white;
+    width: 90%;
+    max-width: 300px;
+    height: 100px; /* Ajusta la altura según tus necesidades */
+}
+
+#btnPrintMac {
+    margin-top: 20px;
+    background-color: black;
+    border-radius: 10px;
+    color: white;
+    width: 90%;
+    max-width: 300px;
+    height: 100px; /* Ajusta la altura según tus necesidades */
+}
+#btnPrintOther:hover {
+    background-color: #333; /* Un gris más claro */
+}
+{% endblock %}
+{% block containerHead %}
+  <div class="flex-wrap d-flex justify-content-between align-items-center">
+    <div>
+        <h1>Investigaciones Premium </h1>
+    </div>
+    <div>
+
+        <!-- <a href="/Investigaciones/NuevoHome" class="btn btn-success btn-sm btn-lb-primary">Nuevo Investigado</a> -->
+    </div>
+</div>
+{% endblock %}
+{% block subContainerHead %}
+{% endblock %}
+{% block contenido %}
+      <div class="card">
+        <div class="row mt-2 p-3">
+            <div class="col">
+                <div class="text-end">
+                   
+                </div>
+            </div>
+        </div>
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Investigaciones premium iniciadas</h4>
+                        <a href="/Investigaciones/Premium" class="btn btn-success btn-sm btn-lb-primary">Agregar</a>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    
+
+                    <form method="get">
+                        <div class="form-group">
+                            <div class="col-auto">
+                                <span>
+                                    <input type="text" class="form-control form-control-sm" name="txtSearch" id="txtSearch" placeholder="Buscar por Nombre, RFC, Apellidos..." value="{{ request.GET.txtSearch }}"/>
+                                    <select name="selUsuario" class="form-select form-select-sm mt-2">
+                                    <option value="">-- Selecciona un usuario --</option>
+                                    {% for usuario in usuarios %}
+                                        <option value="{{ usuario.id }}" {% if usuario.id|striptags == selUsuario|striptags %} selected{% endif %} > {{ usuario.username }}</option>
+                                    {% endfor %}
+                                    </select>
+                                    <input type="submit"  class="btn btn-success btn-lb-primary btn-sm mt-1" value="Buscar">
+                                    <button class="btn btn-info btn-sm mt-1 btn-lb-info" onclick="btnReset()">Limpiar</button>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+
+
+         <div class="col-auto table-responsive">
+             <table class="table table-bordered table-sm">
+             <thead>
+             <th>Id</th>
+             <th>Investigado (Principal)</th>
+             <th style="max-width: 200px;">Fecha</th>
+             <th>Resultado</th>
+             {% if es_admin %}
+             <th>Usuario</th>
+             {% endif %}
+             <th>Acciones</th>
+
+             </thead>
+             <tbdoy>
+             <tr>
+              {% if page_obj %}
+                {% for d in page_obj %}
+                    <td style="font-size: 10px">{{ d.id }}</td>
+                     <td style="font-size: 10px">
+                     <b>   {{ d.principal.investigado.rfc }} / {{ d.principal.investigado.apellido1 }} {{ d.principal.investigado.apellido2 }} {{ d.principal.investigado.nombre }} </b>
+                        <ul>
+                            <b><i>Aval: {{d.aval.investigado.rfc}}  {{ d.aval.investigado.apellido1 }} {{ d.aval.investigado.apellido2 }} {{ d.aval.investigado.nombre}}   </i></b>
+                            <li>Conyuge : {{ d.conyuge.investigado.apellido1 }} {{ d.conyugue.investigado.apellido2 }} {{ d.conyugue.investigado.nombre}}   </li>
+                            <li>Madre : {{ d.madre_principal.investigado.apellido1 }} {{ d.madre_principal.investigado.apellido2 }} {{ d.madre_principal.investigado.nombre}}   </li>
+                            <li>Padre : {{ d.padre_principal.investigado.apellido1 }} {{ d.padre_principal.investigado.apellido2 }} {{ d.padre_principal.investigado.nombre}}   </li>
+                            <li>Madre Conyugue: {{ d.madre_conyugue.investigado.apellido1 }} {{ d.madre_conyugue.investigado.apellido2 }} {{ d.madre_conyugue.investigado.nombre}}   </li> 
+                            <li>Padre Conyugue : {{ d.padre_conyugue.investigado.apellido1 }} {{ d.padre_conyuge_conyugue.investigado.apellido2 }} {{ d.padre_conyugue.investigado.nombre}}   </li>
+                        </ul>
+                    </td>
+                    <td class="text-truncate" style="max-width: 200px; word-wrap: break-word; font-size: 10px">{{ d.creado_en|date:"d/m/Y H:i" }}</td>
+                   <td class="text-truncate;font-size:10px">
+
+                    
+                        {% if not  d.vencida %}
+                                {% if d.aprobado %}
+                                APROBADO
+                                {% else %}
+                                RECHAZADO
+                            {% endif %}
+                        {% else %}
+                         VENCIDA
+                        {% endif %}
+                       
+                       </td>
+                      {% if es_admin %}
+                         <td>{{ d.usuario.username }}</td>
+                         {% endif %}
+                    <td style="width: 200px">
+                    <span>
+                        {% if not d.vencida %}
+                            <button class="btn btn-sm btn-info btn-lb-info" id="selPrint" onclick="openDialogPrint('{{ d.id }}')">verPDF</button>
+                           
+                            <!-- <a class="btn btn-sm btn-info btn-lb-info" href='/Investigaciones/verPDF7/{{ d.id }}' onclick='muestraModal()'>Ver PDF</a> -->
+                        {% endif %}
+                        <a class="btn btn-sm btn-success btn-lb-primary" href='#'>Aprobar</a>
+                        <a class="btn btn-sm btn-danger" href='#'>Rechazar</a>
+                       
+                    </span>
+                    </td>
+                     </tr>
+                {% endfor %}
+            {% endif %}
+
+             </tbdoy>
+             </table>
+             <div class="pagination">
+                        <span class="step-links">
+                            {% if page_obj.has_previous %}
+                                <a href="?page=1">&laquo; first</a>
+                                <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+                            {% endif %}
+
+                            <span class="current">
+                                Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                            </span>
+
+                            {% if page_obj.has_next %}
+                                <a href="?page={{ page_obj.next_page_number }}">Siguente</a>
+                                <a href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a>
+                            {% endif %}
+                        </span>
+                    </div>
+
+
+
+         </div>
+
+
+
+
+                </div>
+            </div>
+
+
+
+
+<div class="modal" tabindex="-1" id="myModal">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Fotos del inmueble</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" >
+              <div class="carousel-inner">
+
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only"></span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only"></span>
+            </a>
+
+
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+
+        </div>
+    </div>
+</div>
+</div>
+
+<dialog id="dialogoReporte" style='background-color:#488fc3; color:#ffffff; border-radius: 5px;margin-top:10%'>
+                    <h3 style='color:#ffffff'>Por favor espere.</h3>
+                    <p>Generando reporte de Investigación. No cierre esta ventana.</p>
+</dialog>
+<dialog id="dialogSelPrint" style='color:#488fc3; background-color:#ffffff; border-radius: 5px; width: 90%; max-width: 300px; margin: auto;'>
+    <button onclick="cerrarDialogoPrint()" style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 20px; cursor: pointer; color: red;">X</button>    <center>
+          <img src="{% static 'resources/legalbit-logo-dark.png' %}" width="150">
+    </center>
+     <h4 style='color:#488fc3;'>Selecciona el dispositivo en el que te encuentras.</h4>
+    <center>
+        <button id="btnPrintMac" onclick="showReportMac(this)" >
+            <span>
+
+                <center>
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 256 315" fill="white"><path d="M213.803 167.03c.442 47.58 41.74 63.413 42.197 63.615c-.35 1.116-6.599 22.563-21.757 44.716c-13.104 19.153-26.705 38.235-48.13 38.63c-21.05.388-27.82-12.483-51.888-12.483c-24.061 0-31.582 12.088-51.51 12.871c-20.68.783-36.428-20.71-49.64-39.793c-27-39.033-47.633-110.3-19.928-158.406c13.763-23.89 38.36-39.017 65.056-39.405c20.307-.387 39.475 13.662 51.889 13.662c12.406 0 35.699-16.895 60.186-14.414c10.25.427 39.026 4.14 57.503 31.186c-1.49.923-34.335 20.044-33.978 59.822M174.24 50.199c10.98-13.29 18.369-31.79 16.353-50.199c-15.826.636-34.962 10.546-46.314 23.828c-10.173 11.763-19.082 30.589-16.678 48.633c17.64 1.365 35.66-8.964 46.64-22.262"/></svg>
+                </center>
+                <br>
+                Safari, iOS y Mac OS X
+                <br>
+            </span>
+        </button>
+        <button id="btnPrintOther" onclick="showReportOther(this)" >
+            <span>
+                <center>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512" fill="white"><title>ionicons-v5_logos</title><path d="M480,265H232V444l248,36V265Z"/><path d="M216,265H32V415l184,26.7V265Z"/><path d="M480,32,232,67.4V249H480V32Z"/><path d="M216,69.7,32,96V249H216V69.7Z"/></svg>
+                </center>
+                <br>
+                Windows, PC y otros
+            </span>
+        </button>
+    </center>
+</dialog>
+
+{% endblock %}
+{% block customJS %}
+    <script>
+   /* window.onload = function() {
+      var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+      var btn = document.getElementById('btnPrintOther')
+        var btn2 = document.getElementById('btnPrintMac')
+      if (isSafari) {
+        btn.style.display = 'none';
+      } else {
+        btn2.style.display = 'none';
+      }
+    };
+    */
+
+    function showReportOther(d){
+        window.location.href = './PDFPremium';
+    }
+    function showReportMac(d){
+        window.location.href = './PDFPremium';
+    }
+    function cerrarDialogoPrint(){
+        var dialogo = document.getElementById('dialogSelPrint');
+        dialogo.close();
+    }
+    function openDialogPrint(val){
+
+        var dialogo = document.getElementById('dialogSelPrint');
+        var btn = document.getElementById('btnPrintOther')
+        var btn2 = document.getElementById('btnPrintMac')
+        btn.value = val
+        btn2.value = val
+        dialogo.showModal();
+        }
+     var modal = document.getElementById('dialogoReporte')
+     modal.close();
+    function muestraModal(){
+          var modal = document.getElementById('dialogoReporte')
+           modal.showModal();
+    }
+    // Cerrar el dialog al cargar la página
+        window.addEventListener('load', function() {
+        modal.close();
+        });
+        function btnReset(){
+
+          const searchInput = document.querySelector('input[name="txtSearch"]');
+            searchInput.value = '';
+            const selUsuario = document.querySelector('select[name="usuarios"]');
+            selUsuario.selectedIndex = 0;
+            // Eliminar el parámetro de la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            urlParams.delete('selUsuario');
+            const nuevaURL = `${window.location.pathname}?${urlParams.toString()}`;
+            history.replaceState({}, document.title, nuevaURL);
+    }
+
+    addEventListener("pageshow", (event) => {});
+onpageshow = (event) => {
+    var modal = document.getElementById('dialogoReporte')
+     modal.close();
+};
+
+
+    </script>
+
+{% endblock %}

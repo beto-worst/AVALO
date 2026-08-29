@@ -1,0 +1,35 @@
+{% load static %}
+<!doctype html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}ávalo{% endblock %}</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'favicon.png' %}" />
+
+    <!-- Google Fonts & Brand CSS -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+
+    <!-- Hope UI Framework -->
+    <link rel="stylesheet" href="{% static 'assets/css/core/libs.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/hope-ui.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/custom.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/dark.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/customizer.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/rtl.min.css' %}" />
+
+    {% block extra_css %}{% endblock %}
+  </head>
+  <body>
+    {% block content %}{% endblock %}
+
+    <!-- Core Scripts -->
+    <script src="{% static 'assets/js/core/libs.min.js' %}"></script>
+    <script src="{% static 'assets/js/core/external.min.js' %}"></script>
+    <script src="{% static 'assets/js/hope-ui.js' %}"></script>
+
+    {% block extra_js %}{% endblock %}
+  </body>
+</html>
