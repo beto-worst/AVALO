@@ -187,6 +187,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
+LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = 'login'
 ADMIN_SITE_HEADER = "Administración y mantenimiento de LEGALBIT"
 
