@@ -169,3 +169,7 @@ install_log.txt
 ~$*
 .DS_Store
 *.tmp
+
+# Excepcion: catalogos de referencia (estados, municipios, bancos).
+# Sin datos personales, necesarios para montar el entorno local.
+!MySQL/catalogos.sql
