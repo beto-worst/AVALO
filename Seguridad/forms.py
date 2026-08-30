@@ -34,8 +34,11 @@ class NuevoUsuario(forms.Form):
     def clean_correo(self):
         correo = self.cleaned_data.get('correo')
 
-        # Validar que el correo no esté vinculado a ningún usuario existente en la base de datos
-        if User.objects.filter(email=correo).exists():
+        # La vista guarda el correo como nombre de usuario, asi que hay que
+        # revisar los dos campos: si solo se valida 'email' y ya existe alguien
+        # con ese 'username', el alta revienta con IntegrityError (error 500).
+        if User.objects.filter(email__iexact=correo).exists() or \
+           User.objects.filter(username__iexact=correo).exists():
             raise forms.ValidationError("El correo electrónico ya está registrado, por favor elige otro.")
 
         # Devolver el valor validado del correo

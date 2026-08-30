@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class CustomUser(models.Model):
@@ -19,3 +21,16 @@ class ConfiguracionUsuariosLB(models.Model):
 
     def __str__(self):
         return "{} {} {}".format(self.usuario.id, self.usuario.username,self.max_investigaciones)
+
+
+@receiver(post_save, sender=User)
+def crear_configuracion_usuario(sender, instance, created, **kwargs):
+    """Todo usuario nuevo necesita su fila de configuracion.
+
+    Las vistas de Investigaciones hacen ConfiguracionUsuariosLB.objects.get(...)
+    sin manejar DoesNotExist, asi que un usuario sin esta fila recibe un error
+    500 al intentar iniciar una investigacion. Antes se creaba a mano desde el
+    admin y era facil olvidarlo.
+    """
+    if created:
+        ConfiguracionUsuariosLB.objects.get_or_create(usuario=instance)
